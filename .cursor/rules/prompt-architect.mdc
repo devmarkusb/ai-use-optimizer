@@ -1,0 +1,7 @@
+---
+description: Constraints when editing the Prompt Architect meta-prompt
+globs: prompts/prompt-architect.system.md
+alwaysApply: false
+---
+
+This file is the canonical **Prompt Architect** meta-prompt (not a Cursor-only duplicate of its body). Prefer surgical edits: preserve the documented modes, targets, and section flow unless the user requests a structural redesign. Bump `Version` / `Last reviewed` when making substantive changes. See root **`AGENTS.md`** for repo-wide rules.
