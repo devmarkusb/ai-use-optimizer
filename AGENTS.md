@@ -12,7 +12,9 @@ None. There is no build system or compiled output.
 
 ## 3. Test commands
 
-None configured. No test runner or CI in this repository.
+None configured. No unit or integration test runner.
+
+**CI (GitHub Actions):** workflow `.github/workflows/ci.yml` runs on push and pull requests to `master`: markdown link check ([lychee](https://github.com/lycheeverse/lychee)) on `README.md` and `prompts/**/*.md`, and a path guard (`.github/scripts/verify-readme-paths.sh`) that ensures file paths extracted from `README.md` exist in the tree.
 
 ## 4. Formatting and linting
 
@@ -24,6 +26,7 @@ No repository-level formatter, linter, or pre-commit configuration. **Unverified
 |------|------|
 | `README.md` | Human-facing index: tools, when to use which prompt, maintenance notes. |
 | `prompts/` | Authoritative prompt sources (`*.md`, `*.prompt.md`). YAML-style front matter appears in some files—preserve it. |
+| `.github/workflows/` | GitHub Actions CI (link check, README path guard). |
 | `.idea/` | JetBrains IDE metadata (gitignored in part elsewhere; see `.gitignore`). |
 
 ## 6. Coding conventions
@@ -34,7 +37,7 @@ No repository-level formatter, linter, or pre-commit configuration. **Unverified
 
 ## 7. Testing expectations
 
-No automated tests. For prompt changes, sanity-check that `README.md` links and file paths still match the tree.
+No application test suite. CI covers link checking and README path consistency; for prompt edits, still sanity-check anchors and any paths not matched by the guard regex (see `.github/scripts/verify-readme-paths.sh`).
 
 ## 8. Files and directories agents must not edit without explicit approval
 

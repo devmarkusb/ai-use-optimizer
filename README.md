@@ -1,5 +1,9 @@
 # AI Use Optimizer
 
+[![CI](https://github.com/devmarkusb/ai-use-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/devmarkusb/ai-use-optimizer/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Markdown](https://img.shields.io/badge/docs-markdown-blue.svg)](./README.md)
+
 This repository collects reusable tools for improving how you work with large language models. Each tool lives in its own area of the repo with its own files and usage notes.
 
 ## Contents
@@ -28,6 +32,8 @@ This repository collects reusable tools for improving how you work with large la
 ## Introduction
 
 The goal is practical, maintainable helpers you can copy into ChatGPT, Claude, Cursor, Codex, Gemini, or your own automation—not one-off viral tricks. New optimizers can be added alongside existing ones without rewriting the whole repo.
+
+This repository is licensed under the [MIT License](./LICENSE).
 
 ## Choosing a prompt
 
