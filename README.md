@@ -202,7 +202,7 @@ prompts/
 2. Attach or paste `prompts/ai-repo-setup.prompt.md` (for example `@prompts/ai-repo-setup.prompt.md` in Cursor chat).
 3. Ask the agent to follow the prompt and report the assessment and file list before large edits if you want an extra checkpoint.
 
-Prefer a **single session** with full repo access so inspection steps (package manager, CI, linters) are accurate. Review diffs carefully: the prompt intentionally avoids secrets, lockfiles, and release workflows unless you explicitly expand scope.
+Prefer a **single session** with full repo access so inspection steps (package manager, CI, linters) are accurate. Review diffs carefully: the prompt intentionally avoids secrets, lockfiles, and release workflows unless you explicitly expand scope. You can **re-run** the same prompt after large refactors or stack changes; say in chat if specific sections must stay, and check the diff so custom agent text is not dropped by mistake.
 
 ### What you should get
 

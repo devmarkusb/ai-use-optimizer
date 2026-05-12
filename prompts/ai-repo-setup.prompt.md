@@ -17,6 +17,8 @@ This prompt is intended for:
 
 It is not intended for completely empty directories.
 
+**Re-running later:** If the tree or tooling changed a lot, run this prompt again. Re-inspect from scratch, update `AGENTS.md` and adapters to match reality, merge with existing files, and preserve bespoke sections unless they are clearly obsolete—do not replace wholesale without diffing against what was there.
+
 # Prompt
 
 ## Goal
