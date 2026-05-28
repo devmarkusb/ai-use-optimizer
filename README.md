@@ -11,6 +11,7 @@ This repository collects reusable tools for improving how you work with large la
 - [Introduction](#introduction)
 - [Choosing a prompt](#choosing-a-prompt)
 - [Tools in this repository](#tools-in-this-repository)
+- [Prompt style guide](#prompt-style-guide)
 - [Prompt Architect](#prompt-architect)
   - [When to use](#when-to-use-prompt-architect)
   - [Files](#files)
@@ -22,6 +23,12 @@ This repository collects reusable tools for improving how you work with large la
     - [DETAIL](#detail)
     - [PRODUCTION](#production)
   - [Maintenance workflow](#maintenance-workflow)
+- [Interview Me](#interview-me)
+  - [When to use Interview Me](#when-to-use-interview-me)
+  - [When not to use Interview Me](#when-not-to-use-interview-me)
+  - [Interview Me file](#interview-me-file)
+  - [How to use Interview Me](#how-to-use-interview-me)
+  - [What Interview Me should produce](#what-interview-me-should-produce)
 - [AI Repo Setup](#ai-repo-setup)
   - [When to use](#when-to-use-ai-repo-setup)
   - [When not to use](#when-not-to-use-ai-repo-setup)
@@ -40,19 +47,33 @@ This repository is licensed under the [MIT License](./LICENSE).
 | You want to… | Start with |
 |----------------|------------|
 | Improve wording of a request before you send it | [Prompt Architect](#prompt-architect) |
+| Turn a manual workflow into questions before delegating or automating it | [Interview Me](#interview-me) |
 | Add or normalize AI agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP) | [AI Repo Setup](#ai-repo-setup) |
 | Bootstrap a new codebase from an empty or nearly empty repo | `prompts/project-start.prompt.md` (greenfield scaffold; run **before** AI Repo Setup if you later want agent config) |
 
-Prompt Architect and AI Repo Setup solve different problems: one shapes *prompts*, the other shapes *repository agent configuration*.
+Prompt Architect, Interview Me, and AI Repo Setup solve different problems: one shapes *prompts*, one extracts missing workflow details, and one shapes *repository agent configuration*.
 
 ## Tools in this repository
 
 | Tool | Role |
 |------|------|
 | **Prompt Architect** | Meta-prompt that turns rough ideas into stronger prompts for any supported target. |
+| **Interview Me** | Task prompt that asks targeted clarification questions before an agent reproduces or automates a workflow. |
 | **AI Repo Setup** | Task prompt for inspecting a real repo and creating minimal, justified `AGENTS.md`-style agent setup (Cursor, Claude Code, compatible tools). |
 
 More tools may be added here over time.
+
+## Prompt style guide
+
+Use this style when adding or updating reusable prompts in `prompts/`.
+
+- Start first-class prompts with YAML front matter: `title`, `type`, `purpose`, `targets`, and `scope`; add fields such as `version`, `last-reviewed`, or `recommended-stage` only when they are useful.
+- Use an H1 that matches the title, then prefer clear sections such as `Context`, `Goal`, `Task`, `Instructions`, `Required Workflow`, `Rules`, `Output Format`, `Deliverables`, and `Quality Bar`.
+- Write operational instructions in short, direct sentences. Prefer concrete `Use`, `Avoid`, and `Do not` rules over broad persona language.
+- Make constraints explicit: inputs, outputs, limits, stop conditions, safety boundaries, success criteria, and verification expectations.
+- Keep prompts pasteable and self-contained. Do not require the user to read the README to run a prompt.
+- Avoid generic boilerplate, unsupported claims, hidden chain-of-thought requests, and prompt tricks that do not reduce a real failure mode.
+- When a prompt becomes a first-class tool, document when to use it, when not to use it, its file path, and the expected result in this README.
 
 ## Prompt Architect
 
@@ -102,7 +123,8 @@ Use that prompt in ChatGPT / Claude / Cursor / Codex
 
 1. Open ChatGPT, Claude, or another LLM.
 2. Paste the contents of `prompt-architect.system.md`.
-3. Then send your rough request directly, or type `template` if you want the built-in starter form.
+3. If the chatbot responds, it should only say: `Ready. Send your rough request, or type template for the starter form.`
+4. Then send your rough request directly, or type `template` if you want the built-in starter form.
 
 In Cursor, you can paste the file contents into the system or first user message, or use **@** to reference `prompts/prompt-architect.system.md` in chat so the model loads it as context.
 
@@ -186,6 +208,41 @@ Prefer updates backed by:
 2. repeatable tests
 3. measurable improvement
 4. clear reduction in failure modes
+
+## Interview Me
+
+`prompts/interview-me.md` is a task prompt for extracting the missing operational details behind a task, workflow, or action before an agent reproduces or automates it.
+
+It does not automate the workflow and does not propose a solution. Its job is to ask the questions that make the next prompt, specification, script, or handoff safer and more complete.
+
+### When to use Interview Me
+
+Use it when a task is easy to demonstrate manually but hard to specify. Typical cases: recurring browser or IDE workflows, repository maintenance routines, data cleanup, tool handoffs, manual checklists, or automation candidates.
+
+It is especially useful before writing a task prompt, runbook, standard operating procedure, or agent instruction.
+
+### When not to use Interview Me
+
+Skip it when the task is already fully specified and you want execution now, or when you want a rough request rewritten into a stronger prompt rather than interviewed. Use [Prompt Architect](#prompt-architect) for prompt rewriting.
+
+### Interview Me file
+
+```text
+prompts/
+  interview-me.md
+```
+
+### How to use Interview Me
+
+1. Paste or attach `prompts/interview-me.md` in ChatGPT, Claude, Cursor, Codex, Gemini, or another LLM.
+2. Describe the task you just performed, plan to perform, or want an agent to reproduce. Include relevant files, screenshots, commands, tools, inputs, outputs, and constraints when available.
+3. Answer the questions. Use the answers as context for the agent that will implement, automate, or document the workflow.
+
+### What Interview Me should produce
+
+You should get a numbered list of at most 10 clarification questions focused on correctness, safety, repeatability, tools, inputs, outputs, dependencies, edge cases, failure handling, permissions, and success criteria.
+
+If the workflow is already sufficiently specified, it should stop early instead of inventing unnecessary questions.
 
 ## AI Repo Setup
 

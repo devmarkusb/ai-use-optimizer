@@ -32,6 +32,10 @@ No repository-level formatter, linter, or pre-commit configuration. **Unverified
 ## 6. Coding conventions
 
 - Match the tone and structure of existing prompts: clear headings, scoped “when to use / when not” sections where appropriate.
+- For reusable prompts, follow the prompt style guide in `README.md`: YAML front matter for first-class prompts, an H1 matching the title, concise operational sections, explicit constraints, and a concrete output contract.
+- Prefer sections such as `Context`, `Goal`, `Task`, `Instructions`, `Required Workflow`, `Rules`, `Output Format`, `Deliverables`, and `Quality Bar` when they fit the prompt.
+- Write prompt instructions as direct, testable behavior. Include limits, stop conditions, success criteria, safety boundaries, and verification expectations when relevant.
+- Avoid generic boilerplate, persona theatrics, unsupported claims, hidden chain-of-thought requests, and prompt tricks that do not reduce a real failure mode.
 - Prefer small, justified edits over large rewrites unless the user asks for a redesign.
 - Keep `README.md` aligned with real files under `prompts/` when adding or renaming prompts.
 

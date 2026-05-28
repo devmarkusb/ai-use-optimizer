@@ -7,5 +7,5 @@ alwaysApply: true
 
 1. Follow the repository root **`AGENTS.md`** for project facts, boundaries, and review expectations.
 2. This repo is **documentation and prompts only** (`README.md`, `prompts/`). Do not assume a build, test, or lint command unless it appears in the tree and `AGENTS.md`.
-3. When editing files under **`prompts/`**, preserve existing structure (headings, front matter delimiters, version/target lines) unless the user asks for a deliberate format change.
+3. When editing files under **`prompts/`**, follow the prompt style conventions in **`AGENTS.md`** and preserve existing structure (headings, front matter delimiters, version/target lines) unless the user asks for a deliberate format change.
 4. After changing prompt filenames or roles, update **`README.md`** so the index stays accurate.
