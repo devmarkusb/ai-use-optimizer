@@ -102,30 +102,36 @@ Use that prompt in ChatGPT / Claude / Cursor / Codex
 
 1. Open ChatGPT, Claude, or another LLM.
 2. Paste the contents of `prompt-architect.system.md`.
-3. Then send your rough request.
+3. Then send your rough request directly, or type `template` if you want the built-in starter form.
 
 In Cursor, you can paste the file contents into the system or first user message, or use **@** to reference `prompts/prompt-architect.system.md` in chat so the model loads it as context.
 
 ### Recommended request format
 
-Use this structure (or don't):
+This structure is optional and is embedded in `prompt-architect.system.md`. Use it when you want a cleaner start; otherwise send a messy paragraph and let Prompt Architect infer the pieces.
 
 ```text
 Target: ChatGPT | Codex | Claude | Claude Code | Gemini | Cursor | Generic
 Mode: BASIC | DETAIL | PRODUCTION
 
 Goal:
-[What you want the final prompt to achieve]
+[The outcome the final prompt should cause. One or two sentences is enough.]
 
 Context:
-[Audience, domain, constraints, inputs, project details]
+[Facts the target model must know or respect: audience, domain, constraints, inputs, files, examples, non-goals.]
 
 Output:
-[Desired format, length, style, schema, or deliverable]
+[What the final answer should look like: format, length, tone, sections, schema, files, acceptance criteria.]
 
 Rough prompt:
-[Your current draft, if any]
+[Your messy draft, notes, bullets, or pasted instruction. Leave blank if Goal and Context already cover it.]
 ```
+
+Field guide:
+- **Goal** is the desired result of running the final prompt.
+- **Context** is background, constraints, and source material the target model would not otherwise know.
+- **Output** is the expected shape of the answer or deliverable.
+- **Rough prompt** is any existing wording you want improved; it can be incomplete or duplicated elsewhere.
 
 ### Modes
 
