@@ -1,9 +1,20 @@
 ---
-title: Project Start Prompt
+title: Project Start
+type: task-prompt
 purpose: Bootstrap a new software project from an idea
+targets:
+  - Codex
+  - Claude Code
+  - Cursor
+  - Generic LLM coding agents
+scope:
+  - greenfield
+recommended-stage: empty or nearly empty repository
 ---
 
-# Context
+# Project Start
+
+## Context
 
 This is a green-field project bootstrap.
 
@@ -11,17 +22,13 @@ The repository may currently be empty or nearly empty.
 
 Prefer pragmatic, maintainable defaults over framework maximalism or premature abstraction.
 
-# Inputs
+## Inputs
 
 The following section contains the actual project idea, requirements, constraints, and preferences.
 
----
-
 <PROJECT_IDEA_AND_REQUIREMENTS>
 
----
-
-# Instructions
+## Instructions
 
 Act as a senior software engineer and project bootstrap architect.
 
@@ -55,7 +62,7 @@ Do not yet create extensive AI-agent configuration.
 Only create minimal placeholders if clearly useful.
 A separate AI repository setup pass will happen afterward.
 
-# Deliverables
+## Deliverables
 
 Return:
 1. architecture summary
