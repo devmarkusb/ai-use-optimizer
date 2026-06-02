@@ -49,7 +49,7 @@ This repository is licensed under the [MIT License](./LICENSE).
 | Improve wording of a request before you send it | [Prompt Architect](#prompt-architect) |
 | Turn a manual workflow into questions before delegating or automating it | [Interview Me](#interview-me) |
 | Add or normalize AI agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP) | [AI Repo Setup](#ai-repo-setup) |
-| Bootstrap a new codebase from an empty or nearly empty repo | `prompts/project-start.prompt.md` (greenfield scaffold; run **before** AI Repo Setup if you later want agent config) |
+| Bootstrap a new codebase from an empty or nearly empty repo | `prompts/project-start.md` (greenfield scaffold; run **before** AI Repo Setup if you later want agent config) |
 
 Prompt Architect, Interview Me, and AI Repo Setup solve different problems: one shapes *prompts*, one extracts missing workflow details, and one shapes *repository agent configuration*.
 
@@ -67,6 +67,7 @@ More tools may be added here over time.
 
 Use this style when adding or updating reusable prompts in `prompts/`.
 
+- Name files under `prompts/` as `<slug>.md` for task prompts and `<slug>.system.md` for system or meta prompts. Do not use a `.prompt.md` suffix—the directory already signals purpose.
 - Start first-class prompts with YAML front matter: `title`, `type`, `purpose`, `targets`, and `scope`; add fields such as `version`, `last-reviewed`, or `recommended-stage` only when they are useful.
 - Use an H1 that matches the title, then prefer clear sections such as `Context`, `Goal`, `Task`, `Instructions`, `Required Workflow`, `Rules`, `Output Format`, `Deliverables`, and `Quality Bar`.
 - Write operational instructions in short, direct sentences. Prefer concrete `Use`, `Avoid`, and `Do not` rules over broad persona language.
@@ -246,7 +247,7 @@ If the workflow is already sufficiently specified, it should stop early instead 
 
 ## AI Repo Setup
 
-`prompts/ai-repo-setup.prompt.md` is a **task** prompt for an AI coding agent. You run it *inside* a repository (or with the repo open in the IDE) so the agent can inspect the tree, tooling, and CI, then add or update only the agent-oriented files that make sense—usually starting with a concise `AGENTS.md` and thin tool-specific adapters.
+`prompts/ai-repo-setup.md` is a **task** prompt for an AI coding agent. You run it *inside* a repository (or with the repo open in the IDE) so the agent can inspect the tree, tooling, and CI, then add or update only the agent-oriented files that make sense—usually starting with a concise `AGENTS.md` and thin tool-specific adapters.
 
 It is not a meta-prompt for wording arbitrary requests; for that, use [Prompt Architect](#prompt-architect).
 
@@ -256,19 +257,19 @@ Use it on **brownfield** codebases, or on **greenfield repos that already have**
 
 ### When not to use AI Repo Setup
 
-Do not use it for **completely empty** directories or when you still need to **create the project from an idea**—use `prompts/project-start.prompt.md` first, then return here once the repo exists and has real tooling to inspect.
+Do not use it for **completely empty** directories or when you still need to **create the project from an idea**—use `prompts/project-start.md` first, then return here once the repo exists and has real tooling to inspect.
 
 ### File location
 
 ```text
 prompts/
-  ai-repo-setup.prompt.md
+  ai-repo-setup.md
 ```
 
 ### How to use AI Repo Setup
 
 1. Open the **target repository** in Cursor (or another agent that can read the tree and edit files).
-2. Attach or paste `prompts/ai-repo-setup.prompt.md` (for example `@prompts/ai-repo-setup.prompt.md` in Cursor chat).
+2. Attach or paste `prompts/ai-repo-setup.md` (for example `@prompts/ai-repo-setup.md` in Cursor chat).
 3. Ask the agent to follow the prompt and report the assessment and file list before large edits if you want an extra checkpoint.
 
 Prefer a **single session** with full repo access so inspection steps (package manager, CI, linters) are accurate. Review diffs carefully: the prompt intentionally avoids secrets, lockfiles, and release workflows unless you explicitly expand scope. You can **re-run** the same prompt after large refactors or stack changes; say in chat if specific sections must stay, and check the diff so custom agent text is not dropped by mistake.

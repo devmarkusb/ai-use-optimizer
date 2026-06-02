@@ -25,7 +25,7 @@ No repository-level formatter, linter, or pre-commit configuration. **Unverified
 | Path | Role |
 |------|------|
 | `README.md` | Human-facing index: tools, when to use which prompt, maintenance notes. |
-| `prompts/` | Authoritative prompt sources (`*.md`, `*.prompt.md`). YAML-style front matter appears in some files—preserve it. |
+| `prompts/` | Authoritative prompt sources (`*.md`, `*.system.md`). YAML-style front matter appears in some files—preserve it. |
 | `.github/workflows/` | GitHub Actions CI (link check, README path guard). |
 | `.idea/` | JetBrains IDE metadata (gitignored in part elsewhere; see `.gitignore`). |
 
