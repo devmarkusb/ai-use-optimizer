@@ -26,8 +26,9 @@ viral tricks. New prompts can be added without rewriting the repo.
 
 ## Development
 
-Markdown in `README.md`, `AGENTS.md`, `CLAUDE.md`, and `prompts/**/*.md` uses a **100-column** wrap
-and lint via [pre-commit](https://pre-commit.com) (local on commit and in CI).
+Markdown in `README.md`, `AGENTS.md`, `CLAUDE.md`, `promptfill/README.md`, and `prompts/**/*.md`
+uses a **100-column** wrap and lint via [pre-commit](https://pre-commit.com) (local on commit and in
+CI).
 
 **Prerequisites:** [uv](https://docs.astral.sh/uv/) (`brew install uv` on macOS).
 
@@ -41,11 +42,13 @@ uv run pre-commit run --all-files   # check or fix
 `.pre-commit-config.yaml` and `.mdformat.toml`.
 
 **CI** (`.github/workflows/ci.yml`): pre-commit (Markdown, gitleaks, actionlint), lychee link check,
-README prompt index guard, pip-audit, zizmor. Dependabot (`.github/dependabot.yml`) proposes weekly
-GitHub Actions and uv dev dependency updates.
+README prompt index guard, **promptfill** pytest (`promptfill/`), pip-audit (root and promptfill),
+zizmor. Dependabot (`.github/dependabot.yml`) proposes weekly GitHub Actions and uv dependency
+updates (root dev tools and `promptfill/`).
 
 **promptfill** (`promptfill/`): CLI to pick a prompt, fill `<PLACEHOLDER>` values, and copy the
-rendered text to the clipboard (Espanso-friendly). See `promptfill/README.md`.
+rendered text to the clipboard (Espanso-friendly). See `promptfill/README.md`. From `promptfill/`:
+`uv sync && uv run pytest`.
 
 ## Tools
 

@@ -33,7 +33,7 @@ jobs:
       - name: Run lychee
         uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2
         with:
-          args: --no-progress --verbose README.md "prompts/**/*.md"
+          args: --no-progress --verbose README.md promptfill/README.md "prompts/**/*.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -47,6 +47,22 @@ jobs:
       - name: Verify README indexes all prompts and referenced paths exist
         run: bash .github/scripts/verify-readme-paths.sh
 
+  promptfill:
+    name: promptfill (pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: promptfill
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run pytest
+
   dependency-audit:
     name: Dependency audit (pip-audit)
     runs-on: ubuntu-latest
@@ -59,6 +75,11 @@ jobs:
           enable-cache: true
       - run: uv sync --frozen
       - run: uv run --with pip-audit pip-audit
+      - name: pip-audit (promptfill)
+        working-directory: promptfill
+        run: |
+          uv sync --frozen
+          uv run --with pip-audit pip-audit
 
   zizmor:
     name: Workflow security (zizmor)

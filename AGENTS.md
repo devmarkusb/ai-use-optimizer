@@ -7,8 +7,9 @@ tools). Tool-specific files in this repo should stay thin and point here.
 
 Private collection of **reusable prompts and documentation** for working with LLMs: meta-prompts
 (e.g. Prompt Architect), task prompts (e.g. AI Repo Setup), and a root `README.md` that describes
-how to use them. **No application runtime or compiled code.** Dev tooling only:
-[uv](https://docs.astral.sh/uv/) + pre-commit for Markdown format/lint (see §4).
+how to use them. The **`promptfill/`** package is a small local CLI (Python) for filling prompt
+placeholders; everything else is Markdown. Dev tooling: [uv](https://docs.astral.sh/uv/) +
+pre-commit for Markdown format/lint (see §4).
 
 ## 2. Build commands
 
@@ -16,21 +17,30 @@ None. There is no build system or compiled output.
 
 ## 3. Test commands
 
-None configured. No unit or integration test runner.
+**promptfill** (from `promptfill/`):
+
+```bash
+cd promptfill && uv sync && uv run pytest
+```
+
+No other test runner is configured.
 
 **CI (GitHub Actions):** workflow `.github/workflows/ci.yml` runs on push and pull requests to
 `main`:
 
 - [pre-commit](https://pre-commit.com) via **uv** (Markdown wrap/lint, secret scan, workflow lint;
   see §4)
-- Markdown link check ([lychee](https://github.com/lycheeverse/lychee)) on `README.md` and
-  `prompts/**/*.md`
+- Markdown link check ([lychee](https://github.com/lycheeverse/lychee)) on `README.md`,
+  `promptfill/README.md`, and `prompts/**/*.md`
 - Path guard (`.github/scripts/verify-readme-paths.sh`) that ensures README-indexed paths exist and
   every `prompts/*.md` file is referenced in `README.md`
-- [pip-audit](https://pypi.org/project/pip-audit/) on dev dependencies (`uv.lock`)
+- **pytest** for `promptfill/` (`uv sync --frozen && uv run pytest` in that directory)
+- [pip-audit](https://pypi.org/project/pip-audit/) on root dev deps (`uv.lock`) and on
+  `promptfill/uv.lock`
 - [zizmor](https://github.com/zizmorcore/zizmor) GitHub Actions security analysis
 
-**Dependabot** (`.github/dependabot.yml`) opens weekly PRs for GitHub Actions and pip/uv dev deps.
+**Dependabot** (`.github/dependabot.yml`) opens weekly PRs for GitHub Actions and pip/uv deps (root
+and `promptfill/`).
 
 ## 4. Formatting and linting
 
@@ -44,7 +54,8 @@ None configured. No unit or integration test runner.
 | `actionlint`        | Lints `.github/workflows/*.yml`                                                    |
 | `check-yaml`        | Validates workflow YAML syntax                                                     |
 
-Scoped Markdown hooks apply to `README.md`, `AGENTS.md`, `CLAUDE.md`, and `prompts/**/*.md`.
+Scoped Markdown hooks apply to `README.md`, `AGENTS.md`, `CLAUDE.md`, `promptfill/README.md`, and
+`prompts/**/*.md`.
 
 **Setup (once per clone):** requires [uv](https://docs.astral.sh/uv/) (`brew install uv` on macOS).
 
@@ -70,8 +81,9 @@ CI runs the same pre-commit hooks with `uv sync --frozen && uv run pre-commit ru
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `README.md`                 | Human-facing index: tools, when to use which prompt, maintenance notes.                                          |
 | `prompts/`                  | Authoritative prompt sources (`*.md`, `*.system.md`). YAML-style front matter appears in some files—preserve it. |
-| `.github/workflows/`        | GitHub Actions CI (lint, link check, security).                                                                  |
-| `.github/dependabot.yml`    | Weekly dependency update PRs for Actions and pip/uv dev deps.                                                    |
+| `promptfill/`               | Local CLI: fill `<PLACEHOLDER>` prompts, copy to clipboard; `pyproject.toml`, `uv.lock`, `tests/`.               |
+| `.github/workflows/`        | GitHub Actions CI (lint, link check, promptfill tests, security).                                                |
+| `.github/dependabot.yml`    | Weekly dependency update PRs for Actions and pip/uv (root and `promptfill/`).                                    |
 | `pyproject.toml`, `uv.lock` | Dev-only: uv-managed pre-commit for Markdown hooks.                                                              |
 | `.idea/`                    | JetBrains IDE metadata (gitignored in part elsewhere; see `.gitignore`).                                         |
 
@@ -95,10 +107,11 @@ CI runs the same pre-commit hooks with `uv sync --frozen && uv run pre-commit ru
 
 ## 7. Testing expectations
 
-No application test suite. CI covers Markdown format/lint (pre-commit), link checking, and README
-prompt indexing (bidirectional path guard). For prompt edits, run `pre-commit run --all-files` and
+CI covers Markdown format/lint (pre-commit), link checking, README prompt indexing (bidirectional
+path guard), and **promptfill** pytest. For prompt edits, run `pre-commit run --all-files` and
 `bash .github/scripts/verify-readme-paths.sh` before pushing when possible; still sanity-check
-anchors and `.cursor/rules/` paths not covered by the prompt-file rule.
+anchors and `.cursor/rules/` paths not covered by the prompt-file rule. For `promptfill/` code
+changes, run `cd promptfill && uv run pytest`.
 
 ## 8. Files and directories agents must not edit without explicit approval
 

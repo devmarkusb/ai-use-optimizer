@@ -1,8 +1,8 @@
 # promptfill
 
 Local CLI that turns Markdown prompts with `<PLACEHOLDER>` fields into a filled prompt on your
-clipboard. Prompt files stay in the parent repo’s `prompts/` directory; [Espanso](https://espanso.org/)
-(or any launcher) only starts the tool.
+clipboard. Prompt files stay in the parent repo’s `prompts/` directory;
+[Espanso](https://espanso.org/) (or any launcher) only starts the tool.
 
 ## Placeholder convention
 
@@ -47,14 +47,14 @@ uv run promptfill list
 
 ## Usage
 
-| Command | Action |
-| ------- | ------ |
-| `promptfill` | Picker → interactive fill → clipboard |
-| `promptfill list` | Titles and filenames |
-| `promptfill project-start` | Fill by stem (no picker) |
-| `promptfill fill project-start` | Same, explicit subcommand |
-| `promptfill --dry-run find-the-right-representation` | Print result, no clipboard |
-| `promptfill --set PROBLEM='fix bug' project-start` | Preset fields (non-interactive) |
+| Command                                              | Action                                |
+| ---------------------------------------------------- | ------------------------------------- |
+| `promptfill`                                         | Picker → interactive fill → clipboard |
+| `promptfill list`                                    | Titles and filenames                  |
+| `promptfill project-start`                           | Fill by stem (no picker)              |
+| `promptfill fill project-start`                      | Same, explicit subcommand             |
+| `promptfill --dry-run find-the-right-representation` | Print result, no clipboard            |
+| `promptfill --set PROBLEM='fix bug' project-start`   | Preset fields (non-interactive)       |
 
 Environment:
 
@@ -73,7 +73,7 @@ not only `promptfill/`. Example:
 Typical flow:
 
 1. `;pf` opens Terminal: `cd <repo_root> && uv run --directory promptfill promptfill`
-2. Pick a prompt, answer prompts, result on clipboard
+1. Pick a prompt, answer prompts, result on clipboard
 
 Keep Espanso as a thin launcher; all parsing and forms live in promptfill.
 
@@ -81,8 +81,11 @@ Keep Espanso as a thin launcher; all parsing and forms live in promptfill.
 
 ```bash
 cd promptfill
+uv sync
 uv run pytest
 ```
+
+CI runs the same (`uv sync --frozen && uv run pytest` in `.github/workflows/ci.yml`).
 
 ## Roadmap (not in MVP)
 
