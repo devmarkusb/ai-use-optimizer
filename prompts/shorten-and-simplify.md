@@ -16,7 +16,8 @@ scope:
 
 # Shorten and Simplify
 
-Your task is to shorten and simplify the provided text or source code without losing meaning, behavior, correctness, or important detail.
+Your task is to shorten and simplify the provided text or source code without losing meaning,
+behavior, correctness, or important detail.
 
 ## Goals
 
@@ -40,8 +41,8 @@ Your task is to shorten and simplify the provided text or source code without lo
 ## Process
 
 1. Detect redundancy, verbosity, repetition, or unclear structure
-2. Compress and simplify where possible
-3. Preserve meaning and intent completely
-4. Return only the improved result
+1. Compress and simplify where possible
+1. Preserve meaning and intent completely
+1. Return only the improved result
 
 If the original is already close to optimal, say so and make only minimal improvements.

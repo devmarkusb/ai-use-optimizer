@@ -1,0 +1,28 @@
+# See README § Development. Setup: uv sync && uv run pre-commit install
+default_install_hook_types: [pre-commit]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.22
+    hooks:
+      - id: mdformat
+        name: mdformat (wrap 100)
+        files: ^(README\.md|AGENTS\.md|CLAUDE\.md|prompts/.*\.md)$
+        args: [--wrap, "100"]
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat-frontmatter
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.22.1
+    hooks:
+      - id: markdownlint-cli2
+        name: markdownlint
+        files: ^(README\.md|AGENTS\.md|CLAUDE\.md|prompts/.*\.md)$

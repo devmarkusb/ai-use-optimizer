@@ -19,11 +19,16 @@ scope:
 
 ## Context
 
-The user has a problem that may be solvable more easily after a change of representation—not after renaming variables, but after a transformation that exposes invariants, locality, bottlenecks, or known theory.
+The user has a problem that may be solvable more easily after a change of representation—not after
+renaming variables, but after a transformation that exposes invariants, locality, bottlenecks, or
+known theory.
 
 ## Goal
 
-Analyze the problem below by searching representations that make the hard part local, constrained, or governed by established tools. End with one primary representation and a solution sketch grounded in it. If other views are complementary, say how they fit—do not blend representations silently in the sketch.
+Analyze the problem below by searching representations that make the hard part local, constrained,
+or governed by established tools. End with one primary representation and a solution sketch grounded
+in it. If other views are complementary, say how they fit—do not blend representations silently in
+the sketch.
 
 ## Inputs
 
@@ -33,13 +38,17 @@ The following section contains the problem to analyze.
 
 ## Rules
 
-- Prioritize representations that make the difficult part of the problem local, constrained, or governed by known theory.
+- Prioritize representations that make the difficult part of the problem local, constrained, or
+  governed by known theory.
 - Do not merely rename the problem; search for transformations that expose hidden structure.
 - Base structure on the stated problem; label inference explicitly when you extend beyond the text.
 - Keep each subsection concise (bullets, not essays).
-- Work through every lens in section 3 with at least a good-faith attempt; weak or surprising fits are often where structure appears.
-- For a lens that still does not help after that attempt, write **Not applicable** and one sentence why—do not skip silently.
-- If fewer than three representations are strong candidates, rank those that are and say why others were excluded.
+- Work through every lens in section 3 with at least a good-faith attempt; weak or surprising fits
+  are often where structure appears.
+- For a lens that still does not help after that attempt, write **Not applicable** and one sentence
+  why—do not skip silently.
+- If fewer than three representations are strong candidates, rank those that are and say why others
+  were excluded.
 
 ## Required Workflow
 
@@ -66,11 +75,13 @@ Identify only structure that appears relevant to solving the problem:
 Then diagnose the likely source of difficulty:
 
 - What makes this problem hard?
-- Is the difficulty mainly combinatorial, informational, computational, geometric, probabilistic, strategic, temporal, or mixed?
+- Is the difficulty mainly combinatorial, informational, computational, geometric, probabilistic,
+  strategic, temporal, or mixed?
 
 ### 3. Representation search
 
-Work through each lens below in order. Try a quick mapping even when the fit looks unlikely—you often cannot tell which representation pays off until you attempt it.
+Work through each lens below in order. Try a quick mapping even when the fit looks unlikely—you
+often cannot tell which representation pays off until you attempt it.
 
 - graph
 - state machine
@@ -85,7 +96,8 @@ Work through each lens below in order. Try a quick mapping even when the fit loo
 - geometric or spatial model
 - type-system or semantic model
 
-For each lens, use the full template when it clarifies structure; otherwise write **Not applicable** and one sentence why.
+For each lens, use the full template when it clarifies structure; otherwise write **Not applicable**
+and one sentence why.
 
 #### Representation: [name]
 
@@ -121,7 +133,8 @@ Identify the single most useful primary representation. Explain:
 - why it shortens the solution path
 - what important structure becomes obvious
 - what competing representations hide
-- if a familiar lens almost fits but would steer the solution wrong, why you reject it (what it hides or assumes incorrectly)
+- if a familiar lens almost fits but would steer the solution wrong, why you reject it (what it
+  hides or assumes incorrectly)
 
 ### 6. Solution sketch
 
@@ -130,14 +143,17 @@ Using the primary representation:
 - outline the solution approach
 - identify the critical insight
 - state what evidence would confirm or falsify this choice of representation
-- if complementary representations matter, state how they support the sketch without replacing the primary view
+- if complementary representations matter, state how they support the sketch without replacing the
+  primary view
 
 ## Output Format
 
-Return Markdown with headings matching sections 1–6 above. In section 3, include every lens—full template or **Not applicable**.
+Return Markdown with headings matching sections 1–6 above. In section 3, include every lens—full
+template or **Not applicable**.
 
 ## Quality Bar
 
 - At least one representation must expose structure that was implicit in the surface formulation.
-- The best representation must justify why it beats the runners-up on locality, constraints, or known theory—not on familiarity alone.
+- The best representation must justify why it beats the runners-up on locality, constraints, or
+  known theory—not on familiarity alone.
 - The solution sketch must not smuggle in a different representation without saying so.

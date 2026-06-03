@@ -57,22 +57,28 @@ Prefer observable behavior over inferred intent.
 
 ## Required Workflow
 
-1. Map the repository.
-   Identify structure, entry points, runtime topology, major subsystems, deployment model, external integrations, storage, auth, configuration strategy, and frontend/backend boundaries.
+1. Map the repository. Identify structure, entry points, runtime topology, major subsystems,
+   deployment model, external integrations, storage, auth, configuration strategy, and
+   frontend/backend boundaries.
 
-2. Extract domain behavior.
-   Infer entities, bounded contexts, workflows, state transitions, validation rules, side effects, failure handling, retry behavior, concurrency assumptions, data ownership, and invariants.
+1. Extract domain behavior. Infer entities, bounded contexts, workflows, state transitions,
+   validation rules, side effects, failure handling, retry behavior, concurrency assumptions, data
+   ownership, and invariants.
 
-3. Extract architecture.
-   Document architectural style, module responsibilities, subsystem boundaries, communication flows, dependency direction, transactional boundaries, coupling risks, and consistency assumptions.
+1. Extract architecture. Document architectural style, module responsibilities, subsystem
+   boundaries, communication flows, dependency direction, transactional boundaries, coupling risks,
+   and consistency assumptions.
 
-4. Infer non-functional requirements.
-   Separate explicit implementation guarantees from likely implied requirements for performance, scalability, resilience, security, privacy, auditability, observability, deployment, and availability.
+1. Infer non-functional requirements. Separate explicit implementation guarantees from likely
+   implied requirements for performance, scalability, resilience, security, privacy, auditability,
+   observability, deployment, and availability.
 
-5. Analyze gaps and risks.
-   Identify undocumented behavior, hidden coupling, unclear ownership, missing validation, surprising semantics, scalability bottlenecks, dead-code candidates, and stakeholder questions.
+1. Analyze gaps and risks. Identify undocumented behavior, hidden coupling, unclear ownership,
+   missing validation, surprising semantics, scalability bottlenecks, dead-code candidates, and
+   stakeholder questions.
 
-If the repository is large, prioritize high-centrality modules and representative paths. Summarize repeated patterns instead of documenting every duplicate instance.
+If the repository is large, prioritize high-centrality modules and representative paths. Summarize
+repeated patterns instead of documenting every duplicate instance.
 
 ## Output Format
 
@@ -81,21 +87,21 @@ Produce one or more well-structured Markdown specification documents.
 Recommended structure:
 
 1. Executive Summary
-2. System Overview
-3. Domain Model
-4. Core Business Workflows
-5. Functional Behavior
-6. Architecture Overview
-7. Module/Subdomain Breakdown
-8. Data Model and Persistence
-9. Integration Points
-10. Security and Access Control
-11. Operational Characteristics
-12. Non-Functional Requirements
-13. Risks and Technical Debt
-14. Known Unknowns and Validation Needed
-15. Appendix
-16. Changelog / Revision History
+1. System Overview
+1. Domain Model
+1. Core Business Workflows
+1. Functional Behavior
+1. Architecture Overview
+1. Module/Subdomain Breakdown
+1. Data Model and Persistence
+1. Integration Points
+1. Security and Access Control
+1. Operational Characteristics
+1. Non-Functional Requirements
+1. Risks and Technical Debt
+1. Known Unknowns and Validation Needed
+1. Appendix
+1. Changelog / Revision History
 
 For each major subsystem, cover only what is useful:
 
@@ -106,11 +112,14 @@ For each major subsystem, cover only what is useful:
 - important behaviors
 - failure modes
 
-Use diagrams only when they materially improve understanding. Prefer Mermaid for system context, request lifecycle, event flow, entity relationship, state transition, deployment, or dependency diagrams.
+Use diagrams only when they materially improve understanding. Prefer Mermaid for system context,
+request lifecycle, event flow, entity relationship, state transition, deployment, or dependency
+diagrams.
 
 ## Writing Standard
 
-Write at the level of internal engineering specs, architecture decision records, onboarding design docs, technical product specs, and modernization planning documents.
+Write at the level of internal engineering specs, architecture decision records, onboarding design
+docs, technical product specs, and modernization planning documents.
 
 Prefer:
 
@@ -128,7 +137,8 @@ Before finalizing:
 - mark ambiguous areas clearly
 - avoid unsupported assumptions
 
-The final document should support onboarding, refactoring, architecture reviews, product alignment, modernization, migration planning, impact analysis, and regression-risk reduction.
+The final document should support onboarding, refactoring, architecture reviews, product alignment,
+modernization, migration planning, impact analysis, and regression-risk reduction.
 
 ## Iterative Refinement
 
@@ -140,4 +150,5 @@ Treat open questions as actionable clarification items. For each one, state:
 - likely answer options, if useful
 - impact: `Low`, `Medium`, or `High`
 
-When the user answers a question later, update affected sections, revise confidence levels, remove resolved ambiguity, and add a short changelog entry.
+When the user answers a question later, update affected sections, revise confidence levels, remove
+resolved ambiguity, and add a short changelog entry.
