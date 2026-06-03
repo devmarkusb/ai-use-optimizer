@@ -19,7 +19,7 @@ None. There is no build system or compiled output.
 None configured. No unit or integration test runner.
 
 **CI (GitHub Actions):** workflow `.github/workflows/ci.yml` runs on push and pull requests to
-`master`:
+`main`:
 
 - [pre-commit](https://pre-commit.com) via **uv** (Markdown wrap/lint, secret scan, workflow lint;
   see §4)

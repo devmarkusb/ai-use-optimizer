@@ -1,9 +1,9 @@
 # AI Use Optimizer
 
 [![CI](https://github.com/devmarkusb/ai-use-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/devmarkusb/ai-use-optimizer/actions/workflows/ci.yml)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/devmarkusb/ai-use-optimizer/blob/master/.pre-commit-config.yaml)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot&logoColor=white)](https://github.com/devmarkusb/ai-use-optimizer/blob/master/.github/dependabot.yml)
-[![Security](https://img.shields.io/badge/security-gitleaks%20%7C%20pip--audit%20%7C%20zizmor-6e4c7b)](https://github.com/devmarkusb/ai-use-optimizer/blob/master/.github/workflows/ci.yml)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/devmarkusb/ai-use-optimizer/blob/main/.pre-commit-config.yaml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot&logoColor=white)](https://github.com/devmarkusb/ai-use-optimizer/blob/main/.github/dependabot.yml)
+[![Security](https://img.shields.io/badge/security-gitleaks%20%7C%20pip--audit%20%7C%20zizmor-6e4c7b)](https://github.com/devmarkusb/ai-use-optimizer/blob/main/.github/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 This repository collects reusable tools for improving how you work with large language models. Each
