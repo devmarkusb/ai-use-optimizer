@@ -48,6 +48,7 @@ This repository is licensed under the [MIT License](./LICENSE).
 |----------------|------------|
 | Improve wording of a request before you send it | [Prompt Architect](#prompt-architect) |
 | Turn a manual workflow into questions before delegating or automating it | [Interview Me](#interview-me) |
+| Rethink a hard problem by trying multiple formal representations | `prompts/find-the-right-representation.md` |
 | Add or normalize AI agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP) | [AI Repo Setup](#ai-repo-setup) |
 | Bootstrap a new codebase from an empty or nearly empty repo | `prompts/project-start.md` (greenfield scaffold; run **before** AI Repo Setup if you later want agent config) |
 
@@ -59,6 +60,7 @@ Prompt Architect, Interview Me, and AI Repo Setup solve different problems: one 
 |------|------|
 | **Prompt Architect** | Meta-prompt that turns rough ideas into stronger prompts for any supported target. |
 | **Interview Me** | Task prompt that asks targeted clarification questions before an agent reproduces or automates a workflow. |
+| **Find the Right Representation** | Task prompt that searches formal representations (graphs, constraints, optimization, and others) to expose structure before solving. |
 | **AI Repo Setup** | Task prompt for inspecting a real repo and creating minimal, justified `AGENTS.md`-style agent setup (Cursor, Claude Code, compatible tools). |
 
 More tools may be added here over time.
