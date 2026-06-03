@@ -68,9 +68,9 @@ Environment:
 
 ## Espanso
 
-Use [espanso-prompts](https://github.com/devmarkusb/espanso-prompts) with the `;p` shortcut, or copy
-`examples/espanso-promptfill.yml` into your Espanso match folder. Set **absolute path to this repo’s
-root** (the directory that contains `prompts/` and `promptfill/`).
+Use Espanso with the `;p` shortcut, or copy `examples/espanso-promptfill.yml` into your Espanso
+match folder. Set **absolute path to this repo’s root** (the directory that contains `prompts/` and
+`promptfill/`).
 
 Typical flow:
 
