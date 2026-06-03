@@ -23,7 +23,7 @@ The user has a problem that may be solvable more easily after a change of repres
 
 ## Goal
 
-Analyze the problem below by searching representations that make the hard part local, constrained, or governed by established tools. End with one best representation and a solution sketch grounded in that representation only.
+Analyze the problem below by searching representations that make the hard part local, constrained, or governed by established tools. End with one primary representation and a solution sketch grounded in it. If other views are complementary, say how they fit—do not blend representations silently in the sketch.
 
 ## Inputs
 
@@ -37,7 +37,7 @@ The following section contains the problem to analyze.
 - Do not merely rename the problem; search for transformations that expose hidden structure.
 - Base structure on the stated problem; label inference explicitly when you extend beyond the text.
 - Keep each subsection concise (bullets, not essays).
-- For a framework that is a poor fit, write **Not applicable** and one sentence why—do not invent structure to fill the template.
+- Develop only representations that plausibly help; do not survey every framework by default.
 - If fewer than three representations are strong candidates, rank those that are and say why others were excluded.
 
 ## Required Workflow
@@ -53,20 +53,23 @@ The following section contains the problem to analyze.
 Identify only structure that appears relevant to solving the problem:
 
 - entities
-- relations
-- operations
-- dynamics over time
-- invariants
+- relations and dependencies
+- allowed operations or transformations
+- dynamics over time (if any)
+- invariants or correctness conditions
 - constraints
-- scarce resources
-- information structure
+- scarce resources and bottlenecks
+- information available vs missing
 - likely failure modes
+
+Then diagnose the likely source of difficulty:
+
+- What makes this problem hard?
+- Is the difficulty mainly combinatorial, informational, computational, geometric, probabilistic, strategic, temporal, or mixed?
 
 ### 3. Representation search
 
-Consider the problem under each framework below. For each one, either complete the template or mark **Not applicable** with one sentence.
-
-Frameworks:
+Use as many of the following lenses as are relevant (skip the rest):
 
 - graph
 - state machine
@@ -81,7 +84,7 @@ Frameworks:
 - geometric or spatial model
 - type-system or semantic model
 
-For each framework you develop, use this template:
+For each lens you develop, use this template:
 
 #### Representation: [name]
 
@@ -91,54 +94,51 @@ For each framework you develop, use this template:
 - **Invariants**
 - **What becomes easier?**
 - **What becomes harder?**
-- **Toolkit imported** (established methods, algorithms, or theory this view brings in)
+- **Toolkit imported** (theorems, algorithms, or established theory this view brings in)
 - **One plausible solution path**
 
 When possible, complete:
 
 > The problem becomes easier in this representation because …
 
-### 4. Locality analysis
+### 4. Representation ranking
 
-For each strong candidate representation (not marked Not applicable):
+Rank the top three candidates (or fewer if only that many are strong). Compare them on:
 
-- What becomes local rather than global?
-- What can be checked using only a small neighborhood of information?
-- What dependencies disappear?
-- Which bottleneck becomes visible?
+- locality of the hard part
+- exposed invariant, symmetry, bottleneck, or conservation law
+- strength of imported toolkit
+- shortest visible solution path
 
-### 5. Representation ranking
+For each ranked representation, explain why it fits and what it unlocks.
 
-Rank the top three representations (or fewer if only that many are strong). For each, explain:
+### 5. Best representation
 
-- why it fits
-- what toolkit it unlocks
-- what key invariant, symmetry, bottleneck, or conservation law it exposes
-
-### 6. Best representation
-
-Identify the single most useful representation. Explain:
+Identify the single most useful primary representation. Explain:
 
 - why it is the most natural abstraction
 - why it shortens the solution path
 - what important structure becomes obvious
 - what competing representations hide
 
-### 7. Solution sketch
+Name any tempting but misleading alternatives: what structure they hide and what assumptions they smuggle in.
 
-Using only the best representation:
+### 6. Solution sketch
+
+Using the primary representation:
 
 - outline the solution approach
 - identify the critical insight
-- state what evidence would confirm this representation is correct
-- state what evidence would falsify it
+- state what evidence would confirm or falsify this choice of representation
+- if complementary representations matter, state how they support the sketch without replacing the primary view
 
 ## Output Format
 
-Return Markdown with headings matching sections 1–7 above. Use the representation template in section 3 for each developed framework.
+Return Markdown with headings matching sections 1–6 above. Use the representation template in section 3 for each developed lens.
 
 ## Quality Bar
 
 - At least one representation must expose structure that was implicit in the surface formulation.
 - The best representation must justify why it beats the runners-up on locality, constraints, or known theory—not on familiarity alone.
+- Name misleading alternatives when a familiar lens would distort the problem.
 - The solution sketch must not smuggle in a different representation without saying so.
