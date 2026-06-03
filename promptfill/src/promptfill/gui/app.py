@@ -22,6 +22,17 @@ FIELD_LINES = 5
 MULTILINE_FIELD_LINES = 8
 
 
+def list_index_after_delta(current: int | None, delta: int, count: int) -> int:
+    """Return the list index after moving by delta, clamped to [0, count - 1]."""
+    if count <= 0:
+        return 0
+    if current is None:
+        index = 0 if delta > 0 else count - 1
+    else:
+        index = current + delta
+    return max(0, min(count - 1, index))
+
+
 class PromptfillApp:
     def __init__(self, root: tk.Tk, prompts_dir: Path) -> None:
         self.root = root
@@ -30,6 +41,7 @@ class PromptfillApp:
         self.filtered: list[tuple[Path, str]] = list(self.catalog)
         self.selected_path: Path | None = None
         self.field_widgets: dict[str, tk.Text] = {}
+        self._skip_listbox_select = False
 
         root.title("Promptfill")
         root.minsize(720, 520)
@@ -38,10 +50,11 @@ class PromptfillApp:
 
         self._build_layout()
         self._bind_submit_shortcuts()
+        self._bind_list_navigation()
         self._refresh_list()
         if self.filtered:
             self.prompt_list.selection_set(0)
-            self._on_select()
+            self._load_selection(focus_fields=True)
 
     def _build_layout(self) -> None:
         paned = ttk.Panedwindow(self.root, orient=tk.HORIZONTAL)
@@ -55,8 +68,8 @@ class PromptfillApp:
         ttk.Label(left, text="Prompts").grid(row=0, column=0, sticky="w", pady=(0, 4))
         self.search_var = tk.StringVar()
         self.search_var.trace_add("write", lambda *_: self._refresh_list())
-        search = ttk.Entry(left, textvariable=self.search_var)
-        search.grid(row=1, column=0, sticky="ew", pady=(0, 4))
+        self.search_entry = ttk.Entry(left, textvariable=self.search_var)
+        self.search_entry.grid(row=1, column=0, sticky="ew", pady=(0, 4))
 
         list_frame = ttk.Frame(left)
         list_frame.grid(row=2, column=0, sticky="nsew")
@@ -68,7 +81,8 @@ class PromptfillApp:
         scroll = ttk.Scrollbar(list_frame, orient=tk.VERTICAL, command=self.prompt_list.yview)
         scroll.grid(row=0, column=1, sticky="ns")
         self.prompt_list.configure(yscrollcommand=scroll.set)
-        self.prompt_list.bind("<<ListboxSelect>>", lambda _e: self._on_select())
+        self.prompt_list.bind("<<ListboxSelect>>", self._on_listbox_select)
+        self.prompt_list.bind("<Return>", self._on_return)
 
         right = ttk.Frame(paned, padding=4)
         right.columnconfigure(0, weight=1)
@@ -111,15 +125,49 @@ class PromptfillApp:
         self.root.bind("<Return>", self._on_return)
         self.root.bind("<Escape>", lambda _e: self.root.destroy())
 
+    def _bind_list_navigation(self) -> None:
+        for sequence in ("<Up>", "<Down>"):
+            self.search_entry.bind(sequence, self._on_arrow_nav)
+            self.prompt_list.bind(sequence, self._on_arrow_nav)
+
     def _on_return(self, event: tk.Event) -> str | None:
         widget = event.widget
         if isinstance(widget, tk.Text) and self._shift_held(event):
             widget.insert(tk.INSERT, "\n")
             return "break"
-        if isinstance(widget, tk.Listbox):
+        if isinstance(widget, tk.Listbox) and self.field_widgets:
             return None
         self._submit_and_close()
         return "break"
+
+    def _on_arrow_nav(self, event: tk.Event) -> str:
+        if not self.filtered:
+            return "break"
+
+        delta = -1 if event.keysym == "Up" else 1
+        index = self._list_index_after_delta(delta)
+        self._move_list_selection(index)
+        return "break"
+
+    def _list_index_after_delta(self, delta: int) -> int:
+        selection = self.prompt_list.curselection()
+        current = selection[0] if selection else None
+        return list_index_after_delta(current, delta, len(self.filtered))
+
+    def _move_list_selection(self, index: int) -> None:
+        self._skip_listbox_select = True
+        self.prompt_list.focus_set()
+        self.prompt_list.selection_clear(0, tk.END)
+        self.prompt_list.selection_set(index)
+        self.prompt_list.activate(index)
+        self.prompt_list.see(index)
+        self._load_selection(focus_fields=False)
+        self._skip_listbox_select = False
+
+    def _on_listbox_select(self, _event: tk.Event | None = None) -> None:
+        if self._skip_listbox_select:
+            return
+        self._load_selection(focus_fields=True)
 
     @staticmethod
     def _shift_held(event: tk.Event) -> bool:
@@ -157,7 +205,7 @@ class PromptfillApp:
         for _path, title in self.filtered:
             self.prompt_list.insert(tk.END, title)
 
-    def _on_select(self) -> None:
+    def _load_selection(self, *, focus_fields: bool) -> None:
         selection = self.prompt_list.curselection()
         if not selection:
             return
@@ -171,9 +219,10 @@ class PromptfillApp:
         self.copy_btn.configure(state=tk.NORMAL)
         self.status_var.set(f"{path.name} · Enter: copy & paste back · Shift+Enter: newline")
 
-        if self.field_widgets:
-            first = next(iter(self.field_widgets.values()))
-            first.focus_set()
+        if focus_fields and self.field_widgets:
+            next(iter(self.field_widgets.values())).focus_set()
+        else:
+            self.prompt_list.focus_set()
 
     def _clear_form(self) -> None:
         for child in self.form_frame.winfo_children():
