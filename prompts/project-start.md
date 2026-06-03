@@ -26,7 +26,7 @@ Prefer pragmatic, maintainable defaults over framework maximalism or premature a
 
 The following section contains the actual project idea, requirements, constraints, and preferences.
 
-\<PROJECT_IDEA_AND_REQUIREMENTS>
+\<PROBLEM>
 
 ## Instructions
 

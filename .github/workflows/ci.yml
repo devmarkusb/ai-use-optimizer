@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           persist-credentials: false
-      - name: Verify paths referenced in README exist
+      - name: Verify README indexes all prompts and referenced paths exist
         run: bash .github/scripts/verify-readme-paths.sh
 
   dependency-audit:

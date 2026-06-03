@@ -25,8 +25,8 @@ None configured. No unit or integration test runner.
   see §4)
 - Markdown link check ([lychee](https://github.com/lycheeverse/lychee)) on `README.md` and
   `prompts/**/*.md`
-- Path guard (`.github/scripts/verify-readme-paths.sh`) that ensures file paths extracted from
-  `README.md` exist in the tree
+- Path guard (`.github/scripts/verify-readme-paths.sh`) that ensures README-indexed paths exist and
+  every `prompts/*.md` file is referenced in `README.md`
 - [pip-audit](https://pypi.org/project/pip-audit/) on dev dependencies (`uv.lock`)
 - [zizmor](https://github.com/zizmorcore/zizmor) GitHub Actions security analysis
 
@@ -89,14 +89,16 @@ CI runs the same pre-commit hooks with `uv sync --frozen && uv run pre-commit ru
 - Avoid generic boilerplate, persona theatrics, unsupported claims, hidden chain-of-thought
   requests, and prompt tricks that do not reduce a real failure mode.
 - Prefer small, justified edits over large rewrites unless the user asks for a redesign.
-- Keep `README.md` aligned with real files under `prompts/` when adding or renaming prompts.
+- Keep `README.md` aligned with real files under `prompts/` when adding or renaming prompts. Add
+  chooser and tools table rows with literal `prompts/<file>` paths in the same change; CI enforces
+  this via `.github/scripts/verify-readme-paths.sh`.
 
 ## 7. Testing expectations
 
 No application test suite. CI covers Markdown format/lint (pre-commit), link checking, and README
-path consistency. For prompt edits, run `pre-commit run --all-files` before pushing when possible;
-still sanity-check anchors and any paths not matched by the guard regex (see
-`.github/scripts/verify-readme-paths.sh`).
+prompt indexing (bidirectional path guard). For prompt edits, run `pre-commit run --all-files` and
+`bash .github/scripts/verify-readme-paths.sh` before pushing when possible; still sanity-check
+anchors and `.cursor/rules/` paths not covered by the prompt-file rule.
 
 ## 8. Files and directories agents must not edit without explicit approval
 

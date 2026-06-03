@@ -77,7 +77,7 @@ uv run pre-commit run --all-files
 
 - pre-commit (Markdown, gitleaks secret scan, actionlint on workflows)
 - lychee link check on docs
-- README path guard
+- README prompt index guard (referenced paths exist; every `prompts/*.md` is indexed)
 - pip-audit on dev dependencies
 - zizmor workflow security analysis
 
@@ -90,20 +90,27 @@ Dependabot (`.github/dependabot.yml`) proposes weekly updates for GitHub Actions
 | Improve wording of a request before you send it                                                    | [Prompt Architect](#prompt-architect)                                                                         |
 | Turn a manual workflow into questions before delegating or automating it                           | [Interview Me](#interview-me)                                                                                 |
 | Rethink a hard problem by trying multiple formal representations                                   | `prompts/find-the-right-representation.md`                                                                    |
+| Shorten prose or source code without changing meaning or behavior                                  | `prompts/shorten-and-simplify.md`                                                                             |
+| Derive an evidence-based development spec from an existing codebase                                | `prompts/reverse-engineer-dev-spec.md`                                                                        |
 | Add or normalize AI agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP) | [AI Repo Setup](#ai-repo-setup)                                                                               |
 | Bootstrap a new codebase from an empty or nearly empty repo                                        | `prompts/project-start.md` (greenfield scaffold; run **before** AI Repo Setup if you later want agent config) |
 
 Prompt Architect, Interview Me, and AI Repo Setup solve different problems: one shapes *prompts*,
-one extracts missing workflow details, and one shapes *repository agent configuration*.
+one extracts missing workflow details, and one shapes *repository agent configuration*. The other
+task prompts cover representation search, compression, brownfield specification, and greenfield
+bootstrap.
 
 ## Tools in this repository
 
-| Tool                              | Role                                                                                                                                          |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Prompt Architect**              | Meta-prompt that turns rough ideas into stronger prompts for any supported target.                                                            |
-| **Interview Me**                  | Task prompt that asks targeted clarification questions before an agent reproduces or automates a workflow.                                    |
-| **Find the Right Representation** | Task prompt that searches formal representations (graphs, constraints, optimization, and others) to expose structure before solving.          |
-| **AI Repo Setup**                 | Task prompt for inspecting a real repo and creating minimal, justified `AGENTS.md`-style agent setup (Cursor, Claude Code, compatible tools). |
+| Tool                                           | Role                                                                                                                                          |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Prompt Architect**                           | Meta-prompt that turns rough ideas into stronger prompts for any supported target.                                                            |
+| **Interview Me**                               | Task prompt that asks targeted clarification questions before an agent reproduces or automates a workflow.                                    |
+| **Find the Right Representation**              | Task prompt that searches formal representations (graphs, constraints, optimization, and others) to expose structure before solving.          |
+| **Shorten and Simplify**                       | Task prompt to shorten text or source code while preserving meaning, behavior, and important constraints.                                     |
+| **Reverse-Engineer Development Specification** | Brownfield task prompt to produce an evidence-based engineering specification from the current codebase.                                      |
+| **Project Start**                              | Greenfield task prompt to bootstrap stack, structure, tooling, and README from an idea (not full agent config).                               |
+| **AI Repo Setup**                              | Task prompt for inspecting a real repo and creating minimal, justified `AGENTS.md`-style agent setup (Cursor, Claude Code, compatible tools). |
 
 More tools may be added here over time.
 
@@ -126,6 +133,10 @@ Use this style when adding or updating reusable prompts in `prompts/`.
   prompt.
 - Avoid generic boilerplate, unsupported claims, hidden chain-of-thought requests, and prompt tricks
   that do not reduce a real failure mode.
+- When adding or renaming a prompt under `prompts/`, update **Choosing a prompt** and **Tools in
+  this repository** in the same change. Each row must include the literal path `prompts/<slug>.md`
+  (or `prompts/<slug>.system.md` for meta prompts). CI fails if a prompt file exists but is not
+  indexed in README.
 - When a prompt becomes a first-class tool, document when to use it, when not to use it, its file
   path, and the expected result in this README.
 
