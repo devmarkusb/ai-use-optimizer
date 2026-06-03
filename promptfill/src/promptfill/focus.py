@@ -14,6 +14,10 @@ ENV_KEY = "PROMPTFILL_RETURN_TARGET"
 PASTE_DELAY_S = 0.15
 
 
+class PasteUnavailableError(RuntimeError):
+    """Raised by paste_back() when the required tool is not installed."""
+
+
 @dataclass(frozen=True)
 class ReturnTarget:
     kind: Literal["mac_bundle", "x11_window", "win_hwnd"]
@@ -98,6 +102,13 @@ def _paste_macos(bundle_id: str) -> bool:
 
 def _capture_linux() -> ReturnTarget | None:
     if not _which("xdotool"):
+        import warnings
+
+        warnings.warn(
+            "xdotool is not installed — paste-back is disabled on Linux/X11. "
+            "Run: sudo apt install xdotool",
+            stacklevel=3,
+        )
         return None
     proc = subprocess.run(
         ["xdotool", "getactivewindow"],

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 import tkinter as tk
 from pathlib import Path
 from tkinter import messagebox, scrolledtext, ttk
@@ -22,6 +23,12 @@ from promptfill.workflow import (
 
 FIELD_LINES = 5
 MULTILINE_FIELD_LINES = 8
+
+
+def _xdotool_available() -> bool:
+    from shutil import which
+
+    return which("xdotool") is not None
 
 
 class PromptfillApp:
@@ -273,13 +280,19 @@ class PromptfillApp:
             messagebox.showerror("Clipboard error", str(exc))
             return
 
+        if sys.platform.startswith("linux") and not _xdotool_available():
+            messagebox.showwarning(
+                "Paste-back unavailable",
+                "xdotool is not installed — the prompt was copied to your clipboard.\n\n"
+                "To enable auto-paste on Linux, run:\n  sudo apt install xdotool",
+            )
+            self.root.destroy()
+            return
+
         self.root.withdraw()
         self.root.update_idletasks()
-        pasted = paste_back()
+        paste_back()
         self.root.destroy()
-        if not pasted and outcome.rendered:
-            # Clipboard still holds the text; paste-back is best-effort (Wayland, permissions, etc.).
-            pass
 
     def _fill(self):
         assert self.selected_path is not None
