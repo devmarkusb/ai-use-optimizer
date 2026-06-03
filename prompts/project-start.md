@@ -48,7 +48,7 @@ First:
 1. create the initial repository structure
 1. create build, test, formatting, and linting setup
 1. create minimal runnable functionality
-1. create minimal CI if appropriate
+1. create minimal and security CI if appropriate
 1. create a concise README with exact commands and badges
 
 Avoid:
