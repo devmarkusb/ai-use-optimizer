@@ -1,8 +1,10 @@
 # AI Use Optimizer
 
 [![CI](https://github.com/devmarkusb/ai-use-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/devmarkusb/ai-use-optimizer/actions/workflows/ci.yml)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/devmarkusb/ai-use-optimizer/blob/master/.pre-commit-config.yaml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot&logoColor=white)](https://github.com/devmarkusb/ai-use-optimizer/blob/master/.github/dependabot.yml)
+[![Security](https://img.shields.io/badge/security-gitleaks%20%7C%20pip--audit%20%7C%20zizmor-6e4c7b)](https://github.com/devmarkusb/ai-use-optimizer/blob/master/.github/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Markdown](https://img.shields.io/badge/docs-markdown-blue.svg)](./README.md)
 
 This repository collects reusable tools for improving how you work with large language models. Each
 tool lives in its own area of the repo with its own files and usage notes.
@@ -70,6 +72,16 @@ uv run pre-commit run --all-files
 `mdformat` reflows wrapped paragraphs; `markdownlint-cli2` enforces the rules in
 `.markdownlint-cli2.jsonc` (line length, heading style, and similar). Config:
 `.pre-commit-config.yaml`, `.mdformat.toml`.
+
+**CI on GitHub** (`.github/workflows/ci.yml`, same checks you can run locally plus):
+
+- pre-commit (Markdown, gitleaks secret scan, actionlint on workflows)
+- lychee link check on docs
+- README path guard
+- pip-audit on dev dependencies
+- zizmor workflow security analysis
+
+Dependabot (`.github/dependabot.yml`) proposes weekly updates for GitHub Actions and uv dev deps.
 
 ## Choosing a prompt
 

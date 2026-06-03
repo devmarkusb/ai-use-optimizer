@@ -21,21 +21,30 @@ None configured. No unit or integration test runner.
 **CI (GitHub Actions):** workflow `.github/workflows/ci.yml` runs on push and pull requests to
 `master`:
 
-- [pre-commit](https://pre-commit.com) (Markdown wrap/lint; see §4)
+- [pre-commit](https://pre-commit.com) via **uv** (Markdown wrap/lint, secret scan, workflow lint;
+  see §4)
 - Markdown link check ([lychee](https://github.com/lycheeverse/lychee)) on `README.md` and
   `prompts/**/*.md`
 - Path guard (`.github/scripts/verify-readme-paths.sh`) that ensures file paths extracted from
   `README.md` exist in the tree
+- [pip-audit](https://pypi.org/project/pip-audit/) on dev dependencies (`uv.lock`)
+- [zizmor](https://github.com/zizmor/zizmor) GitHub Actions security analysis
+
+**Dependabot** (`.github/dependabot.yml`) opens weekly PRs for GitHub Actions and pip/uv dev deps.
 
 ## 4. Formatting and linting
 
-**Pre-commit** (`.pre-commit-config.yaml`) on `README.md`, `AGENTS.md`, `CLAUDE.md`, and
-`prompts/**/*.md`:
+**Pre-commit** (`.pre-commit-config.yaml`):
 
-| Hook                | Role                                                                                            |
-| ------------------- | ----------------------------------------------------------------------------------------------- |
-| `mdformat`          | Wraps prose at **100** columns (`.mdformat.toml`); GFM + YAML front matter plugins              |
-| `markdownlint-cli2` | Style lint (`.markdownlint-cli2.jsonc`); line length MD013 aligned to 100; front matter ignored |
+| Hook                | Role                                                                               |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| `mdformat`          | Wraps prose at **100** columns (`.mdformat.toml`); GFM + YAML front matter plugins |
+| `markdownlint-cli2` | Style lint (`.markdownlint-cli2.jsonc`); line length MD013 aligned to 100          |
+| `gitleaks`          | Scans for accidentally committed secrets                                           |
+| `actionlint`        | Lints `.github/workflows/*.yml`                                                    |
+| `check-yaml`        | Validates workflow YAML syntax                                                     |
+
+Scoped Markdown hooks apply to `README.md`, `AGENTS.md`, `CLAUDE.md`, and `prompts/**/*.md`.
 
 **Setup (once per clone):** requires [uv](https://docs.astral.sh/uv/) (`brew install uv` on macOS).
 
@@ -53,7 +62,7 @@ uv run pre-commit run --all-files
 Dev dependency lives in `pyproject.toml` (dev group); lockfile is `uv.lock`. Virtualenv is `.venv/`
 (gitignored).
 
-CI runs the same hooks via `pre-commit/action` (no local install required on PRs).
+CI runs the same pre-commit hooks with `uv sync --frozen && uv run pre-commit run --all-files`.
 
 ## 5. Architecture and important directories
 
@@ -61,7 +70,8 @@ CI runs the same hooks via `pre-commit/action` (no local install required on PRs
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `README.md`                 | Human-facing index: tools, when to use which prompt, maintenance notes.                                          |
 | `prompts/`                  | Authoritative prompt sources (`*.md`, `*.system.md`). YAML-style front matter appears in some files—preserve it. |
-| `.github/workflows/`        | GitHub Actions CI (link check, README path guard).                                                               |
+| `.github/workflows/`        | GitHub Actions CI (lint, link check, security).                                                                  |
+| `.github/dependabot.yml`    | Weekly dependency update PRs for Actions and pip/uv dev deps.                                                    |
 | `pyproject.toml`, `uv.lock` | Dev-only: uv-managed pre-commit for Markdown hooks.                                                              |
 | `.idea/`                    | JetBrains IDE metadata (gitignored in part elsewhere; see `.gitignore`).                                         |
 

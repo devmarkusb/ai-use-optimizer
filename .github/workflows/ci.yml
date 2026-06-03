@@ -11,14 +11,15 @@ permissions:
 
 jobs:
   pre-commit:
-    name: Markdown format and lint
+    name: Lint (pre-commit)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.12"
-      - uses: pre-commit/action@v3.0.1
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run pre-commit run --all-files
 
   linkcheck:
     name: Markdown link check
@@ -39,3 +40,21 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify paths referenced in README exist
         run: bash .github/scripts/verify-readme-paths.sh
+
+  dependency-audit:
+    name: Dependency audit (pip-audit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run --with pip-audit pip-audit
+
+  zizmor:
+    name: Workflow security (zizmor)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: zizmor/zizmor-action@v1
