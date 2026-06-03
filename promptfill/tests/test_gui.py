@@ -1,5 +1,5 @@
-from promptfill.gui.app import list_index_after_delta
 from promptfill.gui.icon import icon_path
+from promptfill.gui.navigation import list_index_after_delta
 
 
 def test_bundled_icon_exists():

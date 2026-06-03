@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
-import tkinter as tk
 from importlib import resources
 from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import tkinter as tk
 
 
 def icon_path() -> Path | None:
@@ -17,8 +20,10 @@ def icon_path() -> Path | None:
     return path if path.is_file() else None
 
 
-def apply_window_icon(root: tk.Tk) -> None:
+def apply_window_icon(root: tk.Misc) -> None:
     """Set the window (and child) icon from the bundled asset."""
+    import tkinter as tk
+
     path = icon_path()
     if path is None:
         return

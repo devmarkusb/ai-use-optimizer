@@ -9,6 +9,7 @@ from tkinter import messagebox, scrolledtext, ttk
 from promptfill.clipboard import ClipboardError
 from promptfill.focus import paste_back
 from promptfill.gui.icon import apply_window_icon
+from promptfill.gui.navigation import list_index_after_delta
 from promptfill.schema import FieldSpec
 from promptfill.workflow import (
     catalog_for,
@@ -21,17 +22,6 @@ from promptfill.workflow import (
 
 FIELD_LINES = 5
 MULTILINE_FIELD_LINES = 8
-
-
-def list_index_after_delta(current: int | None, delta: int, count: int) -> int:
-    """Return the list index after moving by delta, clamped to [0, count - 1]."""
-    if count <= 0:
-        return 0
-    if current is None:
-        index = 0 if delta > 0 else count - 1
-    else:
-        index = current + delta
-    return max(0, min(count - 1, index))
 
 
 class PromptfillApp:
