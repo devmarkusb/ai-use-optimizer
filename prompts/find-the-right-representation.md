@@ -37,7 +37,8 @@ The following section contains the problem to analyze.
 - Do not merely rename the problem; search for transformations that expose hidden structure.
 - Base structure on the stated problem; label inference explicitly when you extend beyond the text.
 - Keep each subsection concise (bullets, not essays).
-- Develop only representations that plausibly help; do not survey every framework by default.
+- Work through every lens in section 3 with at least a good-faith attempt; weak or surprising fits are often where structure appears.
+- For a lens that still does not help after that attempt, write **Not applicable** and one sentence why—do not skip silently.
 - If fewer than three representations are strong candidates, rank those that are and say why others were excluded.
 
 ## Required Workflow
@@ -69,7 +70,7 @@ Then diagnose the likely source of difficulty:
 
 ### 3. Representation search
 
-Use as many of the following lenses as are relevant (skip the rest):
+Work through each lens below in order. Try a quick mapping even when the fit looks unlikely—you often cannot tell which representation pays off until you attempt it.
 
 - graph
 - state machine
@@ -84,7 +85,7 @@ Use as many of the following lenses as are relevant (skip the rest):
 - geometric or spatial model
 - type-system or semantic model
 
-For each lens you develop, use this template:
+For each lens, use the full template when it clarifies structure; otherwise write **Not applicable** and one sentence why.
 
 #### Representation: [name]
 
@@ -120,8 +121,7 @@ Identify the single most useful primary representation. Explain:
 - why it shortens the solution path
 - what important structure becomes obvious
 - what competing representations hide
-
-Name any tempting but misleading alternatives: what structure they hide and what assumptions they smuggle in.
+- if a familiar lens almost fits but would steer the solution wrong, why you reject it (what it hides or assumes incorrectly)
 
 ### 6. Solution sketch
 
@@ -134,11 +134,10 @@ Using the primary representation:
 
 ## Output Format
 
-Return Markdown with headings matching sections 1–6 above. Use the representation template in section 3 for each developed lens.
+Return Markdown with headings matching sections 1–6 above. In section 3, include every lens—full template or **Not applicable**.
 
 ## Quality Bar
 
 - At least one representation must expose structure that was implicit in the surface formulation.
 - The best representation must justify why it beats the runners-up on locality, constraints, or known theory—not on familiarity alone.
-- Name misleading alternatives when a familiar lens would distort the problem.
 - The solution sketch must not smuggle in a different representation without saying so.
