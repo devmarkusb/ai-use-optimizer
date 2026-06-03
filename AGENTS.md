@@ -89,9 +89,9 @@ CI runs the same pre-commit hooks with `uv sync --frozen && uv run pre-commit ru
 - Avoid generic boilerplate, persona theatrics, unsupported claims, hidden chain-of-thought
   requests, and prompt tricks that do not reduce a real failure mode.
 - Prefer small, justified edits over large rewrites unless the user asks for a redesign.
-- Keep `README.md` aligned with real files under `prompts/` when adding or renaming prompts. Add
-  chooser and tools table rows with literal `prompts/<file>` paths in the same change; CI enforces
-  this via `.github/scripts/verify-readme-paths.sh`.
+- Keep `README.md` aligned with real files under `prompts/` when adding or renaming prompts. Add a
+  **Tools** table row with literal `prompts/<file>` paths in the same change; CI enforces this via
+  `.github/scripts/verify-readme-paths.sh`.
 
 ## 7. Testing expectations
 

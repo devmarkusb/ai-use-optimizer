@@ -36,7 +36,7 @@ unindexed=0
 for p in "${prompt_files[@]}"; do
   if ! grep -Fq "$p" README.md; then
     echo "verify-readme-paths: README.md does not index prompt file: $p" >&2
-    echo "  Add a row to Choosing a prompt and Tools in this repository with the path prompts/$(basename "$p")." >&2
+    echo "  Add a row to the Tools table in README.md with the path prompts/$(basename "$p")." >&2
     unindexed=1
   fi
 done
