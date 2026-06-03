@@ -44,6 +44,9 @@ uv run pre-commit run --all-files   # check or fix
 README prompt index guard, pip-audit, zizmor. Dependabot (`.github/dependabot.yml`) proposes weekly
 GitHub Actions and uv dev dependency updates.
 
+**promptfill** (`promptfill/`): CLI to pick a prompt, fill `<PLACEHOLDER>` values, and copy the
+rendered text to the clipboard (Espanso-friendly). See `promptfill/README.md`.
+
 ## Tools
 
 Pick by goal; paste the prompt file. **More** links to short README notes when they exist (not a
