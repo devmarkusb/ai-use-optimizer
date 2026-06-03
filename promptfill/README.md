@@ -46,9 +46,10 @@ uv run promptfill list
 ```
 
 **Desktop GUI:** requires Python with tkinter (included with python.org installers on Windows; macOS
-system Python; on Debian/Ubuntu install `python3-tk`). **Enter** copies, closes the window, and
-pastes back into the app that was focused when launched (macOS/Linux X11/Windows; needs
-Automation/Accessibility permission on macOS). **Shift+Enter** inserts a newline in a field.
+system Python; on Debian/Ubuntu install `python3-tk`). The window uses a bundled app icon
+(`src/promptfill/assets/icon.png`). **Enter** copies, closes the window, and pastes back into the
+app that was focused when launched (macOS/Linux X11/Windows; needs Automation/Accessibility
+permission on macOS). **Shift+Enter** inserts a newline in a field.
 
 ## Usage
 

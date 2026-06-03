@@ -19,6 +19,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/promptfill"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"src/promptfill/assets/icon.png" = "promptfill/assets/icon.png"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]

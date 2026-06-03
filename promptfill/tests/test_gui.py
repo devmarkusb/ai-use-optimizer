@@ -1,4 +1,12 @@
 from promptfill.gui.app import list_index_after_delta
+from promptfill.gui.icon import icon_path
+
+
+def test_bundled_icon_exists():
+    path = icon_path()
+    assert path is not None
+    assert path.name == "icon.png"
+    assert path.stat().st_size > 0
 
 
 def test_list_index_after_delta_from_selection():

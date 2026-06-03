@@ -8,6 +8,7 @@ from tkinter import messagebox, scrolledtext, ttk
 
 from promptfill.clipboard import ClipboardError
 from promptfill.focus import paste_back
+from promptfill.gui.icon import apply_window_icon
 from promptfill.schema import FieldSpec
 from promptfill.workflow import (
     catalog_for,
@@ -314,6 +315,7 @@ def run_gui(prompts_dir: Path | None = None) -> int:
         return 1
 
     root = tk.Tk()
+    apply_window_icon(root)
     PromptfillApp(root, resolved)
     root.mainloop()
     return 0
