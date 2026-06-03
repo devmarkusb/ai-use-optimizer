@@ -1,48 +1,22 @@
-# Espanso match — thin launcher for promptfill (macOS example).
+# Espanso match — launcher for promptfill GUI (cross-platform).
 #
-# Install: copy this file into your Espanso match folder (any location), e.g.
-#   ~/.config/espanso/match/promptfill.yml
-# Espanso does not need to live inside the ai-use-optimizer repo.
+# Install: copy into your Espanso match folder or use espanso-prompts (;p).
+# Set ABSOLUTE repo root below, or use Espanso vars / PROMPT_REPO_ROOT.
 #
-# You must set ABSOLUTE paths below (or via Espanso vars — see bottom).
-#
-# Flow: ;pf → Terminal → picker → fill → clipboard
+# Flow: ;pf → promptfill desktop window → fill → clipboard
 
 matches:
   - trigger: ";pf"
-    replace: ""
-    force_clipboard: false
-    backend: shell
-    shell:
-      cmd: |
-        osascript -e 'tell application "Terminal" to activate' \
-          -e 'tell application "Terminal" to do script "cd /ABS/PATH/TO/ai-use-optimizer && uv run --directory promptfill promptfill"'
+    replace: "{{output}}"
+    force_mode: keys
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: |
+            (
+              sleep 0.2
+              PROMPTFILL_LAUNCH_NOW=1 python3 "$CONFIG/scripts/promptfill-launch.py" "/ABS/PATH/TO/ai-use-optimizer"
+            ) >/dev/null 2>&1 &
 
-# --- Paths (pick one approach) ---
-#
-# 1) Hardcode in the match (simplest): replace /ABS/PATH/TO/ai-use-optimizer with e.g.
-#      /Users/user/dev/ai-use-optimizer
-#    `promptfill` subdir is relative to that root via `--directory promptfill`.
-#
-# 2) Espanso custom var (config.yml next to your other espanso files):
-#
-#    custom_vars:
-#      - name: repo_root
-#        type: shell
-#        params:
-#          cmd: 'echo -n /Users/user/dev/ai-use-optimizer'
-#
-#    Then in the match use:
-#      cd {{repo_root}} && uv run --directory promptfill promptfill
-#
-# 3) No cd — set prompts dir only (repo root can be anywhere):
-#
-#      PROMPTFILL_PROMPTS_DIR=/ABS/PATH/TO/ai-use-optimizer/prompts \
-#        uv run --directory /ABS/PATH/TO/ai-use-optimizer/promptfill promptfill
-#
-# --- Requirements ---
-# - `uv` on PATH in the shell Terminal starts (login PATH issues: use full path to uv if needed)
-# - Once per clone: cd .../promptfill && uv sync
-#
-# Shorthand by stem (no picker):
-#   ... promptfill project-start
+# Prefer espanso-prompts scripts/promptfill-launch.py + {{prompt_repo_root}} when using that repo.

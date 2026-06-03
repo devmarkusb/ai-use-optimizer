@@ -7,20 +7,18 @@ import sys
 from pathlib import Path
 
 from promptfill import __version__
-from promptfill.clipboard import ClipboardError, copy_to_clipboard
-from promptfill.discover import (
-    find_prompts_dir,
-    load_prompt_catalog,
-    resolve_prompt_path,
+from promptfill.clipboard import ClipboardError
+from promptfill.form import collect_values, is_tty
+from promptfill.gui import run_gui
+from promptfill.workflow import (
+    catalog_for,
+    copy_rendered,
+    fill_prompt,
+    initial_values,
+    resolve_prompts_dir,
+    resolve_selector,
+    schema_for,
 )
-from promptfill.form import collect_values, collect_values_noninteractive, is_tty
-from promptfill.parser import parse_prompt_file
-from promptfill.render import (
-    apply_values,
-    missing_required_values,
-    unresolved_required,
-)
-from promptfill.schema import infer_schema
 
 
 def _pick_prompt(catalog: list[tuple[Path, str]]) -> Path | None:
@@ -47,7 +45,7 @@ def _pick_prompt(catalog: list[tuple[Path, str]]) -> Path | None:
 
 
 def _cmd_list(prompts_dir: Path) -> int:
-    catalog = load_prompt_catalog(prompts_dir)
+    catalog = catalog_for(prompts_dir)
     if not catalog:
         print(f"No .md files in {prompts_dir}")
         return 1
@@ -64,10 +62,10 @@ def _cmd_fill(
     dry_run: bool,
     preset: dict[str, str],
 ) -> int:
-    catalog = load_prompt_catalog(prompts_dir)
+    catalog = catalog_for(prompts_dir)
     path: Path | None
     if selector:
-        path = resolve_prompt_path(prompts_dir, selector)
+        path = resolve_selector(prompts_dir, selector)
         if path is None:
             print(f"Prompt not found: {selector}", file=sys.stderr)
             return 1
@@ -79,41 +77,33 @@ def _cmd_fill(
         if path is None:
             return 0
 
-    parsed = parse_prompt_file(path)
-    schema = infer_schema(parsed)
-
+    schema = schema_for(path)
     if not schema:
-        rendered = parsed.body
-        values = {}
+        values: dict[str, str] = {}
     elif preset or not is_tty():
-        values = collect_values_noninteractive(schema, preset)
-        rendered = apply_values(parsed, values)
+        values = initial_values(schema, preset)
     else:
         print(f"\nFilling: {path.name}\n")
         values = collect_values(schema)
-        rendered = apply_values(parsed, values)
 
-    required = {f.name for f in schema if f.required}
-    empty_required = missing_required_values(required, values)
-    unresolved = unresolved_required(rendered, required)
-
-    if empty_required or unresolved:
-        problems = empty_required or unresolved
+    outcome = fill_prompt(path, values)
+    if not outcome.ok:
         print(
             "Refusing output — unresolved required placeholders: "
-            + ", ".join(f"<{n}>" for n in problems),
+            + ", ".join(f"<{n}>" for n in outcome.missing),
             file=sys.stderr,
         )
         return 2
 
     if dry_run:
+        rendered = outcome.rendered
         print(rendered, end="" if rendered.endswith("\n") else "\n")
         return 0
 
     if not no_clipboard:
         try:
-            copy_to_clipboard(rendered)
-            print(f"Copied to clipboard ({len(rendered)} chars) from {path.name}")
+            copy_rendered(outcome.rendered)
+            print(f"Copied to clipboard ({len(outcome.rendered)} chars) from {path.name}")
         except ClipboardError as exc:
             print(str(exc), file=sys.stderr)
             return 3
@@ -136,7 +126,7 @@ def build_parser() -> argparse.ArgumentParser:
         "command",
         nargs="?",
         default="fill",
-        help="list | fill | <stem> (shorthand for fill)",
+        help="list | fill | gui | <stem> (shorthand for fill)",
     )
     parser.add_argument(
         "selector",
@@ -180,24 +170,22 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
 
-    prompts_dir = args.prompts_dir
-    if prompts_dir is None:
-        found = find_prompts_dir()
-        if found is None:
-            print(
-                "Could not find prompts/ directory. "
-                "Use --prompts-dir or set PROMPTFILL_PROMPTS_DIR.",
-                file=sys.stderr,
-            )
-            return 1
-        prompts_dir = found
-    else:
-        prompts_dir = prompts_dir.expanduser().resolve()
-        if not prompts_dir.is_dir():
-            print(f"Not a directory: {prompts_dir}", file=sys.stderr)
-            return 1
-
     command = args.command or "fill"
+
+    if command == "gui":
+        try:
+            prompts_dir = resolve_prompts_dir(args.prompts_dir)
+        except FileNotFoundError as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
+        return run_gui(prompts_dir)
+
+    try:
+        prompts_dir = resolve_prompts_dir(args.prompts_dir)
+    except FileNotFoundError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+
     selector = args.selector
 
     if command == "list":
@@ -217,7 +205,6 @@ def main(argv: list[str] | None = None) -> int:
             preset=preset,
         )
 
-    # Shorthand: `promptfill project-start` → fill by stem
     try:
         preset = _parse_preset(args.set or [])
     except ValueError as exc:

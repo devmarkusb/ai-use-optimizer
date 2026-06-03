@@ -1,8 +1,8 @@
 # promptfill
 
-Local CLI that turns Markdown prompts with `<PLACEHOLDER>` fields into a filled prompt on your
-clipboard. Prompt files stay in the parent repo’s `prompts/` directory;
-[Espanso](https://espanso.org/) (or any launcher) only starts the tool.
+Local CLI and desktop app that turns Markdown prompts with `<PLACEHOLDER>` fields into a filled
+prompt on your clipboard. Prompt files stay in the parent repo’s `prompts/` directory;
+[Espanso](https://espanso.org/) (or any launcher) can open the GUI with `;p`.
 
 ## Placeholder convention
 
@@ -45,16 +45,22 @@ uv sync
 uv run promptfill list
 ```
 
+**Desktop GUI:** requires Python with tkinter (included with python.org installers on Windows; macOS
+system Python; on Debian/Ubuntu install `python3-tk`). **Enter** copies, closes the window, and
+pastes back into the app that was focused when launched (macOS/Linux X11/Windows; needs
+Automation/Accessibility permission on macOS). **Shift+Enter** inserts a newline in a field.
+
 ## Usage
 
-| Command                                              | Action                                |
-| ---------------------------------------------------- | ------------------------------------- |
-| `promptfill`                                         | Picker → interactive fill → clipboard |
-| `promptfill list`                                    | Titles and filenames                  |
-| `promptfill project-start`                           | Fill by stem (no picker)              |
-| `promptfill fill project-start`                      | Same, explicit subcommand             |
-| `promptfill --dry-run find-the-right-representation` | Print result, no clipboard            |
-| `promptfill --set PROBLEM='fix bug' project-start`   | Preset fields (non-interactive)       |
+| Command                                              | Action                               |
+| ---------------------------------------------------- | ------------------------------------ |
+| `promptfill gui`                                     | Desktop app: pick prompt, fill, copy |
+| `promptfill`                                         | Terminal picker → fill → clipboard   |
+| `promptfill list`                                    | Titles and filenames                 |
+| `promptfill project-start`                           | Fill by stem (no picker)             |
+| `promptfill fill project-start`                      | Same, explicit subcommand            |
+| `promptfill --dry-run find-the-right-representation` | Print result, no clipboard           |
+| `promptfill --set PROBLEM='fix bug' project-start`   | Preset fields (non-interactive)      |
 
 Environment:
 
@@ -62,20 +68,14 @@ Environment:
 
 ## Espanso
 
-Copy `examples/espanso-promptfill.yml` into your Espanso match folder (wherever that lives). Set an
-**absolute path to this repo’s root** (the directory that contains `prompts/` and `promptfill/`),
-not only `promptfill/`. Example:
-
-```text
-/Users/user/dev/ai-use-optimizer
-```
+Use [espanso-prompts](https://github.com/devmarkusb/espanso-prompts) with the `;p` shortcut, or copy
+`examples/espanso-promptfill.yml` into your Espanso match folder. Set **absolute path to this repo’s
+root** (the directory that contains `prompts/` and `promptfill/`).
 
 Typical flow:
 
-1. `;pf` opens Terminal: `cd <repo_root> && uv run --directory promptfill promptfill`
-1. Pick a prompt, answer prompts, result on clipboard
-
-Keep Espanso as a thin launcher; all parsing and forms live in promptfill.
+1. `;p` opens the promptfill desktop window (no terminal)
+1. Pick a prompt, fill fields, **Copy to clipboard**
 
 ## Tests
 
@@ -87,11 +87,11 @@ uv run pytest
 
 CI runs the same (`uv sync --frozen && uv run pytest` in `.github/workflows/ci.yml`).
 
-## Roadmap (not in MVP)
+## Roadmap
 
-- Desktop UI (Tauri/React) and Android
 - Editor or browser context injection
 - Conditional sections and team sync
+- Optional native shell (Tauri) if tkinter is not enough
 
 The MVP validates: placeholder-first prompts, fast fill, safe output (no leftover required
-`<TOKENS>`), and Espanso as entry point only.
+`<TOKENS>`), desktop GUI on macOS/Linux/Windows, and Espanso as a thin launcher.
