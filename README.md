@@ -124,8 +124,8 @@ Use that prompt in ChatGPT / Claude / Cursor / Codex
 
 1. Open ChatGPT, Claude, or another LLM.
 2. Paste the contents of `prompt-architect.system.md`.
-3. If the chatbot responds, it should only say: `Ready. Send your rough request, or type template for the starter form.`
-4. Then send your rough request directly, or type `template` if you want the built-in starter form.
+3. If the chatbot responds, it should show the ready line, the starter form, and the short field guide (see **Starter response** in `prompt-architect.system.md`).
+4. Then send your rough request in plain language, or fill in and send the starter form.
 
 In Cursor, you can paste the file contents into the system or first user message, or use **@** to reference `prompts/prompt-architect.system.md` in chat so the model loads it as context.
 
