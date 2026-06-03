@@ -34,7 +34,7 @@ the sketch.
 
 The following section contains the problem to analyze.
 
-<PROBLEM>
+\<PROBLEM>
 
 ## Rules
 

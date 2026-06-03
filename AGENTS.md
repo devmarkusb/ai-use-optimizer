@@ -28,7 +28,7 @@ None configured. No unit or integration test runner.
 - Path guard (`.github/scripts/verify-readme-paths.sh`) that ensures file paths extracted from
   `README.md` exist in the tree
 - [pip-audit](https://pypi.org/project/pip-audit/) on dev dependencies (`uv.lock`)
-- [zizmor](https://github.com/zizmor/zizmor) GitHub Actions security analysis
+- [zizmor](https://github.com/zizmorcore/zizmor) GitHub Actions security analysis
 
 **Dependabot** (`.github/dependabot.yml`) opens weekly PRs for GitHub Actions and pip/uv dev deps.
 

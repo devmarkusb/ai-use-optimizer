@@ -8,9 +8,7 @@
       "headings": false,
       "strict": false
     },
-    "MD033": {
-      "allowed_elements": ["PROBLEM"]
-    },
+    "MD033": true,
     "MD041": false,
     // YAML front matter lists (targets:, scope:) use 2-space indent; not body Markdown.
     "MD007": false,
