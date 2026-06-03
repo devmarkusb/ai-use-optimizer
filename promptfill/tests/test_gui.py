@@ -12,8 +12,11 @@ def test_bundled_icon_exists():
 def test_list_index_after_delta_from_selection():
     assert list_index_after_delta(2, -1, 5) == 1
     assert list_index_after_delta(2, 1, 5) == 3
-    assert list_index_after_delta(0, -1, 5) == 0
-    assert list_index_after_delta(4, 1, 5) == 4
+
+
+def test_list_index_after_delta_wraps_at_edges():
+    assert list_index_after_delta(0, -1, 5) == 4
+    assert list_index_after_delta(4, 1, 5) == 0
 
 
 def test_list_index_after_delta_without_selection():
