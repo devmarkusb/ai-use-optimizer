@@ -24,6 +24,9 @@ Prefer pragmatic, maintainable defaults over framework maximalism or premature a
 
 Unless inputs specify another license, use the **MIT License**.
 
+Initialize Git when the directory is not already a repository, and add a stack-appropriate
+`.gitignore`.
+
 ## Inputs
 
 The following section contains the actual project idea, requirements, constraints, and preferences.
@@ -47,7 +50,10 @@ First:
 
 1. propose the minimal architecture and stack
 1. explain major technical decisions briefly
+1. initialize a Git repository if one does not already exist
 1. create the initial repository structure
+1. add a stack-appropriate `.gitignore` for build output, dependencies, IDE or editor files, OS
+   cruft, and local secrets
 1. create build, test, formatting, and linting setup
 1. create minimal runnable functionality
 1. add an MIT `LICENSE` file unless inputs specify another license
