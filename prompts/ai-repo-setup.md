@@ -25,26 +25,25 @@ This prompt is intended for:
 
 It is not intended for completely empty directories.
 
-**Re-running later:** If the tree or tooling changed a lot, run this prompt again. Re-inspect from
-scratch, update `AGENTS.md` and adapters to match reality, merge with existing files, and preserve
-bespoke sections unless they are clearly obsolete—do not replace wholesale without diffing against
-what was there.
-
 ## Goal
 
 Bring this repository to a current, maintainable AI-agent setup. Do not create a large static
 boilerplate. First inspect the repository, then generate only the configuration that is justified by
 the actual project structure, tooling, language stack, and risk profile.
 
-## Task
+## Instructions
 
-You are acting as a senior software engineer and AI tooling maintainer. Analyze this repository and
-set up a minimal, high-signal agent configuration for Cursor, Claude Code, and other
-AGENTS.md-compatible tools.
+Act as a senior software engineer and AI tooling maintainer. Analyze this repository and set up a
+minimal, high-signal agent configuration for Cursor, Claude Code, and other AGENTS.md-compatible
+tools.
 
 Prefer one canonical source of truth. Use tool-specific files only as thin adapters.
 
-## Required inspection before editing
+**When re-running later:** If the tree or tooling changed a lot, re-inspect from scratch, update
+`AGENTS.md` and adapters to match reality, merge with existing files, and preserve bespoke sections
+unless they are clearly obsolete—do not replace wholesale without diffing against what was there.
+
+### Inspect before editing
 
 Before proposing or editing configuration, inspect the repository for:
 
@@ -63,7 +62,7 @@ Before proposing or editing configuration, inspect the repository for:
 If the repository already has useful AI configuration, preserve it and reduce duplication instead of
 replacing it blindly.
 
-## Desired output files
+### Output files
 
 Create or update only the files that are useful for this repository:
 
@@ -77,7 +76,7 @@ Create or update only the files that are useful for this repository:
 Do not add large generic templates. Do not add rules that merely restate obvious software
 engineering principles.
 
-## Content requirements for `AGENTS.md`
+### `AGENTS.md` content
 
 Keep `AGENTS.md` concise and operational. Include only repository-specific instructions under these
 headings where applicable:
@@ -96,7 +95,12 @@ headings where applicable:
 Use exact commands discovered from the repository. If a command cannot be verified, mark it as
 unverified rather than inventing it.
 
-## Stacking and scoping rules
+Always include Git/remote workflow constraints in `AGENTS.md`:
+
+- **Never push without approval:** do not run `git push`, force-push, or any equivalent flow (`gh`,
+  IDE sync, etc.) that publishes local commits to a remote unless the user explicitly requests it.
+
+### Layering and scoping
 
 Use the following layering model:
 
@@ -108,7 +112,7 @@ Use the following layering model:
 If this is a monorepo, prefer additional nested `AGENTS.md` files only when subdirectories have
 materially different toolchains or rules.
 
-## Cursor-specific rules
+### Cursor
 
 If Cursor project rules are needed, create `.cursor/rules/*.mdc` as thin wrappers around the
 canonical repo instructions.
@@ -119,7 +123,7 @@ Do not duplicate the whole `AGENTS.md` into Cursor rules. Use Cursor rules for:
 - always-apply project constraints
 - Cursor-specific interaction preferences
 
-## Claude-specific rules
+### Claude Code
 
 If Claude Code is used, make `CLAUDE.md` refer to `AGENTS.md` and include only Claude-specific
 additions.
@@ -130,7 +134,7 @@ should be versioned for this repository. Do not store secrets.
 Use `.claude/agents`, `.claude/commands`, or `.claude/skills` only for repeatable workflows that are
 specific enough to be worth maintaining.
 
-## MCP rules
+### MCP
 
 Configure MCP only when it provides concrete value. Prefer a small allowlisted set of servers.
 
@@ -143,7 +147,10 @@ Before adding an MCP server, explain:
 
 Do not add broad filesystem, browser, GitHub, database, or shell access by default.
 
-## Safety constraints
+### Safety constraints
+
+Do not push to any remote without explicit user approval. Local git work (status, diff, commit when
+requested) is fine; publishing commits always requires the user to ask.
 
 Do not edit:
 
