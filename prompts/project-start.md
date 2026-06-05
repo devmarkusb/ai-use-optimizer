@@ -22,6 +22,8 @@ The repository may currently be empty or nearly empty.
 
 Prefer pragmatic, maintainable defaults over framework maximalism or premature abstraction.
 
+Unless inputs specify another license, use the **MIT License**.
+
 ## Inputs
 
 The following section contains the actual project idea, requirements, constraints, and preferences.
@@ -48,8 +50,9 @@ First:
 1. create the initial repository structure
 1. create build, test, formatting, and linting setup
 1. create minimal runnable functionality
+1. add an MIT `LICENSE` file unless inputs specify another license
 1. create minimal and security CI if appropriate
-1. create a concise README with exact commands and badges
+1. create a concise README with exact commands, a license badge, and other relevant badges
 
 Avoid:
 
