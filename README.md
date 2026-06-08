@@ -67,6 +67,7 @@ second copy of the prompt).
 | Triage a PR or diff to the few spots a human must read before merge                             | `prompts/human-code-review.md`             | —                                     |
 | Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP) | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
 | Bootstrap a new codebase from an empty or nearly empty repo                                     | `prompts/project-start.md`                 | —                                     |
+| Fix failing CI across one or more repositories with minimal, verified changes                   | `prompts/fix-my-ci-runs.md`                | —                                     |
 
 Greenfield: run `prompts/project-start.md` first; use `prompts/ai-repo-setup.md` after the repo has
 real tooling. Architect shapes *prompts*; Interview Me extracts workflow detail; AI Repo Setup
