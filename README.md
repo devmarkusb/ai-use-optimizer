@@ -62,6 +62,7 @@ second copy of the prompt).
 | Rethink a hard problem via multiple formal representations                                      | `prompts/find-the-right-representation.md` | —                                     |
 | Shorten prose or code without changing meaning or behavior                                      | `prompts/shorten-and-simplify.md`          | —                                     |
 | Derive an evidence-based dev spec from an existing codebase                                     | `prompts/reverse-engineer-dev-spec.md`     | —                                     |
+| Understand what a file or folder of code does without reading every line                        | `prompts/code-semantic-digest.md`          | —                                     |
 | Stress-test a PR, diff, or design by grilling the author on decisions and failure modes         | `prompts/grill-me.md`                      | —                                     |
 | Triage a PR or diff to the few spots a human must read before merge                             | `prompts/human-code-review.md`             | —                                     |
 | Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP) | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
