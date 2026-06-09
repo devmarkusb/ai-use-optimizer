@@ -66,9 +66,10 @@ Ignore:
 1. Evaluate not only individual lines, but also missing checks, missing tests, and wrong
    assumptions.
 1. Be honest about uncertainty. Mark uncertainty explicitly.
-1. For each Human Must Read item, extract the matching hunk from the provided diff (or construct a
-   minimal before/after excerpt from the files). Include only enough surrounding context to
-   understand the change.
+1. For each Human Must Read item, write the review metadata and the matching diff excerpt in the
+   same numbered entry—never split explanations and excerpts into separate sections.
+1. Extract the matching hunk from the provided diff (or construct a minimal before/after excerpt
+   from the files). Include only enough surrounding context to understand the change.
 
 ## Rules
 
@@ -76,7 +77,7 @@ Ignore:
 - Prefer **why look here** and **what could break** over summarizing the diff.
 - Treat absent tests, guards, or rollback paths as first-class findings when they matter.
 - Do not pad the list with low-risk boilerplate to appear thorough.
-- In **Focused Diff Excerpts**, quote real diff lines when a diff was provided. Do not paraphrase
+- In each item's diff excerpt, quote real diff lines when a diff was provided. Do not paraphrase
   code as diff or invent `+`/`-` lines.
 - Keep each excerpt short: prefer one hunk plus up to three lines of context on each side. Split
   into multiple excerpts if needed rather than pasting whole files.
@@ -93,7 +94,13 @@ At most five sentences. What is the risky core of this change?
 
 List the most important places a human must inspect. Keep this list as small as possible.
 
-For each item:
+Use **one numbered enumeration** (`1.`, `2.`, `3.`, …). Each number is a single review item:
+metadata **and** its diff excerpt together—do not list all explanations first and all excerpts
+later.
+
+For each item, use this template:
+
+#### `<n>. <file>:<start>-<end>`
 
 - **File:**
 - **Lines/block:**
@@ -103,34 +110,25 @@ For each item:
 - **Concrete review question:**
 - **What would disprove the risk:**
 
-### Focused Diff Excerpts
-
-Provide a stock-style unified diff for **Human Must Read** only—enough to review without opening the
-full PR.
-
-One subsection per item, in the same order as **Human Must Read**. Use this template:
-
-#### `<n>. <file>:<start>-<end>`
-
 ```diff
 <unified diff excerpt: optional ---/+++ headers, then @@ hunk header, then context and +/- lines>
 ```
 
-Rules for excerpts:
+Diff excerpt rules (apply inside each item, immediately after the metadata bullets):
 
 - Copy `+`, `-`, and context lines from the source diff when available. Preserve line fidelity.
 - Include an `@@` hunk header when you have hunk boundaries; otherwise label the block with the line
   range in the heading only.
 - Omit files and hunks not listed in **Human Must Read**.
-- For missing tests or absent guards, use an empty fenced block and one sentence: what is missing
-  and where it should live—do not fabricate diff lines.
+- For missing tests or absent guards, use an empty fenced block and one sentence after it: what is
+  missing and where it should live—do not fabricate diff lines.
 - Cap each excerpt at roughly 40 changed lines (plus context). If the risky block is larger, show
   the highest-risk sub-range and note the truncation.
 
 ## Do Not
 
 - Walk through the entire diff or explain every file.
-- Paste the full PR diff in **Focused Diff Excerpts**.
+- Paste the full PR diff in **Human Must Read**.
 - List formatting, rename-only, or other low-value nits.
 - Recommend patches or rewrite code unless the user explicitly asks for fixes.
 - Hide uncertainty behind confident language.
@@ -142,5 +140,5 @@ Rules for excerpts:
 - Review questions must be answerable by a human in minutes, not open-ended homework.
 - If nothing rises above low risk, say so in the Executive Risk Summary and keep Human Must Read
   empty or minimal rather than inventing work.
-- **Focused Diff Excerpts** must have the same item count and order as **Human Must Read** (empty
-  excerpt allowed only for “missing test/guard” findings).
+- Every **Human Must Read** item must include its diff excerpt (or an empty fenced block for
+  “missing test/guard” findings) in the same numbered entry—never in a separate section.
