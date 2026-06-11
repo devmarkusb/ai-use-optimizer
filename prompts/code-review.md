@@ -44,6 +44,8 @@ Would an experienced maintainer say this belongs here?
 1. Architecture and naming match the repo?
 1. Reuses existing utilities, error handling, logging, and ownership patterns?
 1. Minimal change—no unnecessary layers, classes, or files?
+1. New or modified functions with no callers in the repo (search references; note uncertainty for
+   dynamic dispatch, plugins, or intentional public API)?
 1. Lifecycle, threading, performance, exception-safety, and ABI/API compatibility considered?
 1. Tests assert observable behavior, not implementation details?
 1. Overall: "This fits here"?
@@ -55,7 +57,8 @@ Would an experienced maintainer say this belongs here?
 1. Separate confirmed defects from hypotheses; mark uncertainty explicitly.
 1. Fix unambiguous comment issues; do not refactor unrelated code.
 1. Give the smallest verification step per bug finding.
-1. For Part II, cite concrete repo files, patterns, or utilities to reuse.
+1. For Part II, search the repo for callers of new or touched functions; cite concrete repo files,
+   patterns, or utilities to reuse.
 
 ## Rules
 
@@ -92,7 +95,7 @@ Per item: **File / lines**, **Before**, **After**, **Reason**. Say "None." if em
 
 #### Slop risks
 
-Concrete churn, over-abstraction, or convention mismatches.
+Concrete churn, over-abstraction, unused never-called functions, or convention mismatches.
 
 #### Concrete simplifications
 
