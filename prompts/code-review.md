@@ -1,7 +1,7 @@
 ---
 title: Code Review
 type: task-prompt
-purpose: Review a branch or PR for bugs, intent, comment clarity, and fit against repo conventions
+purpose: Review a branch or PR for bugs, intent, comment clarity, and repo fit
 targets:
   - ChatGPT
   - Claude
@@ -25,8 +25,8 @@ the merge-base diff (`origin/main...HEAD`). Input may be a branch, diff, PR, fil
 
 ## Goal
 
-Explain what changed and why, find real bugs, fix unclear or misleading comments in touched code,
-and judge whether the diff is minimal repo-fit work or unnecessary AI-generated churn.
+Explain what changed and why, find real bugs, fix comment regressions in touched code, and judge
+whether the diff is minimal repo-fit work or unnecessary AI-generated churn.
 
 ## Task
 
@@ -34,7 +34,7 @@ and judge whether the diff is minimal repo-fit work or unnecessary AI-generated 
 
 1. Model behavior from the diff and nearby context.
 1. Find bugs, regressions, and behavioral surprises—not style unless it hides a defect.
-1. Fix unclear or misleading comments locally; keep edits minimal.
+1. Fix comment regressions locally using the rules below; keep edits minimal.
 1. Explain the change in plain language.
 
 ### Part II — Fit and minimalism ("AI slop")
@@ -54,6 +54,8 @@ Would an experienced maintainer say this belongs here?
 
 1. Diff scope: `origin/main...HEAD` or user equivalent.
 1. Read changed code plus enough context to judge behavior—not every unchanged file.
+1. For moved or extracted code, compare the source and destination hunks for comment changes, not
+   just changed executable behavior.
 1. Separate confirmed defects from hypotheses; mark uncertainty explicitly.
 1. Fix unambiguous comment issues; do not refactor unrelated code.
 1. Give the smallest verification step per bug finding.
@@ -65,6 +67,10 @@ Would an experienced maintainer say this belongs here?
 - Evidence from diff and repo beats generic advice.
 - Each bug: file, line range, failure scenario, minimal fix, verification step.
 - Comment fixes must match post-change behavior.
+- Pure moves must preserve comments exactly; if executable code did not change, comment text,
+  placement, and presence should not change either. If behavior changed, restore or adjust comments
+  that still explain non-obvious behavior, invariants, constraints, compatibility, lifecycle, or
+  edge cases.
 - Lead with the risky core; scale detail to diff size.
 - Name specific simplifications and reuse targets—not vague "could be cleaner."
 - Do not invent repo requirements.
