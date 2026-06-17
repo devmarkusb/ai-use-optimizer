@@ -60,6 +60,7 @@ second copy of the prompt).
 | Improve wording before you send a request                                                       | `prompts/prompt-architect.system.md`       | [Prompt Architect](#prompt-architect) |
 | Turn a manual workflow into questions before delegating or automating                           | `prompts/interview-me.md`                  | [Interview Me](#interview-me)         |
 | Rethink a hard problem via multiple formal representations                                      | `prompts/find-the-right-representation.md` | —                                     |
+| Solve a difficult problem systematically with Polya-style heuristics                            | `prompts/how-to-solve-it.md`               | —                                     |
 | Shorten prose or code without changing meaning or behavior                                      | `prompts/shorten-and-simplify.md`          | —                                     |
 | Derive an evidence-based dev spec from an existing codebase                                     | `prompts/reverse-engineer-dev-spec.md`     | —                                     |
 | Understand what a file or folder of code does without reading every line                        | `prompts/code-semantic-digest.md`          | —                                     |
