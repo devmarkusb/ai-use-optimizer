@@ -67,6 +67,7 @@ second copy of the prompt).
 | Derive an evidence-based dev spec from an existing codebase                                     | `prompts/reverse-engineer-dev-spec.md`     | —                                     |
 | Understand what a file or folder of code does without reading every line                        | `prompts/code-semantic-digest.md`          | —                                     |
 | Audit an AI agent session's visible context, tools, and context boundaries                      | `prompts/agent-info.md`                    | —                                     |
+| Ground factual answers in cited sources, uncertainty, and contradicting evidence                | `prompts/sources-please.md`                | —                                     |
 | Stress-test a PR, diff, or design by grilling the author on decisions and failure modes         | `prompts/grill-me.md`                      | —                                     |
 | Review a branch or PR for bugs, intent, comment fixes, and repo-fit ("AI slop")                 | `prompts/code-review.md`                   | —                                     |
 | Triage a PR or diff to the few spots a human must read before merge                             | `prompts/human-code-review.md`             | —                                     |
