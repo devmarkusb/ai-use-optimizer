@@ -56,24 +56,25 @@ rendered text to the clipboard (Espanso-friendly). See `promptfill/README.md`. F
 Pick by goal; paste the prompt file. **More** links to short README notes when they exist (not a
 second copy of the prompt).
 
-| You want to…                                                                                    | Prompt                                     | More                                  |
-| ----------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------------------------------- |
-| Improve wording before you send a request                                                       | `prompts/prompt-architect.system.md`       | [Prompt Architect](#prompt-architect) |
-| Bring a raw new prompt into this repo's style without bloating it                               | `prompts/prompt-style-fit.md`              | [Prompt Style Fit](#prompt-style-fit) |
-| Turn a manual workflow into questions before delegating or automating                           | `prompts/interview-me.md`                  | [Interview Me](#interview-me)         |
-| Rethink a hard problem via multiple formal representations                                      | `prompts/find-the-right-representation.md` | —                                     |
-| Solve a difficult problem systematically with Polya-style heuristics                            | `prompts/how-to-solve-it.md`               | —                                     |
-| Shorten prose or code without changing meaning or behavior                                      | `prompts/shorten-and-simplify.md`          | —                                     |
-| Derive an evidence-based dev spec from an existing codebase                                     | `prompts/reverse-engineer-dev-spec.md`     | —                                     |
-| Understand what a file or folder of code does without reading every line                        | `prompts/code-semantic-digest.md`          | —                                     |
-| Audit an AI agent session's visible context, tools, and context boundaries                      | `prompts/agent-info.md`                    | —                                     |
-| Ground factual answers in cited sources, uncertainty, and contradicting evidence                | `prompts/sources-please.md`                | —                                     |
-| Stress-test a PR, diff, or design by grilling the author on decisions and failure modes         | `prompts/grill-me.md`                      | —                                     |
-| Review a branch or PR for bugs, intent, comment fixes, and repo-fit ("AI slop")                 | `prompts/code-review.md`                   | —                                     |
-| Triage a PR or diff to the few spots a human must read before merge                             | `prompts/human-code-review.md`             | —                                     |
-| Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP) | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
-| Bootstrap a new codebase from an empty or nearly empty repo                                     | `prompts/project-start.md`                 | —                                     |
-| Fix failing CI across one or more repositories with minimal, verified changes                   | `prompts/fix-my-ci-runs.md`                | —                                     |
+| You want to…                                                                                       | Prompt                                     | More                                  |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------------------------------- |
+| Improve wording before you send a request                                                          | `prompts/prompt-architect.system.md`       | [Prompt Architect](#prompt-architect) |
+| Bring a raw new prompt into this repo's style without bloating it                                  | `prompts/prompt-style-fit.md`              | [Prompt Style Fit](#prompt-style-fit) |
+| Turn a manual workflow into questions before delegating or automating                              | `prompts/interview-me.md`                  | [Interview Me](#interview-me)         |
+| Rethink a hard problem via multiple formal representations                                         | `prompts/find-the-right-representation.md` | —                                     |
+| Solve a difficult problem systematically with Polya-style heuristics                               | `prompts/how-to-solve-it.md`               | —                                     |
+| Shorten prose or code without changing meaning or behavior                                         | `prompts/shorten-and-simplify.md`          | —                                     |
+| Derive an evidence-based dev spec from an existing codebase                                        | `prompts/reverse-engineer-dev-spec.md`     | —                                     |
+| Understand what a file or folder of code does without reading every line                           | `prompts/code-semantic-digest.md`          | —                                     |
+| Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
+| Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
+| Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
+| Stress-test a PR, diff, or design by grilling the author on decisions and failure modes            | `prompts/grill-me.md`                      | —                                     |
+| Review a branch or PR for bugs, intent, comment fixes, and repo-fit ("AI slop")                    | `prompts/code-review.md`                   | —                                     |
+| Triage a PR or diff to the few spots a human must read before merge                                | `prompts/human-code-review.md`             | —                                     |
+| Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP)    | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
+| Bootstrap a new codebase from an empty or nearly empty repo                                        | `prompts/project-start.md`                 | —                                     |
+| Fix failing CI across one or more repositories with minimal, verified changes                      | `prompts/fix-my-ci-runs.md`                | —                                     |
 
 Greenfield: run `prompts/project-start.md` first; use `prompts/ai-repo-setup.md` after the repo has
 real tooling. Architect shapes *prompts*; Interview Me extracts workflow detail; AI Repo Setup
