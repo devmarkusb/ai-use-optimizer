@@ -15,6 +15,7 @@ README adds chooser notes only where helpful. Licensed under the [MIT License](.
 - [Development](#development)
 - [Tools](#tools)
 - [Prompt style guide](#prompt-style-guide)
+- [Prompt Style Fit](#prompt-style-fit)
 - [Prompt Architect](#prompt-architect)
 - [Interview Me](#interview-me)
 - [AI Repo Setup](#ai-repo-setup)
@@ -58,6 +59,7 @@ second copy of the prompt).
 | You want to…                                                                                    | Prompt                                     | More                                  |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------------------------------- |
 | Improve wording before you send a request                                                       | `prompts/prompt-architect.system.md`       | [Prompt Architect](#prompt-architect) |
+| Bring a raw new prompt into this repo's style without bloating it                               | `prompts/prompt-style-fit.md`              | [Prompt Style Fit](#prompt-style-fit) |
 | Turn a manual workflow into questions before delegating or automating                           | `prompts/interview-me.md`                  | [Interview Me](#interview-me)         |
 | Rethink a hard problem via multiple formal representations                                      | `prompts/find-the-right-representation.md` | —                                     |
 | Solve a difficult problem systematically with Polya-style heuristics                            | `prompts/how-to-solve-it.md`               | —                                     |
@@ -95,6 +97,21 @@ Use when adding or updating prompts in `prompts/`.
   if a prompt file is not indexed.
 - README **More** sections only for chooser disambiguation or repo-specific notes—never duplicate
   the prompt body.
+
+## Prompt Style Fit
+
+`prompts/prompt-style-fit.md` normalizes a rough prompt file that already lives in this repo. It is
+for repo fit, not for broad prompt redesign.
+
+Use it after adding a raw file under `prompts/`:
+
+```text
+@prompts/<new-prompt>.md @prompts/prompt-style-fit.md
+```
+
+The workflow tells the agent to read the target file, this README's style guide, and a few nearby
+prompts; keep the final prompt compact; update the Tools row; and run the focused Markdown and path
+checks.
 
 ## Prompt Architect
 
