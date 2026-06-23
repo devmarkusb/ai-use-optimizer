@@ -30,3 +30,13 @@ fields:
     assert schema[0].multiline is True
     assert schema[0].required is True
     assert schema[1].default == "Generic LLM"
+
+
+def test_inferred_placeholders_are_optional_by_default(tmp_path: Path):
+    path = tmp_path / "p.md"
+    path.write_text("Hello <NAME>!\n", encoding="utf-8")
+
+    schema = infer_schema(parse_prompt_file(path))
+
+    assert [field.name for field in schema] == ["NAME"]
+    assert schema[0].required is False

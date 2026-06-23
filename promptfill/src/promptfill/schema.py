@@ -13,7 +13,7 @@ class FieldSpec:
     name: str
     field_type: str = "string"
     multiline: bool = False
-    required: bool = True
+    required: bool = False
     default: str | None = None
     label: str | None = None
 
@@ -31,7 +31,7 @@ def _coerce_field_meta(name: str, meta: Any) -> FieldSpec:
         return FieldSpec(name=name)
     field_type = str(meta.get("type", "string"))
     multiline = bool(meta.get("multiline", field_type in ("markdown", "text", "multiline")))
-    required = bool(meta.get("required", True))
+    required = bool(meta.get("required", False))
     default = meta.get("default")
     default_str = str(default) if default is not None else None
     label = meta.get("label")

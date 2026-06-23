@@ -34,6 +34,7 @@ fields:
 ```
 
 If a name appears in the body, it becomes a field automatically. Repeated tokens share one value.
+Fields are optional by default; add `required: true` when a field must be filled before output.
 
 ## Install
 
@@ -49,7 +50,8 @@ uv run promptfill list
 system Python; on Debian/Ubuntu install `python3-tk`). The window uses a bundled app icon
 (`src/promptfill/assets/icon.png`). **Enter** copies, closes the window, and pastes back into the
 app that was focused when launched (macOS/Linux X11/Windows; needs Automation/Accessibility
-permission on macOS). **Shift+Enter** inserts a newline in a field.
+permission on macOS). **Shift+Enter** inserts a newline in a field. **Tab** and **Shift+Tab** move
+through placeholder fields.
 
 ## Usage
 
@@ -94,5 +96,5 @@ CI runs the same (`uv sync --frozen && uv run pytest` in `.github/workflows/ci.y
 - Conditional sections and team sync
 - Optional native shell (Tauri) if tkinter is not enough
 
-The MVP validates: placeholder-first prompts, fast fill, safe output (no leftover required
-`<TOKENS>`), desktop GUI on macOS/Linux/Windows, and Espanso as a thin launcher.
+The MVP validates: placeholder-first prompts, fast fill, safe output for required `<TOKENS>`,
+desktop GUI on macOS/Linux/Windows, and Espanso as a thin launcher.

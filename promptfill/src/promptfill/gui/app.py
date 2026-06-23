@@ -127,6 +127,10 @@ class PromptfillApp:
         for sequence in ("<Up>", "<Down>"):
             self.search_entry.bind(sequence, self._on_arrow_nav)
             self.prompt_list.bind(sequence, self._on_arrow_nav)
+        for widget in (self.search_entry, self.prompt_list):
+            widget.bind("<Tab>", self._focus_first_field)
+            widget.bind("<Shift-Tab>", self._focus_last_field)
+            widget.bind("<ISO_Left_Tab>", self._focus_last_field)
 
     def _on_return(self, event: tk.Event) -> str | None:
         widget = event.widget
@@ -176,9 +180,46 @@ class PromptfillApp:
             event.widget.insert(tk.INSERT, "\n")
         return "break"
 
+    def _field_widgets_in_order(self) -> list[tk.Text]:
+        return list(self.field_widgets.values())
+
+    def _focus_field_at(self, index: int) -> str | None:
+        widgets = self._field_widgets_in_order()
+        if not widgets:
+            return None
+        widgets[index].focus_set()
+        return "break"
+
+    def _focus_first_field(self, _event: tk.Event) -> str | None:
+        return self._focus_field_at(0)
+
+    def _focus_last_field(self, _event: tk.Event) -> str | None:
+        return self._focus_field_at(-1)
+
+    def _focus_relative_field(self, widget: object, delta: int) -> str | None:
+        widgets = self._field_widgets_in_order()
+        if not widgets:
+            return None
+        try:
+            current = widgets.index(widget)
+        except ValueError:
+            current = None
+        index = list_index_after_delta(current, delta, len(widgets))
+        widgets[index].focus_set()
+        return "break"
+
+    def _on_field_tab(self, event: tk.Event) -> str | None:
+        return self._focus_relative_field(event.widget, 1)
+
+    def _on_field_shift_tab(self, event: tk.Event) -> str | None:
+        return self._focus_relative_field(event.widget, -1)
+
     def _bind_field_widget(self, widget: tk.Text) -> None:
         widget.bind("<Return>", self._on_return)
         widget.bind("<Shift-Return>", self._on_shift_return)
+        widget.bind("<Tab>", self._on_field_tab)
+        widget.bind("<Shift-Tab>", self._on_field_shift_tab)
+        widget.bind("<ISO_Left_Tab>", self._on_field_shift_tab)
 
     def _on_header_configure(self, event: tk.Event) -> None:
         wrap = max(event.width - 8, 120)
