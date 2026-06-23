@@ -34,8 +34,8 @@ the actual project structure, tooling, language stack, and risk profile.
 ## Instructions
 
 Act as a senior software engineer and AI tooling maintainer. Analyze this repository and set up a
-minimal, high-signal agent configuration for Cursor, Claude Code, and other AGENTS.md-compatible
-tools.
+minimal, high-signal agent configuration for Cursor, Claude Code, Codex, Gemini, and other
+AGENTS.md-compatible tools.
 
 Prefer one canonical source of truth. Use tool-specific files only as thin adapters.
 
@@ -56,8 +56,8 @@ Before proposing or editing configuration, inspect the repository for:
 - security-sensitive areas such as credentials, deployment, infrastructure, payments, auth, or data
   migrations
 - existing AI config files such as `AGENTS.md`, `CLAUDE.md`, `.cursor/rules`, `.claude`,
-  `.mcp.json`, `.github/copilot-instructions.md`, `GEMINI.md`, `.windsurfrules`, or legacy
-  `.cursorrules`
+  `.mcp.json`, `.github/copilot-instructions.md`, `GEMINI.md`, `.windsurfrules`,
+  `.codex/config.toml`, `SKILL.md` or legacy `.cursorrules`
 
 If the repository already has useful AI configuration, preserve it and reduce duplication instead of
 replacing it blindly.
@@ -67,7 +67,7 @@ replacing it blindly.
 Create or update only the files that are useful for this repository:
 
 - `AGENTS.md` as the primary portable instruction file
-- `CLAUDE.md` only if Claude Code needs a dedicated entry point
+- `CLAUDE.md` if Claude Code needs a dedicated entry point
 - `.cursor/rules/*.mdc` only for Cursor-specific scoping or rule metadata
 - `.claude/settings.json`, `.claude/agents`, `.claude/commands`, or `.claude/skills` only when there
   is a clear workflow that benefits from them
