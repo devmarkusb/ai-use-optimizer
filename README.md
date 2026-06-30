@@ -68,7 +68,7 @@ second copy of the prompt).
 | Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
 | Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
 | Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
-| Stress-test a PR, diff, or design by grilling the author on decisions and failure modes            | `prompts/grill-me.md`                      | —                                     |
+| Stress-test a PR, diff, or design with adversarial questions and defended answers                  | `prompts/grill-me.md`                      | —                                     |
 | Review a branch or PR for bugs, intent, comment fixes, and repo-fit ("AI slop")                    | `prompts/code-review.md`                   | —                                     |
 | Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP)    | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
 | Bootstrap a new codebase from an empty or nearly empty repo                                        | `prompts/project-start.md`                 | —                                     |
