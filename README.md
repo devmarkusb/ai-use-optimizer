@@ -70,6 +70,10 @@ second copy of the prompt).
 | Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
 | Stress-test a PR, diff, or design with adversarial questions and defended answers                  | `prompts/grill-me.md`                      | —                                     |
 | Review a branch or PR for bugs, intent, comment fixes, and repo-fit ("AI slop")                    | `prompts/code-review.md`                   | —                                     |
+| Explain a code subtree at a quick intuition level                                                  | `prompts/explain-code-level-1.md`          | —                                     |
+| Explain code as an architectural mental model                                                      | `prompts/explain-code-level-2.md`          | —                                     |
+| Explain subsystem behavior through lifecycle, mutation, failure, and dependency views              | `prompts/explain-code-level-3.md`          | —                                     |
+| Review code architecture for contracts, flows, risks, and unknown boundaries                       | `prompts/explain-code-level-4.md`          | —                                     |
 | Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP)    | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
 | Bootstrap a new codebase from an empty or nearly empty repo                                        | `prompts/project-start.md`                 | —                                     |
 | Fix failing CI across one or more repositories with minimal, verified changes                      | `prompts/fix-my-ci-runs.md`                | —                                     |
