@@ -1,25 +1,41 @@
-You are analyzing a source code subtree.
+---
+title: Explain Code Level 1
+type: task-prompt
+purpose: Give a short, correct intuition for what an inspected code subtree exists to do
+targets:
+  - ChatGPT
+  - Claude
+  - Codex
+  - Cursor
+  - Generic LLM coding agents
+scope:
+  - code understanding
+  - quick explanation
+  - brownfield code
+---
 
-Goal: Produce the shortest possible explanation that gives a correct intuition for what this code
-exists to do.
+# Explain Code Level 1
 
-Avoid implementation details.
+## Task
 
-Output:
+Analyze a source code subtree and produce the shortest explanation that gives a correct intuition
+for what the code exists to do.
 
-1. One sentence "This code is responsible for ..."
+## Output Format
 
-1. Input → Processing → Output Keep this to 3-6 bullets.
+Keep the answer under 250 words. Include:
 
-1. Metaphor Explain it using an everyday analogy that even a young child could roughly understand.
-   The analogy must preserve the important relationships.
+1. One sentence: "This code is responsible for ..."
+1. Input → Processing → Output: 3-6 bullets.
+1. Metaphor: an everyday analogy that preserves important relationships and is simple enough for a
+   young child to roughly understand.
+1. Main moving pieces: only the major components, modules, or classes.
+1. Black boxes: what is not understood from the inspected code, including external inputs, hidden
+   dependencies, and assumptions.
+1. Next files to inspect: if black boxes remain, the smallest files or directories to inspect next,
+   with the uncertainty each would likely resolve.
 
-1. Main moving pieces List only the major components/modules/classes.
+## Rules
 
-1. Black boxes Explicitly state what is NOT understood from the inspected code. Mention unknown
-   external inputs, hidden dependencies, and assumptions.
-
-1. Next files to inspect If black boxes remain, list the smallest set of files/directories that
-   should be inspected next. For each, say what uncertainty it would likely resolve.
-
-Keep the answer under 250 words.
+- Avoid implementation details.
+- Do not fill black boxes with guesses.

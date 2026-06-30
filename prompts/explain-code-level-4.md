@@ -1,8 +1,32 @@
+---
+title: Explain Code Level 4
+type: task-prompt
+purpose: >
+  Review inspected code architecture for responsibilities, contracts, flows, risks, and unknown
+  boundaries
+targets:
+  - ChatGPT
+  - Claude
+  - Codex
+  - Cursor
+  - Generic LLM coding agents
+scope:
+  - code understanding
+  - architecture review
+  - brownfield code
+---
+
+# Explain Code Level 4
+
+## Task
+
 Perform a software architecture review of this code.
 
 Focus on understanding rather than critique.
 
-Produce:
+## Output Format
+
+Produce Markdown sections for:
 
 1. Responsibilities
 1. Public contracts
@@ -29,7 +53,11 @@ Separate facts from inference.
 
 Label statements as:
 
-FACT LIKELY UNKNOWN
+- `FACT`
+- `LIKELY`
+- `UNKNOWN`
+
+## Rules
 
 Never infer behavior hidden behind uninspected code.
 
