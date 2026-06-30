@@ -6,8 +6,9 @@
 [![Security](https://img.shields.io/badge/security-gitleaks%20%7C%20pip--audit%20%7C%20zizmor-6e4c7b)](https://github.com/devmarkusb/ai-use-optimizer/blob/main/.github/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-Reusable prompts for working with LLMs. Each file under `prompts/` is meant to be pasted as-is; this
-README adds chooser notes only where helpful. Licensed under the [MIT License](./LICENSE).
+Reusable prompts for working with LLMs. Top-level files under `prompts/` are meant to be pasted
+as-is; archived research prompts live under `prompts/archived/`. This README adds chooser notes only
+where helpful. Licensed under the [MIT License](./LICENSE).
 
 ## Contents
 
@@ -64,15 +65,11 @@ second copy of the prompt).
 | Rethink a hard problem via multiple formal representations                                         | `prompts/find-the-right-representation.md` | —                                     |
 | Solve a difficult problem systematically with Polya-style heuristics                               | `prompts/how-to-solve-it.md`               | —                                     |
 | Shorten prose or code without changing meaning or behavior                                         | `prompts/shorten-and-simplify.md`          | —                                     |
-| Derive an evidence-based dev spec from an existing codebase                                        | `prompts/reverse-engineer-dev-spec.md`     | —                                     |
-| Extract a canonical Application IR from an existing codebase                                       | `prompts/reverse-engineer-app-ir.md`       | —                                     |
-| Understand what a file or folder of code does without reading every line                           | `prompts/code-semantic-digest.md`          | —                                     |
 | Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
 | Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
 | Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
 | Stress-test a PR, diff, or design by grilling the author on decisions and failure modes            | `prompts/grill-me.md`                      | —                                     |
 | Review a branch or PR for bugs, intent, comment fixes, and repo-fit ("AI slop")                    | `prompts/code-review.md`                   | —                                     |
-| Triage a PR or diff to the few spots a human must read before merge                                | `prompts/human-code-review.md`             | —                                     |
 | Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP)    | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
 | Bootstrap a new codebase from an empty or nearly empty repo                                        | `prompts/project-start.md`                 | —                                     |
 | Fix failing CI across one or more repositories with minimal, verified changes                      | `prompts/fix-my-ci-runs.md`                | —                                     |
@@ -96,8 +93,8 @@ Use when adding or updating prompts in `prompts/`.
 - Self-contained and pasteable—no README required to run a prompt.
 - No generic boilerplate, unsupported claims, hidden chain-of-thought, or tricks without a real
   failure mode.
-- On add/rename: add a row to **Tools** with literal `prompts/<slug>.md` (or `.system.md`). CI fails
-  if a prompt file is not indexed.
+- On add/rename of a first-class prompt: add a row to **Tools** with literal `prompts/<slug>.md` (or
+  `.system.md`). CI fails if a top-level prompt file is not indexed.
 - README **More** sections only for chooser disambiguation or repo-specific notes—never duplicate
   the prompt body.
 
