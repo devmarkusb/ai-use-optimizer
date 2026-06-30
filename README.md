@@ -65,6 +65,7 @@ second copy of the prompt).
 | Solve a difficult problem systematically with Polya-style heuristics                               | `prompts/how-to-solve-it.md`               | —                                     |
 | Shorten prose or code without changing meaning or behavior                                         | `prompts/shorten-and-simplify.md`          | —                                     |
 | Derive an evidence-based dev spec from an existing codebase                                        | `prompts/reverse-engineer-dev-spec.md`     | —                                     |
+| Extract a canonical Application IR from an existing codebase                                       | `prompts/reverse-engineer-app-ir.md`       | —                                     |
 | Understand what a file or folder of code does without reading every line                           | `prompts/code-semantic-digest.md`          | —                                     |
 | Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
 | Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
