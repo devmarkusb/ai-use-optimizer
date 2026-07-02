@@ -68,8 +68,7 @@ second copy of the prompt).
 | Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
 | Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
 | Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
-| Stress-test a PR, diff, or design with adversarial questions and defended answers                  | `prompts/grill-me.md`                      | —                                     |
-| Review a branch or PR for bugs, intent, comment fixes, and repo-fit ("AI slop")                    | `prompts/code-review.md`                   | —                                     |
+| Review a branch PR for bugs, intent, comment fixes, repo-fit, and adversarial defense              | `prompts/code-review.md`                   | —                                     |
 | Explain a code subtree at a quick intuition level                                                  | `prompts/explain-code-level-1.md`          | —                                     |
 | Explain code as an architectural mental model                                                      | `prompts/explain-code-level-2.md`          | —                                     |
 | Explain subsystem behavior through lifecycle, mutation, failure, and dependency views              | `prompts/explain-code-level-3.md`          | —                                     |
@@ -141,7 +140,7 @@ result.
 **Use** when an agent says it is done but you suspect it misunderstood the goal, missed context,
 made unverified assumptions, optimized for the wrong process or tradeoff, or needs user answers
 before continuing. **Skip** when you want a separate transcript sanity check ([Verify](#tools)),
-adversarial design interrogation ([Grill Me](#tools)), or prompt rewriting
+branch code review with adversarial defense ([Code Review](#tools)), or prompt rewriting
 ([Prompt Architect](#prompt-architect)).
 
 Paste the file into the active agent session after your challenge, for example: "Are you really

@@ -1,7 +1,7 @@
 ---
 title: Code Review
 type: task-prompt
-purpose: Review a branch or PR for bugs, intent, comment clarity, and repo fit
+purpose: Review the current branch as a PR with bug, comment, repo-fit, and defense checks
 targets:
   - ChatGPT
   - Claude
@@ -21,12 +21,18 @@ scope:
 ## Context
 
 Review the current branch as a pull request to `origin/main`. Fetch if needed. Scope the change with
-the merge-base diff (`origin/main...HEAD`). Input may be a branch, diff, PR, files, or folder path.
+the merge-base diff (`origin/main...HEAD`).
 
 ## Goal
 
-Explain what changed and why, find real bugs, fix comment regressions in touched code, and judge
-whether the diff is minimal repo-fit work or unnecessary AI-generated churn.
+Explain what changed and why, find real bugs, fix comment regressions in touched code, judge whether
+the diff is minimal repo-fit work or unnecessary AI-generated churn, and stress-test the author's
+defense of the riskiest decisions.
+
+Include a **Grill me** adversarial self-interrogation forcing defense of design and implementation
+decisions. It should test whether the author actually understands the change and its surroundings,
+not whether the diff looks fine on a quick read. Expose both the strongest defense of the branch and
+the places where that defense is weak, uncertain, or unsupported by the repository evidence.
 
 ## Task
 
@@ -50,9 +56,37 @@ Would an experienced maintainer say this belongs here?
 1. Tests assert observable behavior, not implementation details?
 1. Overall: "This fits here"?
 
+### Part III — Adversarial defense
+
+Act in two roles for the riskiest parts of the branch. This is a defense of design and
+implementation decisions, not a second conventional review:
+
+- **Adversarial reviewer:** ask specific, high-pressure questions about the change.
+- **Author/respondent:** answer each question as the person or agent responsible for the change.
+
+If you authored or proposed the change, answer from your actual rationale, implementation details,
+and verification work. If you did not author it, answer only from the diff and repository evidence;
+clearly label assumptions, unknowns, and evidence gaps.
+
+Probe whether the defense covers:
+
+- the code and control flow
+- data flow, state management, concurrency, races, and lifecycle behavior
+- surrounding system contracts, API boundaries, and ownership boundaries
+- realistic alternatives and tradeoffs
+- failure modes, error handling, edge cases, and silent behavior changes
+- operational consequences, including deploy, rollback, migrations, incidents, observability, and
+  debugging
+- performance, scalability, threading, and exception safety
+- security and trust boundaries
+- maintainability and future evolution
+- test coverage, testing blind spots, and verification gaps
+- hidden coupling, accidental risk, and unjustified assumptions
+
 ## Required Workflow
 
-1. Diff scope: `origin/main...HEAD` or user equivalent.
+1. Fetch first if needed so `origin/main` is current.
+1. Diff scope: `origin/main...HEAD`.
 1. Read changed code plus enough context to judge behavior—not every unchanged file.
 1. For moved or extracted code, compare the source and destination hunks for comment changes, not
    just changed executable behavior.
@@ -61,6 +95,9 @@ Would an experienced maintainer say this belongs here?
 1. Give the smallest verification step per bug finding.
 1. For Part II, search the repo for callers of new or touched functions; cite concrete repo files,
    patterns, or utilities to reuse.
+1. For Part III, ask only questions tied to concrete risk in this branch. Pair every question with a
+   direct answer.
+1. Infer broader system context when the branch is small, but label inference clearly.
 
 ## Rules
 
@@ -74,6 +111,15 @@ Would an experienced maintainer say this belongs here?
 - Lead with the risky core; scale detail to diff size.
 - Name specific simplifications and reuse targets—not vague "could be cleaner."
 - Do not invent repo requirements.
+- Answers in the adversarial section must be concrete and falsifiable.
+- Separate evidence from inference. Use labels such as `Evidence`, `Inference`, `Assumption`,
+  `Unknown`, or `Not verified` where that distinction matters.
+- Do not inflate weak defenses. If a defense depends on missing tests, missing context, unverified
+  behavior, or an assumption, say so plainly.
+- When an answer exposes a real gap, name the consequence and the evidence that would close the gap.
+- Prefer **why** and **what happens if** over factual trivia answerable from the diff alone.
+- Target reasoning, tradeoffs, and system understanding, not syntax.
+- Challenge assumptions aggressively, especially when the branch appears superficially correct.
 
 ## Output Format
 
@@ -115,6 +161,22 @@ Repo paths, functions, types, or patterns to align with or call.
 
 Product intent, compatibility, rollout, or ownership the diff cannot settle.
 
+### Adversarial Defense Q&A
+
+Start with `Defense strength: Weak`, `Defense strength: Mixed`, or `Defense strength: Strong`, plus
+`Review difficulty: Low`, `Review difficulty: Medium`, or `Review difficulty: High`.
+
+Then give 8–15 numbered `Q:` and `A:` pairs. Start with the highest-risk implementation choices,
+then cover core defense, deep dives into architecture/data flow/concurrency/failure handling,
+realistic alternatives, production readiness, and red-team failure scenarios. Escalate difficulty
+when the diff appears superficially correct.
+
+### Weakest Defenses
+
+The 3–5 questions whose answers most reduce confidence in the branch. For each, name the missing
+evidence, unproven assumption, or unresolved risk, plus the evidence or test that would close the
+gap. Say "None material." only when the branch is low-risk and well-supported.
+
 ## Do Not
 
 - Line-by-line walkthroughs when a risk-focused read suffices.
@@ -122,9 +184,17 @@ Product intent, compatibility, rollout, or ownership the diff cannot settle.
 - Rewrites beyond comment clarity or confirmed bugs.
 - Confident language that hides uncertainty.
 - Large refactors when a minimal fix works.
+- Review arbitrary text, a detached file, or a supplied folder as a substitute for the
+  `origin/main...HEAD` branch diff.
+- Turn the adversarial section into generic interview filler or conventional nit comments.
 
 ## Quality Bar
 
 - Bug findings are actionable; Brief Summary stands alone.
 - Slop items reference this repo—not generic clean-code advice.
 - If the change is sound and minimal, say so; do not invent nits.
+- Adversarial questions must target concrete risks from the branch and answers must cite files,
+  tests, commands, contracts, or runtime behavior where available.
+- At least one adversarial question must cover each major risk area surfaced earlier in the review.
+- Red-team and Weakest Defenses content must name concrete failure scenarios, not vague "what if it
+  breaks."
