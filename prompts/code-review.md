@@ -1,7 +1,7 @@
 ---
 title: Code Review
 type: task-prompt
-purpose: Review the current branch as a PR with bug, comment, repo-fit, and defense checks
+purpose: Review the current branch as a PR with bug, comment, repo-fit, and adversarial defense checks
 targets:
   - ChatGPT
   - Claude
@@ -153,7 +153,7 @@ Concrete churn, over-abstraction, unused never-called functions, or convention m
 
 Specific deletions, inlines, or rewrites without losing behavior.
 
-#### Existing code to reuse
+#### Existing code to reuse instead of the reinvention
 
 Repo paths, functions, types, or patterns to align with or call.
 
@@ -166,7 +166,7 @@ Product intent, compatibility, rollout, or ownership the diff cannot settle.
 Start with `Defense strength: Weak`, `Defense strength: Mixed`, or `Defense strength: Strong`, plus
 `Review difficulty: Low`, `Review difficulty: Medium`, or `Review difficulty: High`.
 
-Then give 8–15 numbered `Q:` and `A:` pairs. Start with the highest-risk implementation choices,
+Then give 3–10 numbered `Q:` and `A:` pairs. Start with the highest-risk implementation choices,
 then cover core defense, deep dives into architecture/data flow/concurrency/failure handling,
 realistic alternatives, production readiness, and red-team failure scenarios. Escalate difficulty
 when the diff appears superficially correct.
@@ -176,17 +176,6 @@ when the diff appears superficially correct.
 The 3–5 questions whose answers most reduce confidence in the branch. For each, name the missing
 evidence, unproven assumption, or unresolved risk, plus the evidence or test that would close the
 gap. Say "None material." only when the branch is low-risk and well-supported.
-
-## Do Not
-
-- Line-by-line walkthroughs when a risk-focused read suffices.
-- Findings on formatting, rename-only hunks, or boilerplate unless they hide defects.
-- Rewrites beyond comment clarity or confirmed bugs.
-- Confident language that hides uncertainty.
-- Large refactors when a minimal fix works.
-- Review arbitrary text, a detached file, or a supplied folder as a substitute for the
-  `origin/main...HEAD` branch diff.
-- Turn the adversarial section into generic interview filler or conventional nit comments.
 
 ## Quality Bar
 
