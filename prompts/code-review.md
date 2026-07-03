@@ -96,7 +96,8 @@ Probe whether the defense covers:
 1. For Part II, search the repo for callers of new or touched functions; cite concrete repo files,
    patterns, or utilities to reuse.
 1. For Part III, ask only questions tied to concrete risk in this branch. Pair every question with a
-   direct answer.
+   direct answer. If the answer exposes a gap, name it in that answer instead of repeating it
+   elsewhere.
 1. Infer broader system context when the branch is small, but label inference clearly.
 
 ## Rules
@@ -111,6 +112,8 @@ Probe whether the defense covers:
 - Lead with the risky core; scale detail to diff size.
 - Name specific simplifications and reuse targets—not vague "could be cleaner."
 - Do not invent repo requirements.
+- Put each substantive point in one primary section. Use brief cross-references instead of repeating
+  the same issue across `Bugs and Risks`, `Slop Assessment`, and `Adversarial Defense Q&A`.
 - Answers in the adversarial section must be concrete and falsifiable.
 - Separate evidence from inference. Use labels such as `Evidence`, `Inference`, `Assumption`,
   `Unknown`, or `Not verified` where that distinction matters.
@@ -127,11 +130,13 @@ Return Markdown with exactly these sections:
 
 ### Brief Summary
 
-Two to four plain-language sentences: what changed and why it matters.
+Two to four plain-language sentences: what changed and why it matters. Keep it high-level; do not
+restate individual bug, slop, or adversarial findings.
 
 ### What It Does and Why
 
-Short narrative of behavior, motivation, and how touched pieces interact.
+Short narrative of behavior, motivation, and how touched pieces interact. Do not preview detailed
+findings that belong in later sections.
 
 ### Bugs and Risks
 
@@ -157,10 +162,6 @@ Specific deletions, inlines, or rewrites without losing behavior.
 
 Repo paths, functions, types, or patterns to align with or call.
 
-#### Requires human confirmation
-
-Product intent, compatibility, rollout, or ownership the diff cannot settle.
-
 ### Adversarial Defense Q&A
 
 Start with `Defense strength: Weak`, `Defense strength: Mixed`, or `Defense strength: Strong`, plus
@@ -169,13 +170,9 @@ Start with `Defense strength: Weak`, `Defense strength: Mixed`, or `Defense stre
 Then give 3–10 numbered `Q:` and `A:` pairs. Start with the highest-risk implementation choices,
 then cover core defense, deep dives into architecture/data flow/concurrency/failure handling,
 realistic alternatives, production readiness, and red-team failure scenarios. Escalate difficulty
-when the diff appears superficially correct.
-
-### Weakest Defenses
-
-The 3–5 questions whose answers most reduce confidence in the branch. For each, name the missing
-evidence, unproven assumption, or unresolved risk, plus the evidence or test that would close the
-gap. Say "None material." only when the branch is low-risk and well-supported.
+when the diff appears superficially correct. If a question overlaps with a bug or slop finding,
+reference that item number and add only the new defense-specific evidence, assumption, or
+uncertainty.
 
 ## Quality Bar
 
@@ -185,5 +182,5 @@ gap. Say "None material." only when the branch is low-risk and well-supported.
 - Adversarial questions must target concrete risks from the branch and answers must cite files,
   tests, commands, contracts, or runtime behavior where available.
 - At least one adversarial question must cover each major risk area surfaced earlier in the review.
-- Red-team and Weakest Defenses content must name concrete failure scenarios, not vague "what if it
+- Adversarial Defense Q&A content must name concrete failure scenarios, not vague "what if it
   breaks."
