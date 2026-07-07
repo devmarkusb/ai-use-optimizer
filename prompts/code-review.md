@@ -47,7 +47,16 @@ the places where that defense is weak, uncertain, or unsupported by the reposito
 
 Would an experienced maintainer say this belongs here?
 
+Identify every abstraction boundary in touched code (functions, types, modules, public APIs). At
+each boundary, verify that names, comments, and interfaces describe the abstraction itself—not its
+current caller.
+
 1. Architecture and naming match the repo?
+1. Abstraction boundaries: for every new or modified function and public interface, do names,
+   comments, and signatures describe the abstraction—not the current caller? Per function:
+   - Does the name describe **how it works** or **who currently uses it**?
+   - Could this function be reused in another project with the same name?
+   - Should any business or caller-specific terminology move to the call site instead?
 1. Reuses existing utilities, error handling, logging, and ownership patterns?
 1. Minimal change—no unnecessary layers, classes, or files?
 1. New or modified functions with no callers in the repo (search references; note uncertainty for
@@ -72,7 +81,8 @@ Probe whether the defense covers:
 
 - the code and control flow
 - data flow, state management, concurrency, races, and lifecycle behavior
-- surrounding system contracts, API boundaries, and ownership boundaries
+- surrounding system contracts, API boundaries, ownership boundaries, and whether abstractions are
+  named for callers instead of the capability they provide
 - realistic alternatives and tradeoffs
 - failure modes, error handling, edge cases, and silent behavior changes
 - operational consequences, including deploy, rollback, migrations, incidents, observability, and
@@ -93,8 +103,9 @@ Probe whether the defense covers:
 1. Separate confirmed defects from hypotheses; mark uncertainty explicitly.
 1. Fix unambiguous comment issues; do not refactor unrelated code.
 1. Give the smallest verification step per bug finding.
-1. For Part II, search the repo for callers of new or touched functions; cite concrete repo files,
-   patterns, or utilities to reuse.
+1. For Part II, identify abstraction boundaries in touched code and flag caller-centric naming,
+   comments, or interfaces; search the repo for callers of new or touched functions and cite
+   concrete repo files, patterns, or utilities to reuse.
 1. For Part III, ask only questions tied to concrete risk in this branch. Pair every question with a
    direct answer. If the answer exposes a gap, name it in that answer instead of repeating it
    elsewhere.
@@ -111,6 +122,8 @@ Probe whether the defense covers:
   edge cases.
 - Lead with the risky core; scale detail to diff size.
 - Name specific simplifications and reuse targets—not vague "could be cleaner."
+- Caller-centric names, comments, or interfaces at abstraction boundaries are slop unless the
+  boundary is intentionally caller-specific; prefer moving business terminology to the call site.
 - Do not invent repo requirements.
 - Put each substantive point in one primary section. Use brief cross-references instead of repeating
   the same issue across `Bugs and Risks`, `Slop Assessment`, and `Adversarial Defense Q&A`.
@@ -152,7 +165,8 @@ Per item: **File / lines**, **Before**, **After**, **Reason**. Say "None." if em
 
 #### Slop risks
 
-Concrete churn, over-abstraction, unused never-called functions, or convention mismatches.
+Concrete churn, over-abstraction, caller-centric naming at abstraction boundaries, unused
+never-called functions, or convention mismatches.
 
 #### Concrete simplifications
 
@@ -178,6 +192,8 @@ uncertainty.
 
 - Bug findings are actionable; Brief Summary stands alone.
 - Slop items reference this repo—not generic clean-code advice.
+- Caller-centric abstraction naming must cite the function or interface and a concrete reuse or
+  call-site alternative when flagged.
 - If the change is sound and minimal, say so; do not invent nits.
 - Adversarial questions must target concrete risks from the branch and answers must cite files,
   tests, commands, contracts, or runtime behavior where available.
