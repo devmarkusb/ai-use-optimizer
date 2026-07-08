@@ -104,8 +104,9 @@ Probe whether the defense covers:
 1. Fix unambiguous comment issues; do not refactor unrelated code.
 1. Give the smallest verification step per bug finding.
 1. For Part II, identify abstraction boundaries in touched code and flag caller-centric naming,
-   comments, or interfaces; search the repo for callers of new or touched functions and cite
-   concrete repo files, patterns, or utilities to reuse.
+   comments, or interfaces; search the repo for callers of new or touched functions. Cite concrete
+   repo paths, patterns, or utilities in `Existing code to reuse instead of the reinvention` only
+   when the branch reinvents or diverges from them—never to praise correct reuse.
 1. For Part III, ask only questions tied to concrete risk in this branch. Pair every question with a
    direct answer. If the answer exposes a gap, name it in that answer instead of repeating it
    elsewhere.
@@ -122,6 +123,9 @@ Probe whether the defense covers:
   edge cases.
 - Lead with the risky core; scale detail to diff size.
 - Name specific simplifications and reuse targets—not vague "could be cleaner."
+- `Existing code to reuse instead of the reinvention` is an open-todo list only: each item is a
+  missed reuse opportunity with a concrete repo path or symbol. No praise, no "already correct"
+  notes, no filler. Say `None.` when the branch does not reinvent existing code.
 - Caller-centric names, comments, or interfaces at abstraction boundaries are slop unless the
   boundary is intentionally caller-specific; prefer moving business terminology to the call site.
 - Do not invent repo requirements.
@@ -166,15 +170,18 @@ Per item: **File / lines**, **Before**, **After**, **Reason**. Say "None." if em
 #### Slop risks
 
 Concrete churn, over-abstraction, caller-centric naming at abstraction boundaries, unused
-never-called functions, or convention mismatches.
+never-called functions, or convention mismatches. Say `None.` if empty.
 
 #### Concrete simplifications
 
-Specific deletions, inlines, or rewrites without losing behavior.
+Specific deletions, inlines, or rewrites without losing behavior. Say `None.` if empty.
 
 #### Existing code to reuse instead of the reinvention
 
-Repo paths, functions, types, or patterns to align with or call.
+Open todos only: repo paths, functions, types, or patterns the branch should call or align with but
+does not. Each item names what to reuse, what in the diff should change, and why. No praise for
+correct reuse; do not list utilities already used properly. Do not invent items to fill the section.
+Say `None.` if empty.
 
 ### Adversarial Defense Q&A
 
@@ -194,7 +201,9 @@ uncertainty.
 - Slop items reference this repo—not generic clean-code advice.
 - Caller-centric abstraction naming must cite the function or interface and a concrete reuse or
   call-site alternative when flagged.
-- If the change is sound and minimal, say so; do not invent nits.
+- If the change is sound and minimal, say so in narrative or slop-risk sections; do not invent nits.
+  An empty `Existing code to reuse instead of the reinvention` (`None.`) is expected when reuse is
+  already correct—do not pad it with praise or restatements of what already matches the repo.
 - Adversarial questions must target concrete risks from the branch and answers must cite files,
   tests, commands, contracts, or runtime behavior where available.
 - At least one adversarial question must cover each major risk area surfaced earlier in the review.
