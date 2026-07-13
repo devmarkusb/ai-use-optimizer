@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 import sys
-import tkinter as tk
-from tkinter import Menu, messagebox
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import tkinter as tk
 
 
 def configure_macos_menubar(root: tk.Tk, app_name: str = "Promptfill") -> None:
     """Use *app_name* in the menu bar instead of the Python executable name."""
     if sys.platform != "darwin":
         return
+
+    from tkinter import Menu, messagebox
 
     menubar = Menu(root)
 
