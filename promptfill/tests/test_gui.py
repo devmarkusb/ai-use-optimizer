@@ -1,4 +1,7 @@
+import sys
+
 from promptfill.gui.icon import icon_path
+from promptfill.gui.macos import configure_macos_menubar
 from promptfill.gui.navigation import list_index_after_delta
 
 
@@ -26,3 +29,13 @@ def test_list_index_after_delta_without_selection():
 
 def test_list_index_after_delta_empty_list():
     assert list_index_after_delta(None, 1, 0) == 0
+
+
+def test_configure_macos_menubar_skips_non_darwin(monkeypatch):
+    monkeypatch.setattr(sys, "platform", "linux")
+
+    class SentinelRoot:
+        def __getitem__(self, _key):
+            raise AssertionError("menu should not be configured off macOS")
+
+    configure_macos_menubar(SentinelRoot())  # type: ignore[arg-type]
