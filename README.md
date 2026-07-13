@@ -64,7 +64,7 @@ second copy of the prompt).
 | Pause an uncertain agent after hard work and make it ask missing intent/context questions          | `prompts/interview-me.md`                  | [Interview Me](#interview-me)         |
 | Rethink a hard problem via multiple formal representations                                         | `prompts/find-the-right-representation.md` | —                                     |
 | Solve a difficult problem systematically with Polya-style heuristics                               | `prompts/how-to-solve-it.md`               | —                                     |
-| Shorten prose or code without changing meaning or behavior                                         | `prompts/shorten-and-simplify.md`          | —                                     |
+| Shorten scoped prose or code (one file/selection) without changing meaning or behavior             | `prompts/shorten-and-simplify.md`          | —                                     |
 | Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
 | Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
 | Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
