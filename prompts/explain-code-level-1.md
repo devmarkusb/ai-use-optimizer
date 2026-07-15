@@ -27,8 +27,6 @@ Keep the answer under 250 words. Include:
 
 1. One sentence: "This code is responsible for ..."
 1. Input → Processing → Output: 3-6 bullets.
-1. Metaphor: an everyday analogy that preserves important relationships and is simple enough for a
-   young child to roughly understand.
 1. Main moving pieces: only the major components, modules, or classes.
 1. Black boxes: what is not understood from the inspected code, including external inputs, hidden
    dependencies, and assumptions.
