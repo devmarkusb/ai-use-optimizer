@@ -33,6 +33,9 @@ Reduce the current changes to the smallest coherent patch that still achieves th
 ## Required Workflow
 
 1. Inspect repository status and the full diff before editing.
+1. Start from context you already have: the conversation, your prior reasoning, tool results, failed
+   attempts, and conclusions about what worked. Use that to identify the intended change and likely
+   dead ends before broad repo search or re-reading unchanged files.
 1. Infer the intended change from the diff, history, surrounding code, tests, and user-provided
    context.
 1. Classify every hunk: required for the intended change, required test coverage, harmless but
@@ -48,6 +51,8 @@ Reduce the current changes to the smallest coherent patch that still achieves th
 
 - Prefer the smallest behavior-preserving patch; do not redesign because you prefer another
   approach.
+- Do not brute-force rediscovery when the session already establishes what worked, what failed, and
+  why.
 - No unrelated refactoring, renaming, formatting, or cleanup.
 - Do not drop a change because it looks unusual—establish whether the intended change depends on it
   first.
