@@ -64,31 +64,43 @@ Reduce the current changes to the smallest coherent patch that still achieves th
 - Do not revert user changes outside the current change diff.
 - Use Git-aware operations; do not reset the worktree or destroy uncommitted work.
 - If a change's purpose is unclear, keep it and report uncertainty instead of guessing.
+- Do the workflow silently. Classify hunks, revert, and test without narrating reasoning in the
+  reply.
+
+## Response style
+
+- The reply is a short audit note, not a report. Say as little as possible.
+- Do not recap the prompt, restate the workflow, or explain how you analyzed the diff.
+- Bullets and one-line facts only. No preamble, methodology, or play-by-play.
+- Every line must carry new information: path, hunk, command, or decision.
+- Use `None.` when a section has nothing to report.
 
 ## Output Format
 
-Return Markdown with exactly these sections:
+Return Markdown with exactly these sections. Bullets only; one line per item unless quoting a
+command.
 
 ### Intent
 
-What the change should accomplish. For bug fixes, include the root cause.
+One sentence on what the patch should accomplish. For bug fixes, add a second sentence with root
+cause only when it is not obvious from the diff.
 
 ### Essential changes
 
-Files and changes kept, and why each is required.
+`- path` — one-line why. Merge paths into one bullet when the reason is identical.
 
 ### Removed changes
 
-Reverted experiments, diagnostics, unrelated edits, or unnecessary refactors.
+`- path` or hunk — one-line what was reverted.
 
 ### Verification
 
-Commands run and results.
+`- command` — pass/fail or one-line result.
 
 ### Remaining uncertainty
 
-Anything not proven safe to remove.
+`- path` or hunk — one-line why it was kept despite unclear purpose.
 
 ### Final diff summary
 
-Why the remaining patch is minimal and coherent.
+One or two sentences: why the remaining patch is minimal and coherent.
