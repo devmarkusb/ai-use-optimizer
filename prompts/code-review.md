@@ -67,8 +67,9 @@ current caller.
 
 ### Part III — Adversarial defense
 
-Act in two roles for the riskiest parts of the branch. This is a defense of design and
-implementation decisions, not a second conventional review:
+Act in two roles for the **few highest-risk** parts of the branch. This is a defense of design and
+implementation decisions, not a second conventional review and not a checklist tour of every risk
+category:
 
 - **Adversarial reviewer:** ask specific, high-pressure questions about the change.
 - **Author/respondent:** answer each question as the person or agent responsible for the change.
@@ -77,21 +78,15 @@ If you authored or proposed the change, answer from your actual rationale, imple
 and verification work. If you did not author it, answer only from the diff and repository evidence;
 clearly label assumptions, unknowns, and evidence gaps.
 
-Probe whether the defense covers:
+Prefer depth over breadth. Ask only about concrete risks this branch actually introduces. Typical
+probe dimensions (pick the ones that matter; do not invent a Q&A for each):
 
-- the code and control flow
-- data flow, state management, concurrency, races, and lifecycle behavior
-- surrounding system contracts, API boundaries, ownership boundaries, and whether abstractions are
-  named for callers instead of the capability they provide
-- realistic alternatives and tradeoffs
-- failure modes, error handling, edge cases, and silent behavior changes
-- operational consequences, including deploy, rollback, migrations, incidents, observability, and
-  debugging
-- performance, scalability, threading, and exception safety
-- security and trust boundaries
-- maintainability and future evolution
-- test coverage, testing blind spots, and verification gaps
-- hidden coupling, accidental risk, and unjustified assumptions
+- control flow, data flow, state, concurrency, races, lifecycle
+- system/API/ownership contracts; caller-centric abstractions
+- alternatives, tradeoffs, failure modes, silent behavior changes
+- ops (deploy, rollback, migrations, incidents, observability)
+- performance, security/trust boundaries, maintainability
+- test blind spots, hidden coupling, unjustified assumptions
 
 ## Required Workflow
 
@@ -107,9 +102,11 @@ Probe whether the defense covers:
    comments, or interfaces; search the repo for callers of new or touched functions. Cite concrete
    repo paths, patterns, or utilities in `Existing code to reuse instead of the reinvention` only
    when the branch reinvents or diverges from them—never to praise correct reuse.
-1. For Part III, ask only questions tied to concrete risk in this branch. Pair every question with a
-   direct answer. If the answer exposes a gap, name it in that answer instead of repeating it
-   elsewhere.
+1. For Part III, ask only questions tied to concrete risk in this branch. Default to **3–5**
+   `Q:`/`A:` pairs; go above 5 only when distinct high-severity risks each need their own question;
+   never exceed **7**. Pair every question with a direct answer. If the answer exposes a gap, name
+   it in that answer instead of repeating it elsewhere, and mark the pair so a skim finds it (see
+   Output Format).
 1. Infer broader system context when the branch is small, but label inference clearly.
 
 ## Rules
@@ -140,6 +137,9 @@ Probe whether the defense covers:
 - Prefer **why** and **what happens if** over factual trivia answerable from the diff alone.
 - Target reasoning, tradeoffs, and system understanding, not syntax.
 - Challenge assumptions aggressively, especially when the branch appears superficially correct.
+- Part III stays short: few sharp questions on the riskiest decisions, not a tour of every probe
+  dimension. When a defense fails, mark it loudly (`PROBLEM INDEX` + `⚠ DEFENSE FAILED`) so the
+  failure is obvious on a skim.
 
 ## Output Format
 
@@ -188,12 +188,39 @@ Say `None.` if empty.
 Start with `Defense strength: Weak`, `Defense strength: Mixed`, or `Defense strength: Strong`, plus
 `Review difficulty: Low`, `Review difficulty: Medium`, or `Review difficulty: High`.
 
-Then give 3–10 numbered `Q:` and `A:` pairs. Start with the highest-risk implementation choices,
-then cover core defense, deep dives into architecture/data flow/concurrency/failure handling,
-realistic alternatives, production readiness, and red-team failure scenarios. Escalate difficulty
-when the diff appears superficially correct. If a question overlaps with a bug or slop finding,
-reference that item number and add only the new defense-specific evidence, assumption, or
-uncertainty.
+Then a one-line **Problem index** so failures are visible without reading every answer:
+
+- If any pair exposes a real bug, serious mistake, or material undefended gap:\
+  `**PROBLEM INDEX:** #N, #M — <shortest label per item>`\
+  (use the same numbers as the Q&A list; bold the whole line)
+- If none: `**PROBLEM INDEX:** None.`
+
+Then give **3–5** numbered pairs (hard cap **7**). Prefer fewer sharp questions over covering every
+risk dimension. Start with the highest-risk implementation choices; escalate difficulty when the
+diff looks superficially correct. Do not pad with low-value or checklist questions.
+
+Each pair uses this shape:
+
+```markdown
+N. **Q:** ...
+   **A:** ...
+```
+
+When the answer exposes a real bug, serious mistake, or material undefended gap (not a minor
+uncertainty):
+
+1. Prefix the item with a bold alert on its own line so skimming works:\
+   `**⚠ DEFENSE FAILED — <Critical|High|Medium>: <one-line consequence>**`
+1. Keep `**Q:**` / `**A:**` immediately under that alert.
+1. In `**A:**`, state the gap, consequence, and what evidence would close it.
+1. Ensure the item number appears in the **Problem index**.
+
+If the defense holds, write a normal `**Q:**` / `**A:**` with no alert line and do not list it in
+the Problem index. Minor residual risk or labeled `Unknown` without a concrete failure mode is not a
+defense failure.
+
+If a question overlaps with a bug or slop finding, reference that item number and add only the new
+defense-specific evidence, assumption, or uncertainty.
 
 ## Quality Bar
 
@@ -206,6 +233,10 @@ uncertainty.
   already correct—do not pad it with praise or restatements of what already matches the repo.
 - Adversarial questions must target concrete risks from the branch and answers must cite files,
   tests, commands, contracts, or runtime behavior where available.
-- At least one adversarial question must cover each major risk area surfaced earlier in the review.
+- Cover major risk areas surfaced earlier only when each still needs a distinct defense question;
+  merge related risks into one Q&A instead of one question per earlier finding.
+- Prefer 3–5 adversarial pairs; never exceed 7. Empty padding to hit a count is a quality failure.
 - Adversarial Defense Q&A content must name concrete failure scenarios, not vague "what if it
   breaks."
+- Defense failures must be skimmable: bold **PROBLEM INDEX** plus a bold `⚠ DEFENSE FAILED` line on
+  each failing pair; a reader should spot every serious problem without reading the held defenses.
