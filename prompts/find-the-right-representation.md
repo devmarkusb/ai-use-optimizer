@@ -83,18 +83,26 @@ Then diagnose the likely source of difficulty:
 Work through each lens below in order. Try a quick mapping even when the fit looks unlikely—you
 often cannot tell which representation pays off until you attempt it.
 
-- graph
-- state machine
-- constraint system
-- resource-flow model
-- queueing model
-- optimization problem
-- information-flow model
-- algebraic model
-- probabilistic or statistical model
-- game-theoretic or incentive model
-- geometric or spatial model
-- type-system or semantic model
+- Graph
+- State machine / automaton
+- Constraint system
+- Rule / logic system
+- Optimization problem
+- Information-flow model
+- Data-flow model
+- Resource-flow model
+- Event model / event log
+- Queueing model
+- Algebraic model
+- Probabilistic model
+- Geometric model
+- Type / semantic model
+- Relational model (tables, joins)
+- Hierarchical model (trees)
+- Temporal model (timelines, intervals)
+- Functional model (functions and composition)
+- Object model (objects and relationships)
+- Process model (workflows, Petri nets)
 
 For each lens, use the full template when it clarifies structure; otherwise write **Not applicable**
 and one sentence why.
