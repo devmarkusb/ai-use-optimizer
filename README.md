@@ -76,6 +76,7 @@ second copy of the prompt).
 | Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP)    | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
 | Bootstrap a new codebase from an empty or nearly empty repo                                        | `prompts/project-start.md`                 | —                                     |
 | Fix failing CI across one or more repositories with minimal, verified changes                      | `prompts/fix-my-ci-runs.md`                | —                                     |
+| Resolve an in-progress git merge or rebase conflict with minimal, verified changes                 | `prompts/resolve-merge-conflicts.md`       | —                                     |
 | Trim a messy diff to the smallest coherent patch that still achieves the intended change           | `prompts/cleanup-code-changes.md`          | —                                     |
 | Plan a large uncertain effort as a map of decision tickets before execution                        | `prompts/wayfinder.md`                     | —                                     |
 
