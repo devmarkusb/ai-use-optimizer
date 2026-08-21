@@ -61,7 +61,7 @@ second copy of the prompt).
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------------------------------- |
 | Improve wording before you send a request                                                          | `prompts/prompt-architect.system.md`       | [Prompt Architect](#prompt-architect) |
 | Bring a raw new prompt into this repo's style without bloating it                                  | `prompts/prompt-style-fit.md`              | [Prompt Style Fit](#prompt-style-fit) |
-| Pause an uncertain agent after hard work and make it ask missing intent/context questions          | `prompts/interview-me.md`                  | [Interview Me](#interview-me)         |
+| Pause an uncertain agent and run dependency-aware clarification rounds                             | `prompts/interview-me.md`                  | [Interview Me](#interview-me)         |
 | Rethink a hard problem via multiple formal representations                                         | `prompts/find-the-right-representation.md` | —                                     |
 | Solve a difficult problem systematically with Polya-style heuristics                               | `prompts/how-to-solve-it.md`               | —                                     |
 | Shorten scoped prose or code (one file/selection) without changing meaning or behavior             | `prompts/shorten-and-simplify.md`          | —                                     |
@@ -135,8 +135,7 @@ edits, `CHANGELOG.md`, and provider-backed changes—not viral prompt tricks.
 ## Interview Me
 
 `prompts/interview-me.md` pauses an agent after a difficult task, confidence wobble, or circular
-debugging session and makes it ask the user for missing intent or context that would change the
-result.
+debugging session and makes it interview the user through dependency-aware clarification rounds.
 
 **Use** when an agent says it is done but you suspect it misunderstood the goal, missed context,
 made unverified assumptions, optimized for the wrong process or tradeoff, or needs user answers
@@ -146,7 +145,8 @@ branch code review with adversarial defense ([Code Review](#tools)), or prompt r
 
 Paste the file into the active agent session after your challenge, for example: "Are you really
 confident? This took a long time. If you are missing context or have open questions, ask me now."
-Answer the questions before asking the agent to continue.
+Answer each round until the agent says shared understanding is reached, then confirm before asking
+it to continue.
 
 ## AI Repo Setup
 
