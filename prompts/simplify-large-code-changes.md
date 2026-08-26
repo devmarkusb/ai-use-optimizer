@@ -90,7 +90,12 @@ Search for the smallest set of concepts from which the required behavior follows
 
 ### 3. Account for complexity
 
-Explain where the current size comes from. Group substantial portions into categories such as:
+Explain where the current size comes from. When counting LOC, count code files only for the main
+implementation estimate. Separate production/source code from tests, generated files, fixtures,
+documentation, build/config files, and diagnostics unless one of those artifacts is itself the
+feature being simplified.
+
+Group substantial portions into categories such as:
 
 - essential domain logic
 - duplicated semantics
@@ -159,6 +164,8 @@ cannot be radically reduced over an unjustified simplification.
 ## Rules
 
 - Inspect before proposing.
+- Count LOC from code files only; report non-code, generated, test, and fixture volume separately
+  when it materially affects complexity.
 - Follow semantics, not existing architecture.
 - Treat tests as evidence, not necessarily as the complete specification.
 - Trace abstractions down to the requirement that supposedly necessitates them.
