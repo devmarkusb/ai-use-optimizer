@@ -68,6 +68,7 @@ second copy of the prompt).
 | Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
 | Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
 | Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
+| Audit a whole AI-developed repo for real correctness bugs and fix clear ones                       | `prompts/fix-bugs.md`                      | —                                     |
 | Review a branch PR for bugs, intent, comment fixes, repo-fit, and adversarial defense              | `prompts/code-review.md`                   | —                                     |
 | Explain a code subtree at a quick intuition level                                                  | `prompts/explain-code-level-1.md`          | —                                     |
 | Explain code as an architectural mental model                                                      | `prompts/explain-code-level-2.md`          | —                                     |
