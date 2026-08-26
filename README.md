@@ -78,6 +78,7 @@ second copy of the prompt).
 | Fix failing CI across one or more repositories with minimal, verified changes                      | `prompts/fix-my-ci-runs.md`                | —                                     |
 | Resolve an in-progress git merge or rebase conflict with minimal, verified changes                 | `prompts/resolve-merge-conflicts.md`       | —                                     |
 | Trim a messy diff to the smallest coherent patch that still achieves the intended change           | `prompts/cleanup-code-changes.md`          | —                                     |
+| Diagnose whether a large implementation can be replaced by a smaller coherent design               | `prompts/simplify-large-code-changes.md`   | —                                     |
 | Plan a large uncertain effort as a map of decision tickets before execution                        | `prompts/wayfinder.md`                     | —                                     |
 
 Greenfield: run `prompts/project-start.md` first; use `prompts/ai-repo-setup.md` after the repo has
