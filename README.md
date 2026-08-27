@@ -65,6 +65,7 @@ second copy of the prompt).
 | Rethink a hard problem via multiple formal representations                                         | `prompts/find-the-right-representation.md` | —                                     |
 | Solve a difficult problem systematically with Polya-style heuristics                               | `prompts/how-to-solve-it.md`               | —                                     |
 | Shorten scoped prose or code (one file/selection) without changing meaning or behavior             | `prompts/shorten-and-simplify.md`          | —                                     |
+| Re-explain confusing material from the likely missing prerequisite idea                            | `prompts/dont-understand.md`               | —                                     |
 | Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
 | Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
 | Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
