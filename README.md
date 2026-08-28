@@ -57,31 +57,32 @@ rendered text to the clipboard (Espanso-friendly). See `promptfill/README.md`. F
 Pick by goal; paste the prompt file. **More** links to short README notes when they exist (not a
 second copy of the prompt).
 
-| You want to…                                                                                       | Prompt                                     | More                                  |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------------------------------- |
-| Improve wording before you send a request                                                          | `prompts/prompt-architect.system.md`       | [Prompt Architect](#prompt-architect) |
-| Bring a raw new prompt into this repo's style without bloating it                                  | `prompts/prompt-style-fit.md`              | [Prompt Style Fit](#prompt-style-fit) |
-| Pause an uncertain agent and run dependency-aware clarification rounds                             | `prompts/interview-me.md`                  | [Interview Me](#interview-me)         |
-| Rethink a hard problem via multiple formal representations                                         | `prompts/find-the-right-representation.md` | —                                     |
-| Solve a difficult problem systematically with Polya-style heuristics                               | `prompts/how-to-solve-it.md`               | —                                     |
-| Shorten scoped prose or code (one file/selection) without changing meaning or behavior             | `prompts/shorten-and-simplify.md`          | —                                     |
-| Re-explain confusing material from the likely missing prerequisite idea                            | `prompts/dont-understand.md`               | —                                     |
-| Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                    | —                                     |
-| Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                | —                                     |
-| Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                        | —                                     |
-| Audit a whole AI-developed repo for real correctness bugs and fix clear ones                       | `prompts/fix-bugs.md`                      | —                                     |
-| Review a branch PR for bugs, intent, comment fixes, repo-fit, and adversarial defense              | `prompts/code-review.md`                   | —                                     |
-| Explain a code subtree at a quick intuition level                                                  | `prompts/explain-code-level-1.md`          | —                                     |
-| Explain code as an architectural mental model                                                      | `prompts/explain-code-level-2.md`          | —                                     |
-| Explain subsystem behavior through lifecycle, mutation, failure, and dependency views              | `prompts/explain-code-level-3.md`          | —                                     |
-| Review code architecture for contracts, flows, risks, and unknown boundaries                       | `prompts/explain-code-level-4.md`          | —                                     |
-| Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP)    | `prompts/ai-repo-setup.md`                 | [AI Repo Setup](#ai-repo-setup)       |
-| Bootstrap a new codebase from an empty or nearly empty repo                                        | `prompts/project-start.md`                 | —                                     |
-| Fix failing CI across one or more repositories with minimal, verified changes                      | `prompts/fix-my-ci-runs.md`                | —                                     |
-| Resolve an in-progress git merge or rebase conflict with minimal, verified changes                 | `prompts/resolve-merge-conflicts.md`       | —                                     |
-| Trim a messy diff to the smallest coherent patch that still achieves the intended change           | `prompts/cleanup-code-changes.md`          | —                                     |
-| Diagnose whether a large implementation can be replaced by a smaller coherent design               | `prompts/simplify-large-code-changes.md`   | —                                     |
-| Plan a large uncertain effort as a map of decision tickets before execution                        | `prompts/wayfinder.md`                     | —                                     |
+| You want to…                                                                                       | Prompt                                                           | More                                  |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------- |
+| Improve wording before you send a request                                                          | `prompts/prompt-architect.system.md`                             | [Prompt Architect](#prompt-architect) |
+| Bring a raw new prompt into this repo's style without bloating it                                  | `prompts/prompt-style-fit.md`                                    | [Prompt Style Fit](#prompt-style-fit) |
+| Pause an uncertain agent and run dependency-aware clarification rounds                             | `prompts/interview-me.md`                                        | [Interview Me](#interview-me)         |
+| Rethink a hard problem via multiple formal representations                                         | `prompts/find-the-right-representation.md`                       | —                                     |
+| Solve a difficult problem systematically with Polya-style heuristics                               | `prompts/how-to-solve-it.md`                                     | —                                     |
+| Shorten scoped prose or code (one file/selection) without changing meaning or behavior             | `prompts/shorten-and-simplify.md`                                | —                                     |
+| Re-explain confusing material from the likely missing prerequisite idea                            | `prompts/dont-understand.md`                                     | —                                     |
+| Audit an AI agent session's visible context, tools, and context boundaries                         | `prompts/agent-info.md`                                          | —                                     |
+| Ground factual answers in cited sources, uncertainty, and contradicting evidence                   | `prompts/sources-please.md`                                      | —                                     |
+| Sanity-check a conversation for unsupported claims, contradictions, sycophancy, and overconfidence | `prompts/verify.md`                                              | —                                     |
+| Audit a whole AI-developed repo for real correctness bugs and fix clear ones                       | `prompts/fix-bugs.md`                                            | —                                     |
+| Review a branch PR for bugs, intent, comment fixes, repo-fit, and adversarial defense              | `prompts/code-review.md`                                         | —                                     |
+| Explain a code subtree at a quick intuition level                                                  | `prompts/explain-code-level-1.md`                                | —                                     |
+| Explain code as an architectural mental model                                                      | `prompts/explain-code-level-2.md`                                | —                                     |
+| Explain subsystem behavior through lifecycle, mutation, failure, and dependency views              | `prompts/explain-code-level-3.md`                                | —                                     |
+| Review code architecture for contracts, flows, risks, and unknown boundaries                       | `prompts/explain-code-level-4.md`                                | —                                     |
+| Add or normalize agent config in an existing repo (`AGENTS.md`, Cursor rules, Claude Code, MCP)    | `prompts/ai-repo-setup.md`                                       | [AI Repo Setup](#ai-repo-setup)       |
+| Bootstrap a new codebase from an empty or nearly empty repo                                        | `prompts/project-start.md`                                       | —                                     |
+| Fix failing CI across one or more repositories with minimal, verified changes                      | `prompts/fix-my-ci-runs.md`                                      | —                                     |
+| Resolve an in-progress git merge or rebase conflict with minimal, verified changes                 | `prompts/resolve-merge-conflicts.md`                             | —                                     |
+| Trim a messy diff to the smallest coherent patch that still achieves the intended change           | `prompts/cleanup-code-changes.md`                                | —                                     |
+| Diagnose whether a large implementation can be replaced by a smaller coherent design               | `prompts/simplify-large-code-changes.md`                         | —                                     |
+| Find accidental complexity in a large repository or changeset by separating independent concerns   | `prompts/simplify-large-code-changes-inspired-by-6-questions.md` | —                                     |
+| Plan a large uncertain effort as a map of decision tickets before execution                        | `prompts/wayfinder.md`                                           | —                                     |
 
 Greenfield: run `prompts/project-start.md` first; use `prompts/ai-repo-setup.md` after the repo has
 real tooling. Architect shapes *prompts*; Interview Me pauses an active agent to extract missing
