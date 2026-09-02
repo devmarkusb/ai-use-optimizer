@@ -27,14 +27,13 @@ It is not intended for completely empty directories.
 
 ## Goal
 
-Bring this repository to a current, maintainable AI-agent setup. Do not create a large static
-boilerplate. First inspect the repository, then generate only the configuration that is justified by
-the actual project structure, tooling, language stack, and risk profile.
+Bring this repository to a current, maintainable AI-agent setup. First inspect the repository, then
+generate only the configuration that is justified by the actual project structure, tooling, language
+stack, and risk profile.
 
 ## Instructions
 
-Act as a senior software engineer and AI tooling maintainer. Analyze this repository and set up a
-minimal, high-signal agent configuration for Cursor, Claude Code, Codex, Gemini, and other
+Set up a minimal, high-signal agent configuration for Cursor, Claude Code, Codex, Gemini, and other
 AGENTS.md-compatible tools.
 
 Prefer one canonical source of truth. Use tool-specific files only as thin adapters.

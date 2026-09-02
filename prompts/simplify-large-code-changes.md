@@ -163,18 +163,14 @@ cannot be radically reduced over an unjustified simplification.
 
 ## Rules
 
-- Inspect before proposing.
-- Count LOC from code files only; report non-code, generated, test, and fixture volume separately
-  when it materially affects complexity.
 - Follow semantics, not existing architecture.
 - Treat tests as evidence, not necessarily as the complete specification.
 - Trace abstractions down to the requirement that supposedly necessitates them.
 - Prefer removing concepts over merely shortening code.
-- Do not count moving code behind helpers as simplification.
-- Do not count replacing explicit code with opaque generic machinery as simplification.
+- Do not count moving code behind helpers, or replacing explicit code with opaque generic machinery,
+  as simplification.
 - Do not sacrifice correctness merely to reduce LOC.
 - Do not assume the user's belief that the implementation should be 10x smaller is correct.
-- Do not edit anything until the user approves the redesign.
 
 The goal is not minimum LOC. The goal is minimum conceptual machinery required by the actual
 problem.

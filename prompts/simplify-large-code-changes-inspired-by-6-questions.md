@@ -50,8 +50,6 @@ conflation:
 - How: Which mechanisms implement the required behavior, and are those mechanisms unnecessarily
   coupled to the semantics?
 
-Do not treat these six questions as required report headings. Use them to detect conflation.
-
 ## Required Workflow
 
 ### 1. Map

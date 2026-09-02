@@ -17,91 +17,55 @@ recommended-stage: when CI is red and you need minimal, verified fixes
 
 ## Context
 
-You are a senior build/release engineer. Github owner \<OWNER> potentially has repositories with
-failing CI, find them. Work **repo-by-repo**—do not batch unrelated fixes across repositories in one
-commit unless explicitly requested. Your fixes can be applied in local checkouts (if given) under
-path: \<LOCAL_CHECKOUTS>. (Ignore statement if path is empty or not given.)
+GitHub owner \<OWNER> potentially has repositories with failing CI; find them. Apply fixes in local
+checkouts (if given) under path: \<LOCAL_CHECKOUTS>. (Ignore if empty or not given.)
 
 ## Goal
 
-Fix all failing CI runs with minimal, idiomatic changes. Prefer the exact commands from CI logs over
-guessing from filenames. Reproduce locally where possible, validate each fix, and report what
-changed and what risk remains. Make a commit if you like, but don't push.
+Fix all failing CI runs with minimal, idiomatic changes. Reproduce locally where possible, validate
+each fix, and report what changed and what risk remains.
 
-## Instructions
+## Required Workflow
 
-Start by listing the repositories and current failing CI runs. Then fix them one by one, starting
-with the smallest or highest-confidence failures.
+List the repositories and current failing CI runs first, then work **repo-by-repo**, starting with
+the smallest or highest-confidence failures.
 
-### 1. Inspect the repository
+Per repository:
 
-Before changing anything:
-
-- Identify language(s): C++, Python, Rust, TypeScript, Markdown/docs, and similar stacks.
-- Identify CI provider and configs: GitHub Actions, reusable workflows, Makefile, CMake, tox,
-  pytest, cargo, npm/pnpm/yarn, pre-commit, clang-format, ruff, mypy, eslint, markdownlint, and
-  related tooling.
-- Read README, CONTRIBUTING, and build docs.
-
-### 2. Inspect CI failures
-
-- Use GitHub Actions logs, failed jobs, annotations, and local reproduction.
-- Prefer the exact command from CI.
-- Do not guess from filenames alone.
-- Group failures by root cause.
-
-### 3. Reproduce locally where possible in a feasable short amount of time
-
-- Install dependencies only as needed.
-- Use the project's declared tooling.
-- Do not upgrade toolchains unless required.
-- If a failure is environment-specific, document it and fix the workflow.
-
-### 4. Fix with minimal, idiomatic changes
-
-- **C++:** compiler errors, warnings-as-errors, CMake config, missing includes, tests, formatting,
-  sanitizers, platform issues.
-- **Python:** tests, packaging, ruff/black/isort/mypy/pytest failures, dependency pins.
-- **Rust:** `cargo test`/`clippy`/`fmt`, feature flags, lockfile issues.
-- **TypeScript:** typecheck, lint, tests, package manager lockfile consistency.
-- **Markdown/docs:** markdownlint, links, formatting, generated docs if applicable.
-- **CI YAML:** fix only when the workflow is wrong; do not hide real code failures.
-
-### 5. Validate
-
-- Run the failing command again.
-- Run relevant formatting, lint, and test commands.
-- For each repo, produce a short summary of:
-  - failing jobs found
-  - root causes
-  - files changed
-  - commands run
-  - remaining risks or failures
-
-### 6. Commit discipline
-
-- Make small commits per logical fix.
-- Do not mix unrelated repos in one commit unless explicitly requested.
-- Never suppress tests, disable CI, remove assertions, or blanket-ignore errors unless justified.
-- Preserve public APIs unless the failure requires a compatible fix.
+1. **Inspect the repository:** language stack, CI provider and configs (workflows, Makefile, CMake,
+   tox, pytest, cargo, npm/pnpm/yarn, pre-commit, formatters, linters, type checkers), README and
+   contributing/build docs.
+1. **Inspect CI failures:** read the failed jobs, logs, and annotations. Prefer the exact command
+   from CI over guessing from filenames. Group failures by root cause.
+1. **Reproduce locally** where feasible in a short amount of time. Install dependencies only as
+   needed and use the project's declared tooling. If a failure is environment-specific, document it
+   and fix the workflow.
+1. **Fix with minimal, idiomatic changes** for the stack (compiler errors, tests, lint/format/type
+   failures, packaging, lockfile consistency, links). Fix CI YAML only when the workflow itself is
+   wrong; do not hide real code failures.
+1. **Validate:** rerun the exact failing command, then relevant format, lint, and test commands.
+1. **Commit:** one small commit per logical fix; do not mix unrelated repos in one commit unless
+   explicitly requested. Do not push.
 
 ## Available tools
 
 - `gh` CLI for GitHub Actions logs and PR/branch handling.
-- Local shell for builds and tests.
-- Package managers as required.
+- Local shell, builds, tests, and package managers as required.
 - Internet only if needed for official docs or dependency/tooling changes.
 
 ## Rules
 
-- Fix root causes, not symptoms. Do not paper over real failures in application code.
+- Fix root causes, not symptoms. Never suppress tests, disable CI, remove assertions, or
+  blanket-ignore errors unless justified.
 - Do not upgrade toolchains, dependencies, or CI images unless the failure requires it.
+- Preserve public APIs unless the failure requires a compatible fix.
 - Do not push to remotes unless the user explicitly requests it.
 - When a failure cannot be reproduced locally, say so and document the environment gap.
 
 ## Output Format
 
-For each repository, return Markdown with:
+Start with the initial inventory of repositories and failing runs. Then, for each repository in
+processing order:
 
 ### `<repo-name>` — CI fix summary
 
@@ -110,15 +74,6 @@ For each repository, return Markdown with:
 - **Files changed:**
 - **Commands run:**
 - **Remaining risks:**
-
-If multiple repos were processed, include one summary section per repo in processing order.
-
-## Deliverables
-
-1. Initial inventory of repositories and failing CI runs.
-1. Fixes applied with validation evidence (commands run and outcomes).
-1. Per-repo summaries as specified in **Output Format**.
-1. Commits per logical fix when the user requests commits.
 
 ## Quality Bar
 

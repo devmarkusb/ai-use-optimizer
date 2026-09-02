@@ -1,8 +1,8 @@
 ---
 title: Prompt Architect
 type: meta-prompt
-version: 1.1.2
-last-reviewed: 2026-06-03
+version: 1.2.0
+last-reviewed: 2026-09-02
 purpose: Transform rough user intent into production-grade prompts for selected AI systems
 targets:
   - ChatGPT
@@ -149,70 +149,26 @@ instead.
 
 ## Target-aware guidance
 
-### ChatGPT / GPT / Codex
+Current frontier models are reasoning models with large context windows. Baseline for every target:
 
-Use:
+- outcome-first instructions with explicit constraints and success criteria
+- structured final answer requirements, stated once and clearly—not buried in prose
+- no "think step by step" scaffolding and no hidden chain-of-thought requests; reasoning depth is a
+  model or API setting—ask for a brief rationale or verification summary instead when needed
+- few-shot examples only when they resolve ambiguity that instructions cannot
+- for coding: inspect before editing, minimal diffs, preserve behavior, run tests where possible
+- no persona theatrics or vague "be creative" instructions without success criteria
 
-- outcome-first instructions
-- explicit constraints
-- tool/retrieval budget if relevant
-- concise reasoning summaries
-- structured final answer requirements
-- for coding: inspect before editing, preserve behavior, run tests where possible
+Target-specific additions:
 
-Avoid:
-
-- long persona theatrics
-- unnecessary chain-of-thought requests
-- vague “be creative” instructions without success criteria
-
-### Claude / Claude Code
-
-Use:
-
-- explicit sections
-- XML-like tags for complex inputs
-- clear success criteria
-- “think carefully” only when useful
-- ask for a brief rationale or verification summary
-- for code: require plan, edit scope, tests, and risk notes
-
-Avoid:
-
-- ambiguous multi-objective prompts
-- burying constraints in prose
-
-### Gemini
-
-Use:
-
-- clear task framing
-- examples for style or format
-- comparative analysis instructions where helpful
-- explicit grounding requirements for factual tasks
-- iterative refinement instructions
-
-Avoid:
-
-- underspecified creative direction
-- assuming default tone or structure
-
-### Cursor
-
-Use:
-
-- repository-aware instructions
-- persistent rule style when appropriate
-- file/path constraints
-- coding standards
-- test commands
-- diff-minimizing behavior
-- “ask before broad refactors”
-- explicit definition of done
-
-Avoid:
-
-- generic coding assistant prompts detached from the repo
+- **ChatGPT / GPT / Codex:** tool/retrieval budget when relevant; concise reasoning summaries.
+- **Claude / Claude Code:** explicit sections; XML-like tags to delimit complex or untrusted inputs;
+  for code, require plan, edit scope, tests, and risk notes.
+- **Gemini:** examples for style or format; explicit grounding requirements for factual tasks.
+- **Cursor:** repository-aware instructions and persistent rule style when appropriate; file/path
+  constraints, coding standards, test commands, diff-minimizing behavior, "ask before broad
+  refactors," and an explicit definition of done—never generic coding prompts detached from the
+  repo.
 
 ## Operating modes
 

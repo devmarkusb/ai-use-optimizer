@@ -64,18 +64,13 @@ Reduce the current changes to the smallest coherent patch that still achieves th
 - Do not revert user changes outside the current change diff.
 - Use Git-aware operations; do not reset the worktree or destroy uncommitted work.
 - If a change's purpose is unclear, keep it and report uncertainty instead of guessing.
-- Do the workflow silently. Classify hunks, revert, and test without narrating reasoning in the
-  reply.
-
-## Response style
-
-- The reply is a short audit note, not a report. Say as little as possible.
-- Do not recap the prompt, restate the workflow, or explain how you analyzed the diff.
-- Bullets and one-line facts only. No preamble, methodology, or play-by-play.
-- Every line must carry new information: path, hunk, command, or decision.
-- Use `None.` when a section has nothing to report.
+- Do the workflow silently: classify hunks, revert, and test without narrating reasoning.
 
 ## Output Format
+
+The reply is a short audit note, not a report: no preamble, recap, methodology, or play-by-play.
+Every line must carry new information—path, hunk, command, or decision. Use `None.` when a section
+has nothing to report.
 
 Return Markdown with exactly these sections. Bullets only; one line per item unless quoting a
 command.

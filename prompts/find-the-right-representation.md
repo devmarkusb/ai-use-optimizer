@@ -38,15 +38,9 @@ The following section contains the problem to analyze.
 
 ## Rules
 
-- Prioritize representations that make the difficult part of the problem local, constrained, or
-  governed by known theory.
 - Do not merely rename the problem; search for transformations that expose hidden structure.
 - Base structure on the stated problem; label inference explicitly when you extend beyond the text.
 - Keep each subsection concise (bullets, not essays).
-- Work through every lens in section 3 with at least a good-faith attempt; weak or surprising fits
-  are often where structure appears.
-- For a lens that still does not help after that attempt, write **Not applicable** and one sentence
-  why—do not skip silently.
 - If fewer than three representations are strong candidates, rank those that are and say why others
   were excluded.
 
@@ -80,8 +74,9 @@ Then diagnose the likely source of difficulty:
 
 ### 3. Representation search
 
-Work through each lens below in order. Try a quick mapping even when the fit looks unlikely—you
-often cannot tell which representation pays off until you attempt it.
+Work through each lens below in order with at least a good-faith attempt—weak or surprising fits are
+often where structure appears, and you often cannot tell which representation pays off until you try
+it.
 
 - Graph
 - State machine / automaton

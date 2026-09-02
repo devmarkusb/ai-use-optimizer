@@ -28,8 +28,6 @@ The following section contains the actual project idea, requirements, constraint
 
 ## Instructions
 
-Act as a senior software engineer and project bootstrap architect.
-
 Prefer pragmatic, maintainable defaults over framework maximalism or premature abstraction.
 
 Before implementing:
@@ -54,11 +52,10 @@ First:
 1. add an MIT `LICENSE` file unless inputs specify another license
 1. create minimal and security CI if appropriate
 1. when using GitHub, add `.github/dependabot.yml` for `github-actions` and the project's package
-   manager or lockfile ecosystem(s); include sensible weekly schedules, grouped minor or patch
-   updates, and cooldowns like [py-app-template](https://github.com/devmarkusb/py-app-template)
-1. add a `dependabot-automerge` CI job that runs after the main CI jobs pass on Dependabot PRs,
-   fetches update metadata with `dependabot/fetch-metadata`, and enables squash auto-merge for
-   patch, minor, security patch or minor, and `pre_commit` updates only—not semver-major bumps
+   ecosystem(s)—weekly schedules, grouped minor/patch updates, and cooldowns like
+   [py-app-template](https://github.com/devmarkusb/py-app-template)—plus a `dependabot-automerge` CI
+   job that runs after main CI passes on Dependabot PRs, uses `dependabot/fetch-metadata`, and
+   enables squash auto-merge for non-major updates only
 1. create a concise README with exact commands, a license badge, and other relevant badges
 
 Avoid:

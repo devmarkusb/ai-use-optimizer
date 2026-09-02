@@ -49,25 +49,17 @@ might only provide the problem, and you will need to distill the remaining place
 
 \<CONDITIONS>
 
-## Task
-
-Act as a structured problem-solving partner. Clarify what is being asked, identify the data and
-conditions, try the full heuristic toolbox, and choose a practical solution strategy.
-
 ## Required Workflow
 
 ### 1. Understand the problem
 
 Answer explicitly:
 
-- What is the unknown?
-- What are the data?
-- What are the conditions?
-- Is it possible to satisfy the conditions?
-- Are the conditions sufficient to determine the unknown?
-- Are they insufficient, redundant, contradictory, or uncertain?
+- What is the unknown? What are the data? What are the conditions?
+- Is it possible to satisfy the conditions? Are they sufficient to determine the unknown, or
+  insufficient, redundant, or contradictory?
 - Would a figure, notation, example, or decomposition help?
-- Can the different parts of the conditions be written down separately?
+- Can the parts of the conditions be written down separately?
 
 State assumptions explicitly when the input is incomplete.
 
@@ -86,100 +78,39 @@ alternatives.
 
 Try every item below during planning.
 
-- Analogy
-- Auxiliary Elements
-- Auxiliary Problem
-- Bolzano
-- Bright Idea
-- Can You Check the Result?
-- Can You Derive the Result Differently?
-- Can You Use the Result?
-- Carrying Out
-- Condition
-- Contradictory
-- Corollary
-- Could You Derive Something Useful from the Data?
-- Could You Restate the Problem?
-- Decomposing and Recombining
-- Definition
-- Descartes
-- Determination, Hope, Success
-- Diagnosis
-- Did You Use All the Data?
-- Do You Know a Related Problem?
-- Draw a Figure
-- Examine Your Guess
-- Figures
-- Generalization
-- Have You Seen It Before?
-- Here Is a Problem Related to Yours and Solved Before
-- Heuristic
-- Heuristic Reasoning
-- If You Cannot Solve the Proposed Problem
-- Induction and Mathematical Induction
-- Inventor's Paradox
-- Is It Possible to Satisfy the Condition?
-- Leibnitz
-- Lemma
-- Look at the Unknown
-- Modern Heuristic
-- Notation
-- Pappus
-- Pedantry and Mastery
-- Practical Problems
-- Problems to Find, Problems to Prove
-- Progress and Achievement
-- Puzzles
-- Reductio ad Absurdum and Indirect Proof
-- Redundant
-- Routine Problem
-- Rules of Discovery
-- Rules of Style
-- Rules of Teaching
-- Separate the Various Parts of the Condition
-- Setting Up Equations
-- Signs of Progress
-- Specialization
-- Subconscious Work
-- Symmetry
-- Terms, Old and New
-- Test by Dimension
-- The Future Mathematician
-- The Intelligent Problem-Solver
-- The Intelligent Reader
-- The Traditional Mathematics Professor
-- Variation of the Problem
-- What Is the Unknown?
-- Why Proofs?
-- Wisdom of Proverbs
-- Working Backward
-
-## Planning Questions
-
-Use these questions while applying the toolbox:
-
-- Have you seen the problem before?
-- Have you seen the same problem in a slightly different form?
-- Do you know a related problem?
-- Do you know a theorem, pattern, or method that could be useful?
-- Looking at the unknown, what familiar problem has the same or a similar unknown?
-- Is there a related solved problem whose result or method could be reused?
-- Should you introduce an auxiliary element to make that reuse possible?
-- Could you restate the problem?
-- Could you restate it differently again?
-- Should you go back to definitions?
-- If you cannot solve the proposed problem, what related problem can you solve first?
-- Is there a more accessible related problem?
-- Is there a more general, more special, or analogous problem?
-- Can you solve only part of the problem?
-- What happens if you keep part of the condition and drop the rest?
-- How far is the unknown then determined, and how can it vary?
-- Can you derive something useful from the data?
-- Can you think of other data that would determine the unknown?
-- Can you change the unknown, the data, or both so they are nearer to each other?
-- Did you use all the data?
-- Did you use the whole condition?
-- Have you accounted for all essential notions involved in the problem?
+- **Have you seen it before?** — the same problem, or one in slightly different form?
+- **Do you know a related problem?** — a theorem, pattern, or solved problem whose result or method
+  could be reused?
+- **Look at the unknown** — what familiar problem has the same or a similar unknown?
+- **Analogy** — is there an analogous problem in a simpler or better-understood domain?
+- **Could you restate the problem?** — restate it, then restate it differently again.
+- **Go back to definitions** — replace terms by their definitions.
+- **Draw a figure** — diagram, sketch, or visual model.
+- **Introduce suitable notation** — variables, tables, formal structure.
+- **Setting up equations** — translate conditions into equations or formal constraints.
+- **Decomposing and recombining** — split into parts; solve and recombine.
+- **Separate the parts of the condition** — treat each condition part on its own.
+- **Auxiliary problem** — is there a more accessible related problem to solve first?
+- **Auxiliary elements** — introduce a helper construct that enables reuse of a known method.
+- **Specialization** — try extreme, degenerate, or concrete special cases.
+- **Generalization** — would the more general problem be easier (inventor's paradox)?
+- **Variation of the problem** — change the unknown, the data, or both so they are nearer to each
+  other.
+- **Drop part of the condition** — keep part, drop the rest; how far is the unknown then determined,
+  and how can it vary?
+- **Solve part of the problem** — can you solve only a part, or a weaker version?
+- **Working backward** — start from the goal and reason toward the data.
+- **Reductio ad absurdum / indirect approach** — assume the opposite and derive a contradiction.
+- **Induction** — find a pattern from small cases; consider mathematical induction.
+- **Symmetry** — exploit symmetry or interchangeable roles in the problem.
+- **Test by dimension** — sanity-check candidate relations by units, dimensions, or orders of
+  magnitude.
+- **Derive something from the data** — what follows directly from the data? What other data would
+  determine the unknown?
+- **Did you use everything?** — all the data, the whole condition, every essential notion?
+- **Examine your guess** — make a guess explicit, then test it.
+- **Can you check the result?** — how would the candidate plan's result be verified or derived
+  differently?
 
 ## Rules
 

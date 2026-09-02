@@ -122,8 +122,6 @@ Delete code | simplify design | reduce state | remove indirection | unify mechan
 What must be checked before changing it.
 ```
 
-Do not bury these observations inside the main architectural explanation.
-
 ## Planning documents
 
 For every substantial High or Medium confidence finding, add a sibling file such as
@@ -141,14 +139,6 @@ Each planning document must include:
 - **Validation** — tests, comparisons, benchmarks, or manual checks for equivalence
 - **Implementation sketch** — short sequence of changes
 - **Risks / unresolved questions** — anything that blocks high confidence
-
-## Rules
-
-- The walkthrough describes the branch as it currently exists.
-- Do not silently fix, refactor, or implement simplifications while preparing the walkthrough.
-- Do not rewrite current architecture as the proposed simplification.
-- Do not mix explanation, diagnosis, and redesign into one undifferentiated narrative.
-- Omit the findings section when there is nothing meaningful to report.
 
 ## Output Format
 
