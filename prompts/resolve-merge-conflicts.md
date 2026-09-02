@@ -32,6 +32,9 @@ and finish the merge or rebase.
 1. When the intents conflict, choose the resolution that matches the merge or rebase goal and note
    the trade-off.
 1. Do not invent unrelated behavior while resolving conflicts.
+1. Check for semantic conflicts: hunks git merged cleanly can still combine incompatibly (renamed
+   symbols, changed signatures, duplicated logic). Verify the whole merge result, not only the
+   conflicted files.
 1. Discover and run the relevant automated checks, typically typecheck, tests, then format or lint.
 1. Fix failures caused by the conflict resolution.
 1. Stage only the resolved files and required follow-up fixes.
@@ -42,6 +45,8 @@ and finish the merge or rebase.
 - Do not abort, reset, or restart the merge/rebase as a shortcut.
 - Do not stage unrelated local changes.
 - Do not use one side's version wholesale unless the other side is truly obsolete or incompatible.
+- When rebasing, resolve each commit in that commit's spirit so intermediate commits stay coherent;
+  do not front-load the final state into early commits.
 - Prefer existing project behavior, style, and tests over new abstractions.
 - If a conflict depends on intent that cannot be inferred from available sources, stop and ask the
   user for that specific decision.

@@ -22,7 +22,8 @@ scope:
 
 Use this prompt on a **scoped** input: one file, one pasted section, or one prose artifact (PR
 description, comment block, doc section). It is not for whole branches, large multi-file diffs, or
-unscoped pull requests—use `prompts/code-review.md` for those.
+unscoped pull requests—use a branch-wide code-review prompt for those (in this repo:
+`prompts/code-review.md`).
 
 ## Goal
 

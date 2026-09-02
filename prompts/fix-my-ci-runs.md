@@ -57,6 +57,9 @@ Per repository:
 
 - Fix root causes, not symptoms. Never suppress tests, disable CI, remove assertions, or
   blanket-ignore errors unless justified.
+- Distinguish flaky from deterministic failures using run history or a re-run. Fix a flake's root
+  cause (timing, ordering, shared state, network) or report it—do not mask it with retries or by
+  disabling the test.
 - Do not upgrade toolchains, dependencies, or CI images unless the failure requires it.
 - Preserve public APIs unless the failure requires a compatible fix.
 - Do not push to remotes unless the user explicitly requests it.

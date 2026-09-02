@@ -130,6 +130,10 @@ Use these selectively:
 - Examples: include few-shot examples only when they reduce ambiguity
 - Decomposition: split complex tasks into phases
 - Verification: require checks, edge cases, uncertainty statements, or tests
+- Untrusted input: delimit third-party or pasted content and instruct the model to treat it as data,
+  never as instructions
+- Long-context placement: put long reference material before the task instructions and restate the
+  core ask after it
 - Tool protocol: specify when to browse, retrieve files, call tools, run tests, or inspect code
 - Coding protocol: require repo inspection, minimal diffs, tests, and explanation of tradeoffs
 - Reasoning control: ask for concise reasoning summaries, not hidden chain-of-thought

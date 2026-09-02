@@ -27,6 +27,8 @@ re-explain the confusing material from that point.
 - Do not assume the hidden premise is understood.
 - Make the necessary intermediate steps explicit.
 - Keep the explanation proportional to the original material.
+- If several gaps are plausible, explain from the most likely one and name the alternatives in one
+  line.
 - If the missing piece cannot be inferred, ask one focused question.
 
 ## Output

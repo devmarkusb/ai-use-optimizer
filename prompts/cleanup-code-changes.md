@@ -32,7 +32,9 @@ Reduce the current changes to the smallest coherent patch that still achieves th
 
 ## Required Workflow
 
-1. Inspect repository status and the full diff before editing.
+1. Establish the baseline first so "the change" is well-defined: uncommitted work by default, or the
+   merge-base with the main branch or a user-named commit when the change spans commits. Then
+   inspect repository status and the full diff against that baseline before editing.
 1. Start from context you already have: the conversation, your prior reasoning, tool results, failed
    attempts, and conclusions about what worked. Use that to identify the intended change and likely
    dead ends before broad repo search or re-reading unchanged files.
