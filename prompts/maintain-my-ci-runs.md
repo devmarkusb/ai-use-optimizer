@@ -20,6 +20,8 @@ recommended-stage: when sweeping multi-repo PRs, triaging blockers, and maintain
 GitHub owner \<USER> has repositories with open pull requests and CI runs. Some repositories may
 depend on each other (e.g. shared libraries, templates, actions, or packages).
 
+Git user: \<GIT_USER>. Git email: \<GIT_EMAIL>.
+
 Local checkouts directory (optional): \<LOCAL_CHECKOUTS>. If empty or omitted, work entirely via
 `gh` CLI and clone or check out selected PRs on demand into a temporary scratch workspace.
 
@@ -116,6 +118,13 @@ Once the user selects one or more PRs to resolve:
    gh pr checkout <number> --repo <owner/repo>
    ```
 
+   Configure the Git committer identity in the repository before rebasing or committing:
+
+   ```bash
+   git config user.name "<GIT_USER>"
+   git config user.email "<GIT_EMAIL>"
+   ```
+
 1. **Try simple update tricks first:**
 
    - If downstream, check whether pulling in newly merged upstream changes/releases resolves it.
@@ -132,8 +141,8 @@ Once the user selects one or more PRs to resolve:
 
 1. **Validate:** Rerun the exact failing CI command, then full local test/lint suites.
 
-1. **Commit and update:** Create focused commits. Push to the PR branch only if requested or
-   configured.
+1. **Commit and update:** Create focused commits under `<GIT_USER>` and `<GIT_EMAIL>`. Push to the
+   PR branch only if requested or configured.
 
 ## Available tools
 
@@ -148,6 +157,7 @@ Once the user selects one or more PRs to resolve:
   their upstream dependencies.
 - Never force-merge or bypass branch protections.
 - Never touch archived repositories.
+- Always configure and use `<GIT_USER>` and `<GIT_EMAIL>` for git operations, rebases, and commits.
 - Never begin fixing PRs in Step 4 without user confirmation from the Step 3 triage table.
 - Give up early on complex branch updates; ask the user instead of speculating.
 - Fix root causes, not symptoms. Never suppress tests, disable CI, remove assertions, or

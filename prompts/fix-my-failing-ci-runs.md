@@ -19,6 +19,8 @@ recommended-stage: when default branch CI is red and you need minimal, verified 
 
 GitHub owner \<USER> has repositories where default branch (`main` or `master`) CI runs are failing.
 
+Git user: \<GIT_USER>. Git email: \<GIT_EMAIL>.
+
 Local checkouts directory (optional): \<LOCAL_CHECKOUTS>. If empty or omitted, work entirely via
 `gh` CLI and clone or check out repositories on demand into a temporary scratch workspace.
 
@@ -76,6 +78,13 @@ For each failing repository in processing order:
      gh repo clone <owner/repo> /tmp/scratch/<repo>
      ```
 
+   - Configure the Git committer identity in the repository before committing:
+
+     ```bash
+     git config user.name "<GIT_USER>"
+     git config user.email "<GIT_EMAIL>"
+     ```
+
 1. **Reproduce locally:**
 
    - Run the failing command using the project's declared package manager and tooling.
@@ -94,7 +103,7 @@ For each failing repository in processing order:
 
 1. **Commit:**
 
-   - Create focused commits per logical fix.
+   - Create focused commits per logical fix under `<GIT_USER>` and `<GIT_EMAIL>`.
    - Do not push to remote unless explicitly requested.
 
 ## Available tools
@@ -111,6 +120,7 @@ For each failing repository in processing order:
 - Distinguish flaky from deterministic failures using run history. Fix flake causes or report
   them—never mask them with retries or by disabling tests.
 - Do not upgrade unrelated toolchains or dependencies unless required to fix the failure.
+- Always configure and use `<GIT_USER>` and `<GIT_EMAIL>` for git operations and commits.
 - Preserve public APIs unless a compatible fix is strictly required.
 - Do not push to remotes unless the user explicitly requests it.
 - When a failure cannot be reproduced locally, document the environment gap.
