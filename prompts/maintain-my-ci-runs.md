@@ -55,6 +55,19 @@ For each non-archived GitHub repository (owner: \<USER>):
 
 Process repositories in the determined lowest-level-first order:
 
+1. Pre-flight token scope check (once, before sweeping):
+
+   ```bash
+   gh auth status
+   ```
+
+   - If the token scopes do **not** include `workflow`, the agent cannot merge any PR that touches
+     `.github/workflows/` (GitHub rejects it with
+     `refusing to allow an OAuth App to create or update workflow ... without 'workflow' scope`).
+     Such PRs are classified as **Skipped (workflow scope)** upfront — never attempt to merge them.
+   - Only run `gh auth refresh -s workflow` if the user explicitly permits interactive auth. Never
+     treat a scope refusal as a sweep-stopping failure.
+
 1. List open PRs:
 
    ```bash
@@ -70,6 +83,16 @@ Process repositories in the determined lowest-level-first order:
 
    - Show repo (with dependency level), PR number, title, and checks state.
 
+   - Check whether the PR touches workflow files:
+
+     ```bash
+     gh pr view <number> --repo <owner/repo> --json files --jq '.files[].path'
+     ```
+
+     If any path is under `.github/workflows/` and the token lacks the `workflow` scope, classify
+     the PR as **Skipped (workflow scope)** and continue with the next candidate — do not attempt
+     the merge.
+
    - Run:
 
      ```bash
@@ -79,12 +102,15 @@ Process repositories in the determined lowest-level-first order:
 1. Rules for sweeping:
 
    - Process one repository at a time in bottom-up dependency order.
-   - Stop and report on any merge failure.
+   - Stop and report on any unexpected merge failure. A `workflow`-scope refusal is expected when
+     the pre-flight check already flagged it — those PRs are skipped, not failures.
    - Never force-merge.
    - Never merge `DIRTY`, `BLOCKED`, or failing-checks PRs.
    - Never touch archived repositories.
 
-1. Conclude Step 2 with a **Merged / Skipped / Failed** summary table.
+1. Conclude Step 2 with a **Merged / Skipped / Failed** summary table, splitting Skipped into
+   `Skipped (failing CI / conflicts / blocked)` and
+   `Skipped (workflow scope — merge via web UI or a workflow-scoped token)`.
 
 ### Step 3: Triage remaining PRs and estimate effort
 
@@ -174,6 +200,8 @@ Once the user selects one or more PRs to resolve:
 - **Dependency order:** list of repos from lowest-level to downstream
 - **Merged:** list of `<repo>#<number>` (with title)
 - **Skipped:** list of `<repo>#<number>` (reason: failing CI / conflicts / blocked)
+- **Skipped (workflow scope):** list of `<repo>#<number>` (green but touching `.github/workflows/`;
+  merge via web UI or a workflow-scoped token)
 - **Failed merges:** list of any merge errors encountered
 
 ### Step 3: Triage & effort estimate (ordered lowest-level first)
