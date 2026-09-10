@@ -39,8 +39,9 @@ grounded in the diff and relevant repository evidence.
    and important test blind spots introduced by this branch.
 1. Prioritize issues that could change the merge decision. Ignore style and speculative concerns
    unless they hide or create a real defect.
-1. For the one to three highest-risk changes, challenge the strongest plausible defense against the
-   concern and identify what evidence remains missing.
+1. For the one to three highest-risk changes, test each concern against its strongest plausible
+   defense using repository evidence. Discard concerns that do not hold up. Use this check to refine
+   the findings; do not print a separate adversarial discussion.
 
 ## Rules
 
@@ -48,51 +49,31 @@ grounded in the diff and relevant repository evidence.
 - Do not run tests, builds, binaries, scripts, migrations, package-manager commands, or any other
   project artifacts. Read-only git and file-inspection commands are allowed.
 - Base claims on the diff and repository evidence; do not invent requirements or behavior.
-- Separate confirmed defects from hypotheses. Label assumptions, unknowns, and unverified claims.
-- Report only actionable findings. If there are no material issues, say so explicitly.
+- Report only actionable, evidence-backed findings. Do not present unsupported hypotheses as
+  findings. State any uncertainty essential to a finding within that finding.
+- If there are no actionable issues, say so explicitly.
 - Do not claim to have run or verified anything that was not actually run or verified.
 
 ## Output Format
 
-Return Markdown with exactly these sections:
+Return only a Markdown list of findings in descending order of severity. For each finding, include:
 
-### Merge Recommendation
+- **Severity and issue**: `Critical`, `High`, `Medium`, or `Low`, followed by a short issue title.
+- **File / lines**: the relevant location.
+- **Problem and evidence**: the concrete failure scenario, its impact, and supporting repository
+  evidence. Include any uncertainty essential to assessing the finding here.
+- **Minimal fix**: the smallest change that addresses the problem.
 
-Choose one: **Merge**, **Merge with follow-ups**, or **Do not merge**. Give the primary reason in
-one or two sentences. State that the review is static-only when relevant.
+If there are no actionable findings, say `No actionable issues found.`
 
-### Summary
-
-Briefly explain what changed, why it changed, and the main consequence for the system.
-
-### Findings
-
-List findings in descending order of severity. For each finding, include:
-
-- **File / lines**
-- **Severity**: `Critical`, `High`, `Medium`, or `Low`
-- **Issue**
-- **Impact**
-- **Evidence**
-- **Minimal fix**
-- **Suggested read-only verification**
-
-Say `None found.` if there are no material findings.
-
-### Adversarial Challenges
-
-Include only useful challenges for the highest-risk changes. For each, state the concern, the
-strongest plausible defense, whether the repository evidence supports that defense, and what would
-close any remaining gap. Say `None.` when no separate challenge is useful.
-
-### Unknowns and Assumptions
-
-List only unknowns or assumptions that could affect the merge decision. Say `None.` if empty.
+Include a brief review limitation only if it materially restricted the review, such as a missing
+base branch or unavailable relevant files. Do not add a summary, merge recommendation, separate
+adversarial discussion, or standalone list of speculative concerns.
 
 ## Quality Bar
 
 - Lead with concrete merge risk, not generic advice.
-- Every finding names a failure scenario and cites repository evidence or clearly labels its
-  uncertainty.
-- Do not manufacture findings to fill sections.
+- Every finding names a failure scenario and cites supporting repository evidence. Labeling a
+  concern as uncertain does not substitute for evidence.
+- Do not manufacture findings to fill the output.
 - Keep the review proportional to the size and risk of the diff.
