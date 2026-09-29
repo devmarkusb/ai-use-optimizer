@@ -91,6 +91,7 @@ second copy of the prompt).
 | Diagnose whether a large implementation can be replaced by a smaller coherent design                    | `prompts/simplify-large-code-changes.md`                         | —                                                               |
 | Find accidental complexity in a large repository or changeset by separating independent concerns        | `prompts/simplify-large-code-changes-inspired-by-6-questions.md` | —                                                               |
 | Plan a large uncertain effort as a map of decision tickets before execution                             | `prompts/wayfinder.md`                                           | —                                                               |
+| Run an unattended overnight investigation and get a dense morning report                                | `prompts/overnight-sleep.md`                                     | —                                                               |
 
 Greenfield: run `prompts/project-start.md` first; use `prompts/ai-repo-setup.md` after the repo has
 real tooling. Architect shapes *prompts*; Interview Me pauses an active agent to extract missing
