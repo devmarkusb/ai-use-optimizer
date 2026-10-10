@@ -10,22 +10,28 @@ targets:
 scope:
   - brownfield
   - correctness
-  - whole-repository
+  - current-branch
 ---
 
 # Fix Bugs
 
 ## Context
 
-You are performing a repository-wide correctness audit of an AI-developed codebase that has evolved
-rapidly. The human maintainer no longer trusts that all implemented behavior is correct.
+You are performing a correctness audit of an AI-developed codebase that has evolved rapidly. The
+human maintainer no longer trusts that all implemented behavior is correct.
+
+By default, audit the current branch against the repository's `main` branch, using the appropriate
+merge-base diff, normally `origin/main...HEAD` or `main...HEAD`. Inspect the changed code and enough
+surrounding code, tests, and documentation to judge whether the changes are correct. If the base is
+missing or may be stale, state that limitation instead of guessing. Expand to a whole-repository
+audit only when the user explicitly asks; note the chosen scope in the final report.
 
 ## Goal
 
-Infer what the system is supposed to do, find as many real correctness bugs as reasonably possible,
-fix bugs whose intended behavior is sufficiently clear, surface cases where correctness depends on
-an ambiguous product or design decision, and leave the repository in a measurably more trustworthy
-state. Avoid speculative rewrites.
+Infer what the system is supposed to do, find as many real correctness bugs as reasonably possible
+within the audited scope, fix bugs whose intended behavior is sufficiently clear, surface cases
+where correctness depends on an ambiguous product or design decision, and leave the audited scope in
+a measurably more trustworthy state. Avoid speculative rewrites.
 
 ## Ground truth hierarchy
 
@@ -45,11 +51,11 @@ disagree, do not silently choose one; record the conflict.
 
 ### 1. Understand the system before editing
 
-Inspect the repository broadly and build a concise semantic model: major components and
-responsibilities, important data structures and invariants, state machines and legal transitions,
-ownership and lifetime assumptions, persistence and serialization contracts, concurrency model,
-error-handling model, external API/protocol contracts, security boundaries, and cross-module
-assumptions.
+Inspect the audited scope and enough surrounding code to build a concise semantic model: major
+components and responsibilities, important data structures and invariants, state machines and legal
+transitions, ownership and lifetime assumptions, persistence and serialization contracts,
+concurrency model, error-handling model, external API/protocol contracts, security boundaries, and
+cross-module assumptions.
 
 Compare available design documentation against the actual implementation and note drift. Focus on
 semantics and invariants relevant to correctness, not trivial code structure.
@@ -162,10 +168,10 @@ declare success solely because the test suite passes.
 
 ## Stopping condition
 
-Stop when all high-risk subsystems have received at least one serious correctness pass, available
-automated checks pass or remaining failures are explained, all high-confidence bugs are fixed,
-ambiguous high-impact issues are surfaced to the human, and another pass produces predominantly
-low-confidence or duplicate findings. Do not claim the repository is bug-free.
+Stop when all high-risk areas in the audited scope have received at least one serious correctness
+pass, available automated checks pass or remaining failures are explained, all high-confidence bugs
+are fixed, ambiguous high-impact issues are surfaced to the human, and another pass produces
+predominantly low-confidence or duplicate findings. Do not claim the audited scope is bug-free.
 
 ## Final report
 
