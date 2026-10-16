@@ -56,9 +56,15 @@ grounded in the diff and relevant repository evidence.
 
 ## Output Format
 
-Return only a Markdown list of findings in descending order of severity. For each finding, include:
+Return only a Markdown list of findings in descending order of severity. Give every finding a stable
+ID that encodes its priority: the severity's first letter (`C`, `H`, `M`, `L` for Critical, High,
+Medium, Low) plus a per-severity counter starting at 1—for example `C1`, `H1`, `H2`, `M1`, `L1`. Use
+these IDs to reference a finding elsewhere in the review.
 
-- **Severity and issue**: `Critical`, `High`, `Medium`, or `Low`, followed by a short issue title.
+For each finding, include:
+
+- **ID and severity**: the ID, the severity word (`Critical`, `High`, `Medium`, or `Low`), and a
+  short issue title, e.g. `H2 — High — Off-by-one in pagination`.
 - **File / lines**: the relevant location.
 - **Problem and evidence**: the concrete failure scenario, its impact, and supporting repository
   evidence. Include any uncertainty essential to assessing the finding here.

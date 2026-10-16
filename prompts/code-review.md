@@ -119,9 +119,11 @@ findings that belong in later sections.
 
 ### Bugs and Risks
 
-Numbered list. Per item: **File / lines**, **Severity** (`Critical`/`High`/`Medium`/`Low`),
-**Issue**, **Why it matters**, **Suggested fix** (minimal), **How to verify**. Say "None found." if
-empty.
+Numbered list, in descending order of severity. Give every finding a stable ID that encodes its
+priority: the severity's first letter (`C`/`H`/`M`/`L` for Critical/High/Medium/Low) plus a
+per-severity counter (for example `C1`, `H1`, `H2`, `M1`, `L1`). Per item: **ID**, **File / lines**,
+**Severity** (`Critical`/`High`/`Medium`/`Low`), **Issue**, **Why it matters**, **Suggested fix**
+(minimal), **How to verify**. Say "None found." if empty.
 
 ### Comment Fixes
 
@@ -175,8 +177,8 @@ uncertainty):
 
 If the defense holds, write a normal pair with no alert line and no Problem-index entry. Minor
 residual risk or a labeled `Unknown` without a concrete failure mode is not a defense failure. If a
-question overlaps with a bug or slop finding, reference that item number and add only the new
-defense-specific evidence, assumption, or uncertainty.
+question overlaps with a bug or slop finding, reference that finding's ID (e.g. `H2`) and add only
+the new defense-specific evidence, assumption, or uncertainty.
 
 ## Quality Bar
 
