@@ -47,7 +47,8 @@ uv run pre-commit run --all-files   # check or fix
 **CI** (`.github/workflows/ci.yml`): pre-commit (Markdown, gitleaks, actionlint), lychee link check,
 README prompt index guard, **promptfill** pytest (`promptfill/`), pip-audit (root and promptfill),
 zizmor. Dependabot (`.github/dependabot.yml`) proposes weekly GitHub Actions and uv dependency
-updates (root dev tools and `promptfill/`).
+updates (root dev tools and `promptfill/`). Required checks on `main`, and why CI does not
+auto-merge those pull requests, are in [`.github/workflows/README.md`](.github/workflows/README.md).
 
 **promptfill** (`promptfill/`): CLI to pick a prompt, fill `<PLACEHOLDER>` values, and copy the
 rendered text to the clipboard (Espanso-friendly). See `promptfill/README.md`. From `promptfill/`:
