@@ -83,6 +83,7 @@ CI runs the same pre-commit hooks with `uv sync --frozen && uv run pre-commit ru
 | `README.md`                 | Human-facing index: tools, when to use which prompt, maintenance notes.                                          |
 | `prompts/`                  | Authoritative prompt sources (`*.md`, `*.system.md`). YAML-style front matter appears in some files—preserve it. |
 | `promptfill/`               | Local CLI: fill `<PLACEHOLDER>` prompts, copy to clipboard; `pyproject.toml`, `uv.lock`, `tests/`.               |
+| `scripts/`                  | Portable setup helpers; currently OpenCode Auto Model configuration. Usage and model policy are in `README.md`.  |
 | `.github/workflows/`        | GitHub Actions CI (lint, link check, promptfill tests, security). Ruleset notes in `README.md` there.            |
 | `.github/dependabot.yml`    | Weekly dependency update PRs for Actions and pip/uv (root and `promptfill/`).                                    |
 | `pyproject.toml`, `uv.lock` | Dev-only: uv-managed pre-commit for Markdown hooks.                                                              |

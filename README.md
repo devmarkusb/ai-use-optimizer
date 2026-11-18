@@ -14,6 +14,7 @@ where helpful. Licensed under the [MIT License](./LICENSE).
 
 - [Introduction](#introduction)
 - [Development](#development)
+- [OpenCode Auto Model setup](#opencode-auto-model-setup)
 - [Tools](#tools)
 - [Prompt style guide](#prompt-style-guide)
 - [Prompt Style Fit](#prompt-style-fit)
@@ -53,6 +54,58 @@ auto-merge those pull requests, are in [`.github/workflows/README.md`](.github/w
 **promptfill** (`promptfill/`): CLI to pick a prompt, fill `<PLACEHOLDER>` values, and copy the
 rendered text to the clipboard (Espanso-friendly). See `promptfill/README.md`. From `promptfill/`:
 `uv sync && uv run pytest`.
+
+## OpenCode Auto Model setup
+
+`scripts/setup-opencode-auto-model.py` configures the MIT-licensed
+[`opencode-auto-model`](https://github.com/vimtor/opencode-plugins/tree/main/packages/opencode-auto-model)
+plugin for OpenCode V2 2.0.31 or later. The virtual `router/auto` model chooses a model and
+reasoning variant on a session's first prompt, then keeps that selection to preserve the prompt
+cache. Routing adds one decision call per new session.
+
+The default allowlist uses models available to the current OpenCode Go setup:
+
+| Tier     | Model reference                  | Intended work                                                   |
+| -------- | -------------------------------- | --------------------------------------------------------------- |
+| Light    | `opencode-go/gpt-6-luna#low`     | Questions, search, explanations, and small mechanical edits     |
+| Standard | `opencode-go/kimi-k3.1-pro#high` | Routine implementation, tests, focused refactors, and debugging |
+| Deep     | `opencode-go/kimi-k3.1-pro#max`  | Architecture, subtle bugs, security-sensitive or ambiguous work |
+
+Standard is the fallback, and GPT-6 Luna Low is the decider. Before running the script on another
+Ubuntu or macOS machine, connect OpenCode Go and check that `/models` offers every reference. Python
+3.9 or later is required only for setup.
+
+```bash
+python3 scripts/setup-opencode-auto-model.py --dry-run
+python3 scripts/setup-opencode-auto-model.py
+```
+
+The script updates `${XDG_CONFIG_HOME:-~/.config}/opencode/opencode.jsonc` (or an existing
+`opencode.json`). It preserves unrelated settings and plugin entries, normalizes JSONC formatting,
+and creates a timestamped backup before changing an existing file. OpenCode watches the config and
+loads new plugins automatically; do not restart OpenCode just to apply the change. New sessions
+default to **Auto**. In an existing session, run `/models` and select **Auto**.
+
+To use another provider, pass exact IDs and supported variants from `/models`:
+
+```bash
+python3 scripts/setup-opencode-auto-model.py \
+  --light 'provider/fast-chat#low' \
+  --standard 'provider/coding-model#medium' \
+  --deep 'provider/reasoning-model#high' \
+  --decider 'provider/fast-chat#low'
+```
+
+The fallback defaults to `--standard`; override it with `--fallback`. Add
+`--config /path/to/opencode.jsonc` to update a nonstandard file. Use only chat models that support
+the required agent tools.
+
+Routing occurs once per session, not after every prompt. Re-select **Auto** to route the next prompt
+again, at the cost of resetting the prompt cache. The first prompt and candidate descriptions go to
+the decider provider, so review its data policy for sensitive work. Override the model manually for
+known difficult tasks. `router/auto` is virtual: operations that run a session before its first
+prompt need a concrete model instead. Subagents skip routing and inherit the parent model unless
+their agent or subagent call selects another model.
 
 ## Tools
 
