@@ -21,7 +21,10 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --frozen
-      - run: uv run pre-commit run --all-files
+      - name: Run pre-commit
+        env:
+          GOPROXY: "https://proxy.golang.org|direct"
+        run: uv run pre-commit run --all-files
 
   linkcheck:
     name: Markdown link check
